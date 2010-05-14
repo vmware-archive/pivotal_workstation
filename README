@@ -1,0 +1,5 @@
+Things you'll need:
+snow leopard
+Git - Or get the files from github yourself
+Xcode - the bootstrap script will install  bundler, which needs something which needs xcode
+
