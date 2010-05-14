@@ -1,2 +1,2 @@
-source "http://rubygems.org"
-gem "chef", "0.8.14"
+source :gemcutter
+gem "chef", "0.8.16"
