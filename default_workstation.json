@@ -1,3 +1,6 @@
 {
-  "recipes": "pivotal_workstation::homebrew"
+  "recipes": [
+    "pivotal_workstation::homebrew", 
+    "pivotal_workstation::mysql"
+  ]
 }
