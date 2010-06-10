@@ -1,6 +1,7 @@
 {
   "recipes": [
     "pivotal_workstation::homebrew", 
-    "pivotal_workstation::mysql"
+    "pivotal_workstation::mysql",
+    "pivotal_workstation::rvm"
   ]
 }

@@ -3,3 +3,9 @@ snow leopard
 Git - Or get the files from github yourself
 Xcode - the bootstrap script will install  bundler, which needs something which needs xcode
 
+
+
+Core goals:
+
+Decomposed / modular.  As much as is possible / makes sense, you should be able to pick and choose and mix and match recipes.
+Unobtrusive.  As much as possible we want to allow development environments to be wide-ranging. (poorly said)
