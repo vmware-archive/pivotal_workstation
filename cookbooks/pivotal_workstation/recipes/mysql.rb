@@ -1,5 +1,7 @@
 #http://solutions.treypiepmeier.com/2010/02/28/installing-mysql-on-snow-leopard-using-homebrew/
 
+DEFAULT_PIVOTAL_MYSQL_PASSWORD = "password"
+
 brew_install "mysql"
 
 execute "copy mysql plist to ~/Library/LaunchAgents" do
@@ -17,5 +19,9 @@ execute "load the mysql plist into the mac daemon startup thing" do
   user WS_USER
 end
 
+execute "set the root password if it is blank" do
+  command "mysqladmin -uroot password #{DEFAULT_PIVOTAL_MYSQL_PASSWORD}"
+  only_if "mysql -uroot -e 'show databases'"
+end
 
 #set the mysql password to be password, etc
