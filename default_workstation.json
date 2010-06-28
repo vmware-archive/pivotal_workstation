@@ -1,7 +1,9 @@
 {
+  "rvm_mri_187_patchlevel" : 174,
+
   "recipes": [
     "pivotal_workstation::homebrew", 
     "pivotal_workstation::mysql",
-    "pivotal_workstation::rvm"
+    "pivotal_workstation::rvm_mri_187"
   ]
 }
