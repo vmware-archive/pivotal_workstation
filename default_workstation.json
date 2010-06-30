@@ -1,9 +1,13 @@
 {
-  "rvm_mri_187_patchlevel" : 174,
-
+  "rvm_rubies": [
+    "ruby-1.8.6-p287",
+    "ruby-1.8.7-p174",
+    "jruby-1.4.1"
+  ],
+  
   "recipes": [
     "pivotal_workstation::homebrew", 
     "pivotal_workstation::mysql",
-    "pivotal_workstation::rvm_mri_187"
+    "pivotal_workstation::rvm"
   ]
 }

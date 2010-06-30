@@ -6,8 +6,7 @@ include_recipe "pivotal_workstation::bash_profile"
 rvm_git_revision_hash  = "c83d53c3d0100cde8f61"
 
 ::RVM_HOME = "#{WS_HOME}/.rvm"
-::RVM_COMMAND = "source #{RVM_HOME}/scripts/rvm || rvm"
-  #explanation of the '||': sourcing the rvm stuff returns 1 sometimes, we don't know why, but it doesn't appear to be harmful.
+::RVM_COMMAND = "#{::RVM_HOME}/bin/rvm"
 
 run_unless_marker_file_exists("rvm-#{rvm_git_revision_hash}") do
   [RVM_HOME, "#{RVM_HOME}/src/", "#{RVM_HOME}/src/rvm"].each do |dir|
@@ -38,4 +37,19 @@ run_unless_marker_file_exists("rvm-#{rvm_git_revision_hash}") do
     user WS_USER
   end
   
+  execute "HACK the rvm openssl install script.  ./Configure was failing with 'target already defined'.  we've filed a bug about this" do
+    command "perl -pi -e 's/os\\/compiler darwin/darwin/g' #{::RVM_HOME}/scripts/package"
+  end
+  
+  
+  %w{readline autoconf openssl zlib}.each do |rvm_package|
+    execute "install rvm package: #{rvm_package}" do
+      command "#{::RVM_COMMAND} package install #{rvm_package}"
+      user WS_USER
+    end
+  end
+end
+
+node[:rvm_rubies].each do |ruby_version_string|
+  rvm_ruby_install(ruby_version_string)
 end
