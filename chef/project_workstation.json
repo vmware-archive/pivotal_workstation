@@ -15,6 +15,6 @@
     "pivotal_workstation::homebrew", 
     "pivotal_workstation::mysql",
     "pivotal_workstation::rvm",
-    "pivotal_workstation::rubymine"
+    "pivotal_workstation::pivotal_rubymine_preferences"
   ]
 }
