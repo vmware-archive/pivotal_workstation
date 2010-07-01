@@ -3,12 +3,12 @@ include_recipe "pivotal_workstation::bash_profile"
 #http://greg.nokes.name/2010/03/26/rooting-with-rvm/
 
 #nailing rvm to this revision, for no reason other than consistency
-rvm_git_revision_hash  = "c83d53c3d0100cde8f61"
+rvm_git_revision_hash  = version_string_for("rvm")
 
 ::RVM_HOME = "#{WS_HOME}/.rvm"
 ::RVM_COMMAND = "#{::RVM_HOME}/bin/rvm"
 
-run_unless_marker_file_exists("rvm-#{rvm_git_revision_hash}") do
+run_unless_marker_file_exists(marker_version_string_for("rvm")) do
   [RVM_HOME, "#{RVM_HOME}/src/", "#{RVM_HOME}/src/rvm"].each do |dir|
     directory dir do
       owner WS_USER

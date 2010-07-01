@@ -5,6 +5,11 @@
     "jruby-1.4.1"
   ],
   
+  "versions" : {
+    "homebrew": "6e5b83c3b0e94c0ee721d87eca64c0e9cbe5d163",
+    "rvm": "c83d53c3d0100cde8f61"
+  },
+  
   "recipes": [
     "pivotal_workstation::homebrew", 
     "pivotal_workstation::mysql",
