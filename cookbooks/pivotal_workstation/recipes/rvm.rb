@@ -1,8 +1,5 @@
 include_recipe "pivotal_workstation::bash_profile"
 
-#http://greg.nokes.name/2010/03/26/rooting-with-rvm/
-
-#nailing rvm to this revision, for no reason other than consistency
 rvm_git_revision_hash  = version_string_for("rvm")
 
 ::RVM_HOME = "#{WS_HOME}/.rvm"
