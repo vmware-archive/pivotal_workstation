@@ -1,1 +1,0 @@
-puts `ruby -v`
