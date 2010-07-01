@@ -1,5 +1,5 @@
 #! /usr/bin/env ruby
 log_level = ENV['LOG_LEVEL'] || "info"
-command = "sudo bundle exec chef-solo -j default_workstation.json -c solo.rb -l #{log_level}"
+command = "sudo bundle exec chef-solo -j chef/project_workstation.json -c solo.rb -l #{log_level}"
 puts "running chef: " + command
 system(command) || exit(1)
