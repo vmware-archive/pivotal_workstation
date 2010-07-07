@@ -6,11 +6,9 @@ rvm_git_revision_hash  = version_string_for("rvm")
 ::RVM_COMMAND = "#{::RVM_HOME}/bin/rvm"
 
 run_unless_marker_file_exists(marker_version_string_for("rvm")) do
-  [RVM_HOME, "#{RVM_HOME}/src/", "#{RVM_HOME}/src/rvm"].each do |dir|
-    directory dir do
-      owner WS_USER
-      recursive true
-    end
+  recursive_directories [RVM_HOME, 'src', 'rvm'] do
+    owner WS_USER
+    recursive true
   end
 
   execute "download rvm" do
