@@ -15,7 +15,8 @@
   "versions" : {
     "homebrew": "6e5b83c3b0e94c0ee721d87eca64c0e9cbe5d163",
     "rvm": "c83d53c3d0100cde8f61",
-    "Pivotal-Preferences-RubyMine": "d0eb393ab3d4c92ac80ce3135aa9f71e59cccbd3"
+    "Pivotal-Preferences-RubyMine": "d0eb393ab3d4c92ac80ce3135aa9f71e59cccbd3",
+    "mvim": "7_2-stable-1_2"
   },
   
   "recipes": [
@@ -24,6 +25,7 @@
     "pivotal_workstation::mysql",
     "pivotal_workstation::rvm",
     "pivotal_workstation::serious_rvm",
-    "pivotal_workstation::pivotal_rubymine_preferences"
+    "pivotal_workstation::pivotal_rubymine_preferences",
+    "pivotal_workstation::mvim"
   ]
 }

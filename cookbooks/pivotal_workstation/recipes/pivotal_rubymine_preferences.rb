@@ -13,17 +13,16 @@ run_unless_marker_file_exists(marker_version_string_for("Pivotal-Preferences-Rub
     user WS_USER
   end
   
-  ["#{WS_HOME}/Library/Preferences/RubyMine20/keymaps", "#{WS_HOME}/Library/Preferences/RubyMine20/templates"].each do |dir|
-    directory dir do
+  [
+    ["#{WS_HOME}/Library/Preferences/RubyMine20", "keymaps"], 
+    ["#{WS_HOME}/Library/Preferences/RubyMine20", "templates"], 
+  ].each do |dirs|
+    recursive_directories dirs do
       owner WS_USER
       mode "0755"
       recursive true
     end
   end
-  
-  execute "clean up dir owndership slop" do
-    command "chown -R #{WS_USER} #{WS_HOME}/Library/Preferences/RubyMine20"
-  end     
   
   ["cp #{download_dir}/keymaps/* #{WS_HOME}/Library/Preferences/RubyMine20/keymaps/",
    "cp #{download_dir}/templates/* #{WS_HOME}/Library/Preferences/RubyMine20/templates/"].each do |copy_command|

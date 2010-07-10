@@ -1,0 +1,1 @@
+brew_install "ack"
