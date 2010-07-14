@@ -20,6 +20,9 @@
     "pivotal_workstation::pivotal_rubymine_preferences",
     "pivotal_workstation::vim",
 	"pivotal_workstation::finder_display_full_path",
-	"pivotal_workstation::osx_turn_on_locate"
+	"pivotal_workstation::osx_turn_on_locate",
+	"pivotal_workstation::bash_path_order",
+	"pivotal_workstation::bash_better_history",
+	"pivotal_workstation::inputrc"	
   ]
 }
