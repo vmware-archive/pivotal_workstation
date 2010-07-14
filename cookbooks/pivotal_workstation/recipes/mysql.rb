@@ -4,8 +4,13 @@ DEFAULT_PIVOTAL_MYSQL_PASSWORD = "password"
 
 brew_install "mysql"
 
+directory "/Users/#{WS_USER}/Library/LaunchAgents" do
+  owner WS_USER
+  action :create
+end
+
 execute "copy mysql plist to ~/Library/LaunchAgents" do
-  command "cp /usr/local/Cellar/mysql/5.1.47/com.mysql.mysqld.plist ~/Library/LaunchAgents"
+  command "cp /usr/local/Cellar/mysql/5.1.48/com.mysql.mysqld.plist ~/Library/LaunchAgents/"
   user WS_USER
 end
 
