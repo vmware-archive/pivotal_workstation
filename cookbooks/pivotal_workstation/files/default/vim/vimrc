@@ -20,7 +20,7 @@ set backspace=indent,eol,start " Allow backspacing over autoindent, line breaks 
 set visualbell
 set virtualedit=all
 
-set t_Co=256 " 256 colors
+" set t_Co=256 " 256 colors
 set background=dark
 colorscheme ir_black
 

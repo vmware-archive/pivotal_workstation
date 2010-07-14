@@ -6,7 +6,7 @@ remote_directory VIM_HOME do
 end
 
 link "~/.vimrc" do
-  to "~/vim/vimrc"
+  to "~/.vim/vimrc"
 end
 
 execute "compile command-t" do
