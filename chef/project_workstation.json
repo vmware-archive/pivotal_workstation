@@ -23,6 +23,7 @@
 	"pivotal_workstation::osx_turn_on_locate",
 	"pivotal_workstation::bash_path_order",
 	"pivotal_workstation::bash_better_history",
-	"pivotal_workstation::inputrc"	
+	"pivotal_workstation::inputrc",
+	"pivotal_workstation::git_config_global_defaults"
   ]
 }
