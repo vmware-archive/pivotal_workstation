@@ -9,3 +9,13 @@ Core goals:
 
 Decomposed / modular.  As much as is possible / makes sense, you should be able to pick and choose and mix and match recipes.
 Unobtrusive.  As much as possible we want to allow development environments to be wide-ranging. (poorly said)
+
+Getting Started:
+Install Xcode from apple
+Install git from google code: http://code.google.com/p/git-osx-installer/downloads/list?can=3
+cd ~
+git clone http://github.com/pivotalexperimental/wschef.git
+cd wschef
+ruby install_chef.rb
+(edit project_workstation.json if desired)
+./run
