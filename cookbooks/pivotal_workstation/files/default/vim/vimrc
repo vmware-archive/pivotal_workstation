@@ -20,14 +20,15 @@ set backspace=indent,eol,start " Allow backspacing over autoindent, line breaks 
 set visualbell
 set virtualedit=all
 
-" set t_Co=256 " 256 colors
+" set t_Co=256 " 256 colors, this is great with iTerm, but XTerm can't do it.
 set background=dark
 colorscheme ir_black
 
 call pathogen#runtime_append_all_bundles()
 
 filetype plugin indent on
-au BufRead,BufNewFile *.thor *.god set filetype=ruby
+au BufRead,BufNewFile *.thor set filetype=ruby
+au BufRead,BufNewFile *.god set filetype=ruby
 
 set tabstop=2
 set smarttab
@@ -42,7 +43,7 @@ set nobackup       "no backup files
 set nowritebackup  "only in case you don't want a backup file while editing
 set noswapfile     "no swap files
 
-autocmd VimEnter * exe 'NERDTree' | wincmd l
+"autocmd VimEnter * exe 'NERDTree' | wincmd l "This opens NERDtree at vi start
 
 " Ruby weird character shortcuts
 " imap uu _
