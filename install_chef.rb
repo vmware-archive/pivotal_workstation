@@ -1,3 +1,5 @@
+#!/usr/bin/ruby
+
 #assume that we're in the project directory
 require "fileutils"
 
