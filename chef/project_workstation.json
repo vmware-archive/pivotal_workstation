@@ -1,6 +1,6 @@
 {
   "rvm_rubies": [
-    "ruby-1.8.6-p287",
+//    "ruby-1.8.6-p287", this seems to be broken
     "ruby-1.8.7-p174",
     "jruby-1.4.1"
   ],
