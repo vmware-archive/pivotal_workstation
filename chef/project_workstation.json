@@ -18,7 +18,7 @@
    	"pivotal_workstation::mysql",
    	"pivotal_workstation::rvm",
    	"pivotal_workstation::pivotal_rubymine_preferences",
-	"pivotal_workstation::vim",
+//	"pivotal_workstation::vim", this seems to be broken
 	"pivotal_workstation::finder_display_full_path",
 	"pivotal_workstation::osx_turn_on_locate",
 	"pivotal_workstation::bash_path_order",

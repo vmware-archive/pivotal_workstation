@@ -2,10 +2,10 @@
 ##  though it seems to work OK.
 
 run_unless_marker_file_exists("google_chrome") do
-  # execute "download chrome to temp dir" do
-  #   command "curl -o /tmp/googlechrome.dmg http://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg"
-  #   user WS_USER
-  # end
+  execute "download chrome to temp dir" do
+    command "curl -o /tmp/googlechrome.dmg http://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg"
+    user WS_USER
+  end
   
   execute "mount chrome dmg" do
     command "hdid /tmp/googlechrome.dmg"
