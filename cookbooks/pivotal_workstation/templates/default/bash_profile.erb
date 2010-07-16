@@ -1,3 +1,6 @@
 #Chef assumes it owns this file.  
 #You can put a your bash_profile changes in a file in the includes subdirectory and they will be evaluated, and not overwritten.
+
+# Note that includes will be concatenated to be on one line - make sure your lines are terminated by semicolons.
+
 eval `cd <%=BASH_INCLUDES_SUBDIR%> && cat *`
