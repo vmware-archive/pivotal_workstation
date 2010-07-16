@@ -26,6 +26,7 @@
 	"pivotal_workstation::inputrc",
 	"pivotal_workstation::git_config_global_defaults",
 	"pivotal_workstation::google_chrome",
-	"pivotal_workstation::textmate_set_defaults"
+	"pivotal_workstation::textmate_set_defaults",
+	"pivotal_workstation::no_sudo_gem_install"
   ]
 }
