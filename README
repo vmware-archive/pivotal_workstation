@@ -3,8 +3,6 @@ Snow Leopard - We make no effort to test on anything less
 Git
 Xcode
 
-
-
 Core goals:
 
 Decomposed / modular.  As much as is possible / makes sense, you should be able to pick and choose and mix and match recipes.
@@ -18,6 +16,6 @@ git clone http://github.com/pivotalexperimental/wschef.git
 cd wschef
 ruby install_chef.rb
 cp workstation.prototype.json workstation.json
-edit workstation.json
+edit workstation.json (by default it will install everything. This probably isn't what you want)
 edit cookbooks/workstation/attributes
 ./run
