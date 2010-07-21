@@ -12,7 +12,7 @@ run_unless_marker_file_exists("text_mate_1_5_9") do
   end
   
   execute "copy text mate to /Applications" do
-    command 'cp -r /Volumes/TextMate\\ 1.5.9/TextMate.app /Applications/'
+    command 'cp -rf /Volumes/TextMate\\ 1.5.9/TextMate.app /Applications/'
     user WS_USER
   end
   

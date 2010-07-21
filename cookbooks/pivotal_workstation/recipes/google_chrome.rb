@@ -13,7 +13,7 @@ run_unless_marker_file_exists("google_chrome") do
   end
   
   execute "copy chrome to /Applications" do
-    command 'cp -r /Volumes/Google\\ Chrome/Google\\ Chrome.app /Applications/'
+    command 'cp -rf /Volumes/Google\\ Chrome/Google\\ Chrome.app /Applications/'
     user WS_USER
   end
   

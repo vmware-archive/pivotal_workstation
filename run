@@ -7,7 +7,7 @@ require "json"
 
 log_level = ENV['LOG_LEVEL'] || "info"
 
-json_file = "chef/project_workstation.json"
+json_file = "chef/workstation.json"
 
 if ARGV.length >= 1
   json_config = JSON.parse(File.read(json_file))

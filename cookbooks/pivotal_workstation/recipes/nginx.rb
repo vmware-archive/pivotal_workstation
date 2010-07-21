@@ -9,8 +9,12 @@ run_unless_marker_file_exists("nginx_7_67") do
     owner WS_USER
   end
   
-  execute "reload nginx" do
-    command "/usr/local/sbin/nginx -s reload"
+  execute "stop nginx, don't worry if it can't" do
+    command "/usr/local/sbin/nginx -s stop || true"
+  end
+  
+  execute "start nginx" do
+    command "/usr/local/sbin/nginx"
   end
 end
 
