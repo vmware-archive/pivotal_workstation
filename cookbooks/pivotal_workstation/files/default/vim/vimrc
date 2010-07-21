@@ -22,7 +22,7 @@ set virtualedit=all
 
 " set t_Co=256 " 256 colors, this is great with iTerm, but XTerm can't do it.
 set background=dark
-colorscheme ir_black
+colorscheme vividchalk
 
 call pathogen#runtime_append_all_bundles()
 
