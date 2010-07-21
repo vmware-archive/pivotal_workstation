@@ -1,14 +1,12 @@
 Things you'll need:
-snow leopard
-Git - Or get the files from github yourself
-Xcode - the bootstrap script will install  bundler, which needs something which needs xcode
-
-
+Snow Leopard - We make no effort to test on anything less
+Git
+Xcode
 
 Core goals:
 
 Decomposed / modular.  As much as is possible / makes sense, you should be able to pick and choose and mix and match recipes.
-Unobtrusive.  As much as possible we want to allow development environments to be wide-ranging. (poorly said)
+Unobtrusive.  As much as possible we want to allow development environments to easily mimic the project's production environment.
 
 Getting Started:
 Install Xcode from apple
@@ -17,5 +15,7 @@ cd ~
 git clone http://github.com/pivotalexperimental/wschef.git
 cd wschef
 ruby install_chef.rb
-(edit project_workstation.json if desired)
+cp workstation.prototype.json workstation.json
+edit workstation.json (by default it will install everything. This probably isn't what you want)
+edit cookbooks/workstation/attributes
 ./run

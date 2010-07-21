@@ -45,6 +45,6 @@ run_unless_marker_file_exists(marker_version_string_for("rvm")) do
   end
 end
 
-node[:rvm_rubies].each do |ruby_version_string|
+node["rvm"]["rubies"].each do |ruby_version_string|
   rvm_ruby_install(ruby_version_string)
 end
