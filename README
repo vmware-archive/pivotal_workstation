@@ -1,21 +1,37 @@
-Things you'll need:
-Snow Leopard - We make no effort to test on anything less
-Git
-Xcode
-
 Core goals:
 
-Decomposed / modular.  As much as is possible / makes sense, you should be able to pick and choose and mix and match recipes.
-Unobtrusive.  As much as possible we want to allow development environments to easily mimic the project's production environment.
+Decomposed - As much as is possible / makes sense, you should be able to pick and choose and mix and match recipes.
+Unobtrusive - As much as possible we want to allow development environments to easily mimic the project's production environment.
+Documentation - The recipes should document how our workstations are set up as much as possible.
 
-Getting Started:
+
+Chef Theory:
+Chef is declarative - You don't run a configuration script which repeats the same steps, you run a command that brings your machine up to the configuration sepcified.  This approximates "rake db:migrate" - take me from where I am to HEAD.
+
+More to come...
+
+
+Getting Started(the simple way):
 Install Xcode from apple
 Install git from google code: http://code.google.com/p/git-osx-installer/downloads/list?can=3
 cd ~
 git clone http://github.com/pivotalexperimental/wschef.git
 cd wschef
 ruby install_chef.rb
-cp workstation.prototype.json workstation.json
+cp all.json to workstation.json
 edit workstation.json (by default it will install everything. This probably isn't what you want)
 edit cookbooks/workstation/attributes
+./run
+
+Getting started(the right way):
+cd ~
+git clone http://github.com/pivotalexperimental/wschef.git
+cd wschef
+ruby install_chef.rb
+==
+cd YOUR_PROJECT_DIR (or anywhere else that's version controlled)
+mkdir -p chef/pivotal_workstation/recipes
+create and edit chef/pivotal_workstation/recipes/linked_project_recipe.rb (see: How do I create a recipe)
+ln -s YOUR_PROJECT_DIR/chef   ~/wschef/cookbook_links/project_cookbook
+cd ~/wschef
 ./run
