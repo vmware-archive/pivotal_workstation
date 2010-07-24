@@ -51,6 +51,9 @@ set listchars=tab:▸\ ,trail:¬
 " and delete trailing spaces with :w
 autocmd FileType ruby,erb,haml,javascript autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
+" re-open opened buffers
+map <leader>b :FuzzyFinderBuffer<CR>
+
 "autocmd VimEnter * exe 'NERDTree' | wincmd l "This opens NERDtree at vi start
 
 " Ruby weird character shortcuts
