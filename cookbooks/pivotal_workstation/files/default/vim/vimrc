@@ -3,7 +3,6 @@ syntax on         "Because you like highlighting
 
 set number        "Because you like line numbers
 set ruler         "Because you like knowing where the cursor is
-set list          "Because I like seeing weird characters
 set nowrap        "Show lines on one line
 
 set hidden
@@ -32,16 +31,28 @@ au BufRead,BufNewFile *.god set filetype=ruby
 
 set tabstop=2
 set smarttab
-set autoindent
 set expandtab
+set autoindent
 set smartindent
-set tabstop=2
 set shiftwidth=2
 set fo-=t
 
 set nobackup       "no backup files
 set nowritebackup  "only in case you don't want a backup file while editing
 set noswapfile     "no swap files
+
+" make /-style searches case-insensitive unless there is a capital letter in the search expression
+set ignorecase
+set smartcase
+
+" make tabs and trailing spaces visible
+set list
+set listchars=tab:▸\ ,trail:¬
+" and delete trailing spaces with :w
+autocmd FileType ruby,erb,haml,javascript autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+
+" re-open opened buffers
+map <leader>b :FuzzyFinderBuffer<CR>
 
 "autocmd VimEnter * exe 'NERDTree' | wincmd l "This opens NERDtree at vi start
 
