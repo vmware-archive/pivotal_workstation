@@ -36,7 +36,7 @@ Getting Started(the simple way):
 
 Getting started(the right way):
 -------------------------------
-The best way to use wschef is to capture requirements in your project, so they are tracked with your code.  To do this, we create a cookbook which takes precedences over wschef's, and override the placeholder *`linked_project_recipe`* and *`linked_workstation_recipe`*.
+The best way to use wschef is to capture requirements in your project, so they are tracked with your code.  To accomplish this, wschef always looks for a `project_cookbook` and a `workstation_cookbook` in the "coobook_links" directory.  The linked workstation cookbook overrides the linked project cookbook which overrides the recipes in wschef. The default wschef json file calls *`linked_project_recipe`* and *`linked_workstation_recipe`*, which if overridden in the linked cookbooks can include recipes from the three cookbooks in order of precedence.
 
     cd ~
     git clone http://github.com/pivotalexperimental/wschef.git
