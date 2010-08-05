@@ -11,7 +11,7 @@ directory "/Users/#{WS_USER}/Library/LaunchAgents" do
 end
 
 execute "copy mysql plist to ~/Library/LaunchAgents" do
-  command "cp /usr/local/Cellar/mysql/5.1.48/com.mysql.mysqld.plist ~/Library/LaunchAgents/"
+  command "cp /usr/local/Cellar/mysql/5.1.49/com.mysql.mysqld.plist ~/Library/LaunchAgents/"
   user WS_USER
 end
 
