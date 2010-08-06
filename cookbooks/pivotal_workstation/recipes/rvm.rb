@@ -52,7 +52,7 @@ end
 run_unless_marker_file_exists("rvm_default_to_1.8.7") do
   if node["rvm"]["default_ruby"]
     execute "making 1.8.7 with rvm the default" do
-      command "#{::RVM_COMMAND} --default #{node["rvm"]["default_rvm"]}"
+      command "#{::RVM_COMMAND} --default #{node["rvm"]["default_ruby"]}"
       user WS_USER
     end
   end
