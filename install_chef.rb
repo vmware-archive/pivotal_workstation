@@ -11,7 +11,7 @@ module Kernel
   end
 end
 
-system!("sudo sh -c 'gem update --system && gem install bundler -v 0.9.25 --no-rdoc --no-ri'")
+system!("sudo sh -c 'gem update --system && gem install bundler -v 0.9.26 --no-rdoc --no-ri'")
 
 FileUtils.mkdir_p("vendor/bundle")
 system!("bundle install vendor/bundle")

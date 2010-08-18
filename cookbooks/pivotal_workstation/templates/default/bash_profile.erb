@@ -1,6 +1,6 @@
-#Chef assumes it owns this file.  
-#You can put a your bash_profile changes in a file in the includes subdirectory and they will be evaluated, and not overwritten.
+# Chef assumes that it owns this file.
+# Additions to bash should be placed into $HOME/<%= BASH_INCLUDES_DIRNAME %>/ with a .sh extension
 
-# Note that includes will be concatenated to be on one line - make sure your lines are terminated by semicolons.
-
-eval `cd <%=BASH_INCLUDES_SUBDIR%> && cat *`
+for file in $(\ls -1 ${HOME}/<%= BASH_INCLUDES_DIRNAME %>/*.sh); do
+  source $file;
+done

@@ -22,10 +22,7 @@ run_unless_marker_file_exists(marker_version_string_for("rvm")) do
     user WS_USER
   end
   
-  template "#{BASH_INCLUDES_SUBDIR}/rvm" do
-    source "bash_profile_rvm.erb"
-    owner WS_USER
-  end
+  bash_profile_include("rvm")
   
   execute "check rvm" do
     command "#{RVM_COMMAND} --version | grep Wayne"
