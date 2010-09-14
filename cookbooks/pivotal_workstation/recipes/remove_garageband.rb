@@ -1,10 +1,8 @@
 # This is obviously a destructive recipe.
 
-# UNTESTED USE AT YOUR OWN RISK
-
 run_unless_marker_file_exists("removing garage band") do
   execute "Deleting Garage Band Support Files" do
-    command "rm -rf /Library/Application\ Support/GarageBand/"
+    command "rm -rf /Library/Application\ Support/GarageBand"
   end
   
   execute "Deleting Garage Band Application" do

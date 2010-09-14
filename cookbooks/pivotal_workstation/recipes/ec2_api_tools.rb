@@ -1,0 +1,1 @@
+brew_install "ec2-api-tools"
