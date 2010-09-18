@@ -7,7 +7,7 @@ run_unless_marker_file_exists("size_up") do
   # end
   
   execute "download size_up" do
-    command "curl -o /tmp/sizeup.zip http://irradiatedsoftware.com/downloads/SizeUp.zip"
+    command "curl -o /tmp/sizeup.zip http://irradiatedsoftware.com/download/SizeUp.zip"
     user WS_USER
   end
   
