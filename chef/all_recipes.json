@@ -23,7 +23,6 @@
 	"pivotal_workstation::remove_garageband",
 	"pivotal_workstation::rvm",
 	"pivotal_workstation::safari_preferences",
-	"pivotal_workstation::serious_rvm",
 	"pivotal_workstation::size_up",
 	"pivotal_workstation::ssh_copy_id",
 	"pivotal_workstation::ssl_certificate",
