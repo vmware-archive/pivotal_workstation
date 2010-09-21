@@ -1,3 +1,5 @@
+include_recipe "pivotal_workstation::git"
+
 run_unless_marker_file_exists("git_config_global") do
   execute "set alias st=status" do
     command "git config --global alias.st status"

@@ -29,5 +29,6 @@ run_unless_marker_file_exists("mysql_install") do
 
   execute "set the root password to the default" do
     command "mysqladmin -uroot password #{DEFAULT_PIVOTAL_MYSQL_PASSWORD}"
+    not_if "mysql -uroot -p#{DEFAULT_PIVOTAL_MYSQL_PASSWORD} -e 'show databases'"
   end
 end
