@@ -16,6 +16,7 @@
  	"pivotal_workstation::homebrew", 
  	"pivotal_workstation::mysql",
  	"pivotal_workstation::pivotal_rubymine_preferences",
- 	"pivotal_workstation::rvm"
+ 	"pivotal_workstation::rvm",
+	"pivotal_workstation::set_ntp_server"
   ]
 }

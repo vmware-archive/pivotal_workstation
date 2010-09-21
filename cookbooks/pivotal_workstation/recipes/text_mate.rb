@@ -20,4 +20,8 @@ run_unless_marker_file_exists("text_mate_1_5_9") do
     command "hdiutil detach  /Volumes/TextMate\\ 1.5.9/"
     user WS_USER
   end
+
+  execute "link textmate" do
+    command "ln -s /Applications/TextMate.app/Contents/Resources/mate /usr/local/bin/mate"
+  end
 end

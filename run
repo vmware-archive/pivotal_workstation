@@ -17,6 +17,6 @@ if ARGV.length >= 1
   File.open(json_file, "w+"){|f| f<<JSON.pretty_generate(json_config) }
 end
 
-command = "sudo bundle exec chef-solo -j #{json_file} -c solo.rb -l #{log_level}"
+command = "sudo RAILS_ENV=$RAILS_ENV bundle exec chef-solo -j #{json_file} -c solo.rb -l #{log_level}"
 puts "running chef: " + command
 system(command) || exit(1)
