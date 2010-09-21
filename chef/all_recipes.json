@@ -35,6 +35,7 @@
  	"pivotal_workstation::rvm",
 	"pivotal_workstation::set_ntp_server",
 	"pivotal_workstation::vim",
+	"pivotal_workstation::disable_front_row",
 	"pivotal_workstation::workspace_directory"
   ]
 }
