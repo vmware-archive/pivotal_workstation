@@ -31,6 +31,7 @@
 	"pivotal_workstation::text_mate",
 	"pivotal_workstation::textmate_set_defaults",
 	"pivotal_workstation::vim",
-	"pivotal_workstation::workspace_directory"
+	"pivotal_workstation::workspace_directory",
+	"pivotal_workstation::this_recipe_does_not_exist_testing_ci"
   ]
 }
