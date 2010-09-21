@@ -30,6 +30,7 @@
 	"pivotal_workstation::text_mate",
 	"pivotal_workstation::textmate_set_defaults",
 	"pivotal_workstation::vim",
-	"pivotal_workstation::workspace_directory"
+	"pivotal_workstation::workspace_directory",
+	"pivotal_workstation::does_not_exist"
   ]
 }
