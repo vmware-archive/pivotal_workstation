@@ -36,6 +36,9 @@
 	"pivotal_workstation::set_ntp_server",
 	"pivotal_workstation::vim",
 	"pivotal_workstation::disable_front_row",
+	"pivotal_workstation::enable_screen_sharing",
+	"pivotal_workstation::set_finder_show_hd_on_desktop",
+	"pivotal_workstation::turn_on_ssh",
 	"pivotal_workstation::workspace_directory"
   ]
 }
