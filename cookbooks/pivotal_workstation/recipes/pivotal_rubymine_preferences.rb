@@ -2,6 +2,7 @@ pivotal_rubymine_git_revision_hash  = version_string_for("Pivotal-Preferences-Ru
 
 run_unless_marker_file_exists(marker_version_string_for("Pivotal-Preferences-RubyMine")) do
   download_dir = "/tmp/Pivotal-Preferences-RubyMine"
+  rubymine_preferences_dir = "#{WS_HOME}/Library/Preferences/RubyMine25"
   
   execute "reset dir" do
     command "rm -rf #{download_dir} && mkdir -p #{download_dir}"
@@ -13,9 +14,11 @@ run_unless_marker_file_exists(marker_version_string_for("Pivotal-Preferences-Rub
     user WS_USER
   end
   
+  
+  
   [
-    ["#{WS_HOME}/Library/Preferences/RubyMine20", "keymaps"], 
-    ["#{WS_HOME}/Library/Preferences/RubyMine20", "templates"], 
+    [rubymine_preferences_dir, "keymaps"], 
+    [rubymine_preferences_dir, "templates"], 
   ].each do |dirs|
     recursive_directories dirs do
       owner WS_USER
@@ -24,8 +27,8 @@ run_unless_marker_file_exists(marker_version_string_for("Pivotal-Preferences-Rub
     end
   end
   
-  ["cp #{download_dir}/keymaps/* #{WS_HOME}/Library/Preferences/RubyMine20/keymaps/",
-   "cp #{download_dir}/templates/* #{WS_HOME}/Library/Preferences/RubyMine20/templates/"].each do |copy_command|
+  ["cp #{download_dir}/keymaps/* #{rubymine_preferences_dir}/keymaps/",
+   "cp #{download_dir}/templates/* #{rubymine_preferences_dir}/templates/"].each do |copy_command|
      execute "copy: #{copy_command}" do
        command copy_command
        user WS_USER

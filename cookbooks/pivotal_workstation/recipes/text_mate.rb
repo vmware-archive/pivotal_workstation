@@ -23,5 +23,6 @@ run_unless_marker_file_exists("text_mate_1_5_9") do
 
   execute "link textmate" do
     command "ln -s /Applications/TextMate.app/Contents/Resources/mate /usr/local/bin/mate"
+    not_if "test -e /usr/local/bin/mate"
   end
 end

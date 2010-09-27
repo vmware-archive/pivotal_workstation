@@ -39,6 +39,7 @@
 	"pivotal_workstation::enable_screen_sharing",
 	"pivotal_workstation::set_finder_show_hd_on_desktop",
 	"pivotal_workstation::turn_on_ssh",
-	"pivotal_workstation::workspace_directory"
+	"pivotal_workstation::workspace_directory",
+	"pivotal_workstation::iterm_set_defaults"
   ]
 }
