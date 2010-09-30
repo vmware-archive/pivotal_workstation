@@ -29,6 +29,10 @@ run_unless_marker_file_exists("ssl_certificate") do
     user WS_USER
   end
 
+  execute "trust our CA" do
+    command "security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain #{ca_path}/certs/ca.cert"
+  end
+
   execute "generate server key" do
     command "openssl genrsa 1024 > #{cert_path}/server.key"
     user WS_USER
