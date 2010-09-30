@@ -17,9 +17,9 @@ run_unless_marker_file_exists("nginx_7_67") do
     command "/usr/local/sbin/nginx"
   end
 
-  execute "test that the self signed cert is accepted as valid" do
-    command "curl https://localhost/"
-  end
+#  execute "test that the self signed cert is accepted as valid" do
+#    command "curl https://localhost/"
+#  end
 
 end
 

@@ -5,7 +5,7 @@ node.default["nginx_settings"]= {
 }
 
 node.default["ssl_settings"]= {
-  "common_name" => "localhost",
+  "common_name" => "*.local",
   "cert_path" => "/usr/local/etc/certificates",
   "ca_path" => "/usr/local/etc/certificates/demoCA"
 }
