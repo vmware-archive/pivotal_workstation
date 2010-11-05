@@ -8,4 +8,4 @@ ln -s /Users/pivotal/workspace/foo/chef   ~/wschef/cookbook_links/project_cookbo
 These cookbooks should define a "linked_project_recipe" and a "linked_workstation_recipe" which will be called by the 
 default workstation.json.
 
-The workstation cookbook overrides the project cookbook which overrides the wschef cookbook.
+The workstation cookbook overrides the project cookbook which overrides the wschef cookbook. 
