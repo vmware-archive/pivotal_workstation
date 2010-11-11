@@ -2,7 +2,7 @@
 
 run_unless_marker_file_exists("text_mate_1_5_9") do
   execute "download text mate to temp dir" do
-    command "curl -o /tmp/textmate.dmg http://download.macromates.com/TextMate_1.5.9.dmg"
+    command "curl -o /tmp/textmate.dmg http://dl.macromates.com/TextMate_1.5.9.dmg"
     user WS_USER
   end
   
