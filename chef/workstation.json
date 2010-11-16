@@ -1,6 +1,0 @@
-{
-  "recipes": [
- 	"pivotal_workstation::linked_project_recipe",
-	"pivotal_workstation::linked_workstation_recipe"
-  ]
-}

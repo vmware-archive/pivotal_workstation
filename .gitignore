@@ -1,4 +1,0 @@
-.bundle
-vendor
-cookbook_links/*
-!cookbook_links/info.txt
