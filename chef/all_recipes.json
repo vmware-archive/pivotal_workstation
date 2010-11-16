@@ -1,5 +1,6 @@
 {
   "recipes": [
+	"pivotal_workstation::active_corners",
 	"pivotal_workstation::bash_path_order",
 	"pivotal_workstation::bash_profile-better_history",
 	"pivotal_workstation::bash_profile-no_sudo_gem_install",
@@ -34,6 +35,7 @@
  	"pivotal_workstation::pivotal_rubymine_preferences",
  	"pivotal_workstation::rvm",
 	"pivotal_workstation::set_ntp_server",
+	"pivotal_workstation::skype",
 	"pivotal_workstation::vim",
 	"pivotal_workstation::disable_front_row",
 	"pivotal_workstation::enable_screen_sharing",
