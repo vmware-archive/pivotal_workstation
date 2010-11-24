@@ -8,8 +8,8 @@ remote_directory VIM_HOME do
   owner WS_USER
 end
 
-link "~/.vimrc" do
-  to "~/.vim/vimrc"
+link "#{WS_HOME}/.vimrc" do
+  to "#{VIM_HOME}/vimrc"
 end
 
 execute "compile command-t" do
