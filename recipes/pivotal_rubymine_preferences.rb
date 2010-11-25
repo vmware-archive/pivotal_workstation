@@ -2,7 +2,7 @@ pivotal_rubymine_git_revision_hash  = version_string_for("Pivotal-Preferences-Ru
 
 run_unless_marker_file_exists(marker_version_string_for("Pivotal-Preferences-RubyMine")) do
   download_dir = "/tmp/Pivotal-Preferences-RubyMine"
-  rubymine_preferences_dir = "#{WS_HOME}/Library/Preferences/RubyMine25"
+  rubymine_preferences_dir = "#{WS_HOME}/Library/Preferences/RubyMine30"
   
   execute "reset dir" do
     command "rm -rf #{download_dir} && mkdir -p #{download_dir}"
