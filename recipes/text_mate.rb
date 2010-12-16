@@ -1,4 +1,4 @@
-##  This is very experimental and unsupported.
+include_recipe "pivotal_workstation::user_owns_usr_local"
 
 run_unless_marker_file_exists("text_mate_1_5_10") do
   execute "download text mate to temp dir" do
