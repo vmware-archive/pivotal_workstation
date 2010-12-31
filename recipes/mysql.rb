@@ -13,7 +13,7 @@ run_unless_marker_file_exists("mysql_install") do
   end
 
   execute "copy mysql plist to ~/Library/LaunchAgents" do
-    command "cp /usr/local/Cellar/mysql/5.1.49/com.mysql.mysqld.plist ~/Library/LaunchAgents/"
+    command "cp /usr/local/Cellar/mysql/5.1.54/com.mysql.mysqld.plist ~/Library/LaunchAgents/"
     user WS_USER
   end
 
