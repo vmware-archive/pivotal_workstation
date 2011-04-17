@@ -4,27 +4,37 @@ DEFAULT_PIVOTAL_MYSQL_PASSWORD = "password"
 
 include_recipe "pivotal_workstation::homebrew"
 
-run_unless_marker_file_exists("mysql_install") do
+run_unless_marker_file_exists("mysql_" + marker_version_string_for("homebrew")) do
   brew_install "mysql"
-
+  
   directory "/Users/#{WS_USER}/Library/LaunchAgents" do
     owner WS_USER
     action :create
   end
-
+  
   execute "copy mysql plist to ~/Library/LaunchAgents" do
-    command "cp /usr/local/Cellar/mysql/5.1.54/com.mysql.mysqld.plist ~/Library/LaunchAgents/"
+    command "cp \`brew info mysql | grep 'cp /usr/local'  | head -n 1 | cut -f 6 -d ' '\` #{WS_HOME}/Library/LaunchAgents/"
     user WS_USER
   end
-
+  
   execute "mysql_install_db" do
-    command "mysql_install_db"
+    command "mysql_install_db --verbose --user=#{WS_USER} --basedir=\"$(brew --prefix mysql)\" --datadir=/usr/local/var/mysql --tmpdir=/tmp"
     user WS_USER
   end
 
   execute "load the mysql plist into the mac daemon startup thing" do
-    command "launchctl load -w ~/Library/LaunchAgents/com.mysql.mysqld.plist; sleep 5"
+    command "launchctl load -w #{WS_HOME}/Library/LaunchAgents/com.mysql.mysqld.plist"
     user WS_USER
+  end
+  
+  ruby_block "wait for mysql to come up" do
+    block do
+      Timeout::timeout(60) do
+        until system("ls /tmp/mysql.sock")
+          sleep 1
+        end
+      end
+    end
   end
 
   execute "set the root password to the default" do
