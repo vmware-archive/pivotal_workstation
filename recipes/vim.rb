@@ -13,7 +13,7 @@ end
 
 execute "ensure we're on the approved hash" do
   user WS_USER
-  command "cd #{VIM_HOME} && git checkout 960967514858e889dfc1"
+  command "cd #{VIM_HOME} && git checkout 58e3885b874c27820018"
 end
 
 execute "get the submodules" do
