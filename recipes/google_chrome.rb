@@ -3,7 +3,7 @@
 
 run_unless_marker_file_exists("google_chrome") do
   execute "download chrome to temp dir" do
-    command "curl -o /tmp/googlechrome.dmg http://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg"
+    command "curl -o /tmp/googlechrome.dmg #{node["chrome_download_location"]}"
     user WS_USER
   end
   
@@ -14,7 +14,6 @@ run_unless_marker_file_exists("google_chrome") do
   
   execute "copy chrome to /Applications" do
     command 'cp -rf /Volumes/Google\\ Chrome/Google\\ Chrome.app /Applications/'
-    user WS_USER
   end
   
   execute "unmount dmg" do
