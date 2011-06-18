@@ -28,7 +28,8 @@ run_unless_marker_file_exists("postgres_" + marker_version_string_for("postgres"
     user WS_USER
   end
 
-  directory "~/Library/LaunchAgents" do
+  launch_agents_path = File.expand_path('.', File.join('~','Library', 'LaunchAgents'))
+  directory launch_agents_path do
     action :create
     recursive true
     owner WS_USER
