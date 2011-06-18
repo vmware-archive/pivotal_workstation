@@ -2,9 +2,15 @@ include_recipe "pivotal_workstation::homebrew"
 
 run_unless_marker_file_exists("postgres_" + marker_version_string_for("postgres")) do
 
-  execute "unload the plist (shuts down the daemon)" do
-    command %'launchctl unload -w ~/Library/LaunchAgents/org.postgresql.postgres.plist'
-    user WS_USER
+  plist_path = File.expand_path('org.postgresql.postgres.plist', File.join('~', 'Library', 'LaunchAgents'))
+  if File.exists?(plist_path)
+    log "postgres plist found at #{plist_path}"
+    execute "unload the plist (shuts down the daemon)" do
+      command %'launchctl unload -w #{plist_path}'
+      user WS_USER
+    end
+  else
+    log "Did not find postgres plist at #{plist_path} don't try to unload it"
   end
 
 #    blow away default image's data directory
