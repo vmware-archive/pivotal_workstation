@@ -2,10 +2,13 @@ include_recipe "pivotal_workstation::homebrew"
 include_recipe "pivotal_workstation::ssl_certificate"
 
 run_unless_marker_file_exists("nginx_7_67") do
-   execute "uninstall nginx" do
-    command "sudo brew remove nginx"
+  brew_installed = `brew list | grep #{package}`
+  unless brew_installed.empty?
+    execute "uninstall nginx" do
+      command "sudo brew remove nginx"
+    end
   end
-  
+
   brew_install "nginx"
 
   plist_path = File.expand_path('org.nginx.nginx.plist', File.join('~', 'Library', 'LaunchAgents'))
@@ -19,7 +22,7 @@ run_unless_marker_file_exists("nginx_7_67") do
     log "Did not find plist at #{plist_path} don't try to unload it"
   end
 
-  launch_agents_path = File.expand_path('.', File.join('~','Library', 'LaunchAgents'))
+  launch_agents_path = File.expand_path('.', File.join('~', 'Library', 'LaunchAgents'))
   directory launch_agents_path do
     action :create
     recursive true
