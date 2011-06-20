@@ -20,7 +20,6 @@ run_unless_marker_file_exists("postgres_" + marker_version_string_for("postgres"
   end
 
   brew_remove "postgresql"
-  brew_update
   brew_install "postgresql"
 
   execute "create the database" do
