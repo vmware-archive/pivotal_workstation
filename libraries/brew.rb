@@ -11,7 +11,7 @@ class Chef::Recipe
   def brew_remove(package)
     include_recipe "pivotal_workstation::homebrew"
 
-    brew_installed = `brew list | grep postgresql`
+    brew_installed = `brew list | grep #{package}`
     unless brew_installed.empty?
       execute "brew remove #{package}" do
         user WS_USER

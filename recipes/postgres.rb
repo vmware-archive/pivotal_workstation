@@ -10,7 +10,7 @@ run_unless_marker_file_exists("postgres_" + marker_version_string_for("postgres"
       user WS_USER
     end
   else
-    log "Did not find postgres plist at #{plist_path} don't try to unload it"
+    log "Did not find plist at #{plist_path} don't try to unload it"
   end
 
 #    blow away default image's data directory
