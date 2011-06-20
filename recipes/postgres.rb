@@ -35,7 +35,7 @@ run_unless_marker_file_exists("postgres_" + marker_version_string_for("postgres"
   end
 
   execute "copy over the plist" do
-    command %'cp /usr/local/Cellar/postgresql/9.0.4/org.postgresql.postgres.plist ~/Library/LaunchAgents/'
+    command %'cp /usr/local/Cellar/postgresql/9.*/org.postgresql.postgres.plist ~/Library/LaunchAgents/'
     user WS_USER
   end
 
