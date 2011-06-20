@@ -2,7 +2,8 @@ include_recipe "pivotal_workstation::homebrew"
 include_recipe "pivotal_workstation::ssl_certificate"
 
 run_unless_marker_file_exists("nginx_7_67") do
-  brew_installed = `brew list | grep #{package}`
+
+  brew_installed = `brew list | grep nginx`
   unless brew_installed.empty?
     execute "uninstall nginx" do
       command "sudo brew remove nginx"
