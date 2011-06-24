@@ -1,6 +1,6 @@
 include_recipe "pivotal_workstation::homebrew"
 
-run_unless_marker_file_exists("postgres_" + marker_version_string_for("postgres")) do
+run_unless_marker_file_exists("postgres") do
 
   plist_path = File.expand_path('org.postgresql.postgres.plist', File.join('~', 'Library', 'LaunchAgents'))
   if File.exists?(plist_path)
