@@ -4,3 +4,8 @@ run_unless_marker_file_exists("git_scripts") do
     user WS_USER
   end
 end
+
+template "#{WS_HOME}/.pairs" do
+  owner WS_USER
+  source "git_scripts_pairs.erb"
+end
