@@ -1,0 +1,10 @@
+pairs:
+<% node.git_pairs_authors.each do |half_pair| %>
+  <%= "#{half_pair["initials"]}: #{half_pair["name"]}"%><%= half_pair["shortname"] ? "; #{half_pair["shortname"]}" : "" %>
+<% end %>
+
+email:
+  prefix: pair
+  domain: pivotallabs.com
+
+global: true
