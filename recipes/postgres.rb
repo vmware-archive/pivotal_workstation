@@ -46,3 +46,15 @@ run_unless_marker_file_exists("postgres") do
 
 end
 
+ruby_block "test to see if postgres is running" do
+  block do
+    require 'socket'
+    postgres_port = 5432
+    begin
+      s = TCPSocket.open('localhost',postgres_port)
+    rescue => e
+      raise "postgres is not running: " << e
+    end
+    s.close
+  end
+end
