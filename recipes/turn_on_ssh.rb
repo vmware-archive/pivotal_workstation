@@ -1,5 +1,4 @@
 execute "turn on ssh" do
-  #command "systemsetup -f -setremotelogin off"	# to test the test
   command "systemsetup -setremotelogin on"
 end
 
