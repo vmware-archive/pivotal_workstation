@@ -1,6 +1,3 @@
-##  This is very experimental and unsupported.  Don't expect it to work,
-##  though it seems to work OK.
-
 run_unless_marker_file_exists("jetbrains_rubymine") do
   execute "download rubymine to temp dir" do
     # pass the '-L' because jetbrains uses a 302
