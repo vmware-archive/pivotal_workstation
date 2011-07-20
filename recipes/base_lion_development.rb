@@ -10,4 +10,5 @@ include_recipe "pivotal_workstation::gem_no_rdoc_no_ri"
 include_recipe "pivotal_workstation::jetbrains_rubymine"
 include_recipe "pivotal_workstation::skype"
 include_recipe "pivotal_workstation::size_up"
+include_recipe "pivotal_workstation::imagemagick"
 #include_recipe "pivotal_workstation::mysql"  # broken
