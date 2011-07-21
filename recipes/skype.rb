@@ -1,21 +1,28 @@
-run_unless_marker_file_exists("skype_5_beta") do
-  execute "download skype to temp dir" do
-    command "curl -o /tmp/skype.dmg http://download.skype.com/macosx/Skype_5.0.0.6378.dmg"
-    user WS_USER
+unless File.exists?("/Applications/Skype.app")
+
+  remote_file "/tmp/skype.dmg" do
+    source node["skype_download_uri"]
+    mode "0644" 
   end
   
-  execute "mount dmg" do
+  execute "mount skype dmg" do
     command "hdid /tmp/skype.dmg"
     user WS_USER
   end
-  
+
   execute "copy skype to /Applications" do
-    command 'cp -rf /Volumes/Skype/Skype.app /Applications/'
+    command "cp -rf /Volumes/Skype/Skype.app /Applications/"
     user WS_USER
   end
-  
+
   execute "unmount dmg" do
-    command "hdiutil detach  /Volumes/Skype"
+    command "hdiutil detach /Volumes/Skype"
     user WS_USER
+  end
+
+  ruby_block "test to see if Skype was installed" do
+    block do
+      raise "Skype install failed" unless File.exists?("/Applications/Skype.app")
+    end
   end
 end
