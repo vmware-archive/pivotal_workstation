@@ -48,6 +48,7 @@ end
 
 ruby_block "test to see if postgres is running" do
   block do
+    sleep 2
     require 'socket'
     postgres_port = 5432
     begin
