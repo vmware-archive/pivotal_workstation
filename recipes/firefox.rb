@@ -5,6 +5,11 @@ unless File.exists?(node["firefox_app_path"])
     mode "0644" 
   end
   
+  execute "mount firefox dmg" do
+    command "hdid /tmp/firefox.dmg"
+    user WS_USER
+  end
+  
   execute "copy firefox to /Applications" do
     command "cp -rf /Volumes/Firefox/Firefox.app #{Regexp.escape(node["firefox_app_path"])}"
   end
