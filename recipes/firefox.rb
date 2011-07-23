@@ -12,6 +12,7 @@ unless File.exists?(node["firefox_app_path"])
   
   execute "copy firefox to /Applications" do
     command "cp -rf /Volumes/Firefox/Firefox.app #{Regexp.escape(node["firefox_app_path"])}"
+    user WS_USER
   end
   
   execute "unmount dmg" do
