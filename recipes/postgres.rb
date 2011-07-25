@@ -34,6 +34,16 @@ run_unless_marker_file_exists("postgres") do
     owner WS_USER
   end
 
+  ruby_block "rename Apple's stock postgres commands to avoid confusion" do 
+    block do
+      ["clusterdb", "createdb", "createlang", "createuser", "dropdb", "droplang", "dropuser", "ecpg", "initdb", "oid2name", "pg_archivecleanup", "pg_config", "pg_controldata", "pg_ctl", "pg_dump", "pg_dumpall", "pg_resetxlog", "pg_restore", "pg_standby", "pg_upgrade", "pgbench", "postgres", "postmaster", "psql", "reindexdb", "vacuumdb", "vacuumlo"].each do |pg_cmd| 
+	if File.exists?("/usr/bin/#{pg_cmd}")
+	  `mv /usr/bin/#{pg_cmd} /usr/bin/#{pg_cmd}.orig`
+	end
+      end
+    end
+  end
+
   execute "copy over the plist" do
     command %'cp /usr/local/Cellar/postgresql/9.*/org.postgresql.postgres.plist ~/Library/LaunchAgents/'
     user WS_USER
