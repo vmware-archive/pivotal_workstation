@@ -1,3 +1,5 @@
+include_recipe "pivotal_workstation::java"
+
 unless File.exists?("/Applications/" + node["rubymine_basename"])
 
   remote_file "/tmp/rubymine.dmg" do

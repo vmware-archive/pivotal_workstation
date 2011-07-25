@@ -1,4 +1,5 @@
 # Base recipe
+include_recipe "pivotal_workstation::java"
 include_recipe "pivotal_workstation::rvm"
 include_recipe "pivotal_workstation::git_scripts"
 include_recipe "pivotal_workstation::chrome"
@@ -17,4 +18,4 @@ include_recipe "pivotal_workstation::set_screensaver_preferences"
 include_recipe "pivotal_workstation::firefox"
 include_recipe "pivotal_workstation::textmate"
 include_recipe "pivotal_workstation::textmate_set_defaults"
-#include_recipe "pivotal_workstation::mysql"  # broken
+##include_recipe "pivotal_workstation::mysql"  # broken
