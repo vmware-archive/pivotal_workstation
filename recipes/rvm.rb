@@ -1,3 +1,4 @@
+include_recipe "pivotal_workstation::java"
 include_recipe "pivotal_workstation::bash_profile"
 include_recipe "pivotal_workstation::git"
 
