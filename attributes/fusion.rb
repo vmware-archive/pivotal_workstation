@@ -1,1 +1,0 @@
-node.default["fusion_download_uri"]="https://download2.vmware.com/software/fusion/VMware-Fusion-3.1.3-416484-light.dmg?HashKey=f381863921400dbf00aafbceed3ba430&AuthKey=1311786532_dd802694bf5ecb329595a9154a4ba945"
