@@ -19,4 +19,7 @@ include_recipe "pivotal_workstation::firefox"
 include_recipe "pivotal_workstation::textmate"
 include_recipe "pivotal_workstation::textmate_set_defaults"
 include_recipe "pivotal_workstation::libreoffice"
+include_recipe "pivotal_workstation::bash_profile-better_history"
+include_recipe "pivotal_workstation::bash_profile-no_sudo_gem_install"
+include_recipe "pivotal_workstation::bash_profile-ps1"
 #include_recipe "pivotal_workstation::mysql"  # broken
