@@ -5,3 +5,8 @@ file "/etc/gemrc" do
   action :create
   content "install: --no-rdoc --no-ri\nupdate: --no-rdoc --no-ri\n"
 end
+
+execute "link .gemrc to /etc/gemrc" do
+  command "ln -s /etc/gemrc #{WS_HOME}/.gemrc"
+  user WS_USER
+end
