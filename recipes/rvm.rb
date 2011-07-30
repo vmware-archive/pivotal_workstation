@@ -35,6 +35,9 @@ run_unless_marker_file_exists(marker_version_string_for("rvm")) do
     command "perl -pi -e 's/os\\/compiler darwin/darwin/g' #{::RVM_HOME}/scripts/package"
   end
   
+  execute "gem install soloist for default rvm" do
+    command "bash -c 'gem install soloist'"
+  end
   
   %w{readline autoconf openssl zlib}.each do |rvm_package|
     execute "install rvm package: #{rvm_package}" do
