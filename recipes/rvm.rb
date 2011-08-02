@@ -47,11 +47,6 @@ node["rvm"]["rubies"].each do |ruby_version_string|
   rvm_ruby_install(ruby_version_string)
 end
 
-execute "gem install soloist for default rvm" do
-  command "bash -c 'source ~/.bash_profile_includes/rvm.sh; gem install soloist'"
-  user WS_USER
-end
-
 run_unless_marker_file_exists("rvm_default_to_1.9.2") do
   if node["rvm"]["default_ruby"]
     execute "making 1.9.2 with rvm the default" do
