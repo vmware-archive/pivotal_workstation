@@ -1,3 +1,4 @@
+include_recipe "pivotal_workstation::java"
 include_recipe "pivotal_workstation::bash_profile"
 include_recipe "pivotal_workstation::git"
 
@@ -34,7 +35,6 @@ run_unless_marker_file_exists(marker_version_string_for("rvm")) do
     command "perl -pi -e 's/os\\/compiler darwin/darwin/g' #{::RVM_HOME}/scripts/package"
   end
   
-  
   %w{readline autoconf openssl zlib}.each do |rvm_package|
     execute "install rvm package: #{rvm_package}" do
       command "#{::RVM_COMMAND} package install #{rvm_package}"
@@ -47,9 +47,9 @@ node["rvm"]["rubies"].each do |ruby_version_string|
   rvm_ruby_install(ruby_version_string)
 end
 
-run_unless_marker_file_exists("rvm_default_to_1.8.7") do
+run_unless_marker_file_exists("rvm_default_to_1.9.2") do
   if node["rvm"]["default_ruby"]
-    execute "making 1.8.7 with rvm the default" do
+    execute "making 1.9.2 with rvm the default" do
       command "#{::RVM_COMMAND} --default #{node["rvm"]["default_ruby"]}"
       user WS_USER
     end
