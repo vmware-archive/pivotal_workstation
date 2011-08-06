@@ -34,11 +34,15 @@ run_unless_marker_file_exists("postgres") do
     owner WS_USER
   end
 
-  ruby_block "rename Apple's stock postgres commands to avoid confusion" do 
+  ruby_block "rename Apple's stock postgres commands to avoid confusion" do
     block do
-      ["clusterdb", "createdb", "createlang", "createuser", "dropdb", "droplang", "dropuser", "ecpg", "initdb", "oid2name", "pg_archivecleanup", "pg_config", "pg_controldata", "pg_ctl", "pg_dump", "pg_dumpall", "pg_resetxlog", "pg_restore", "pg_standby", "pg_upgrade", "pgbench", "postgres", "postmaster", "psql", "reindexdb", "vacuumdb", "vacuumlo"].each do |pg_cmd| 
+      new_dir="/usr/bin/postgres-orig"
+      if ! ( File.exists?(new_dir) && File.directory?(new_dir) )
+        Dir.mkdir(new_dir)
+      end
+      ["clusterdb", "createdb", "createlang", "createuser", "dropdb", "droplang", "dropuser", "ecpg", "initdb", "oid2name", "pg_archivecleanup", "pg_config", "pg_controldata", "pg_ctl", "pg_dump", "pg_dumpall", "pg_resetxlog", "pg_restore", "pg_standby", "pg_upgrade", "pgbench", "postgres", "postmaster", "psql", "reindexdb", "vacuumdb", "vacuumlo"].each do |pg_cmd|
 	if File.exists?("/usr/bin/#{pg_cmd}")
-	  `mv /usr/bin/#{pg_cmd} /usr/bin/#{pg_cmd}.orig`
+	  File.rename("/usr/bin/#{pg_cmd}","/usr/bin/postgres-orig/#{pg_cmd}")
 	end
       end
     end
@@ -54,11 +58,21 @@ run_unless_marker_file_exists("postgres") do
     user WS_USER
   end
 
+  ruby_block "wait two seconds for the database to start" do
+    block do
+      sleep 2
+    end
+  end
+
+  execute "create the database" do
+    command "createdb"
+    user WS_USER
+  end
+
 end
 
 ruby_block "test to see if postgres is running" do
   block do
-    sleep 2
     require 'socket'
     postgres_port = 5432
     begin
@@ -67,5 +81,9 @@ ruby_block "test to see if postgres is running" do
       raise "postgres is not running: " << e
     end
     s.close
+    `sudo -u #{WS_USER} psql < /dev/null`
+    if $?.to_i != 0
+      raise "I couldn't invoke postgres!"
+    end
   end
 end
