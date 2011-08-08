@@ -23,7 +23,7 @@ run_unless_marker_file_exists("postgres") do
   brew_install "postgresql"
 
   execute "create the database" do
-    command %'initdb -U #{node["postgres_settings"]["name"]} --encoding=utf8 --locale=en_US /usr/local/var/postgres'
+    command %'initdb -U #{WS_USER} --encoding=utf8 --locale=en_US /usr/local/var/postgres'
     user WS_USER
   end
 
