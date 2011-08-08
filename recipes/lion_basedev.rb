@@ -1,6 +1,7 @@
 # Base recipe
 include_recipe "pivotal_workstation::java"
 include_recipe "pivotal_workstation::rvm"
+include_recipe "pivotal_workstation::git_config_global_defaults"
 include_recipe "pivotal_workstation::git_scripts"
 include_recipe "pivotal_workstation::chrome"
 include_recipe "pivotal_workstation::homebrew"
