@@ -1,10 +1,9 @@
 GITX_PATH = "/Applications/GitX.app"
 
-unless File.exists?(GITX_PATH) 
-  
-  execute "download GitX to temp dir" do
-    command %'/usr/bin/curl -o /tmp/gitx.zip #{node["gitx_download_location"]}'
-    user WS_USER
+unless File.exists?(GITX_PATH)
+
+  remote_file "/tmp/gitx.zip" do
+    source node["gitx_download_location"]
   end
 
   execute "unzip gitx" do
@@ -13,7 +12,7 @@ unless File.exists?(GITX_PATH)
   end
 
   execute "copy gitx to /Applications" do
-    command "cp -rf /tmp/GitX.app #{GITX_PATH}"
+    command "mv /tmp/GitX.app #{GITX_PATH}"
     user WS_USER
   end
 
