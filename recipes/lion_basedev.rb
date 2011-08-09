@@ -1,4 +1,5 @@
 # Base recipe
+include_recipe "pivotal_workstation::osx_updates"
 include_recipe "pivotal_workstation::java"
 include_recipe "pivotal_workstation::rvm"
 include_recipe "pivotal_workstation::git_config_global_defaults"
