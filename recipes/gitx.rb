@@ -4,6 +4,7 @@ unless File.exists?(GITX_PATH)
 
   remote_file "/tmp/gitx.zip" do
     source node["gitx_download_location"]
+    owner WS_USER
   end
 
   execute "unzip gitx" do
