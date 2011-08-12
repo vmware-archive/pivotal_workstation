@@ -21,7 +21,7 @@ end
   end
 end
 
-%w{Pivot.jpeg Pivotal\ Tracker.png}.each do |filename|
+%w{Pivot.jpeg Pivotal\ Tracker.png tracker_dot.png}.each do |filename|
   remote_file "#{WS_HOME}/Pictures/Icons/#{filename}" do
     filename = filename.gsub(" ","%20")
     source "http://cheffiles.pivotallabs.com/#{filename}"
@@ -41,7 +41,7 @@ gem_package("plist")
 ruby_block "install the pivotal backgrounds" do
   block do
     `dscl . delete /Users/#{WS_USER} JPEGPhoto`
-    `dscl . create /Users/#{WS_USER} Picture "#{WS_HOME}/Pictures/Icons/Pivotal Tracker.png"`
+    `dscl . create /Users/#{WS_USER} Picture "#{WS_HOME}/Pictures/Icons/tracker_dot.png"`
 
     Gem.clear_paths
     require 'rubygems'
@@ -81,5 +81,3 @@ ruby_block "install the pivotal backgrounds" do
     `killall Dock`
   end
 end
-
-
