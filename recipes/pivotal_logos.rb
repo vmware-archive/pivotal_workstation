@@ -49,29 +49,36 @@ ruby_block "install the pivotal backgrounds" do
     require 'plist'
     # FIXME:  if plist  doesn't exist, create it.
     plist_file = "#{ENV['HOME']}/Library/Preferences/com.apple.desktop.plist"
-    `plutil -convert xml1 #{plist_file}`
-    desktop_plist = Plist::parse_xml(plist_file)
+    if File.exists?(plist_file)
+      `plutil -convert xml1 #{plist_file}`
+      desktop_plist = Plist::parse_xml(plist_file)
+    else
+      desktop_plist = Plist::parse_xml('<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"><plist version="1.0"><dict></dict></plist>')
+    end
     desktop_plist["Background"] =
       { "default" =>
-        { "BackgroundColor" =
+        { "BackgroundColor" =>
             [ 0.0, 0.250980406999588, 0.501960813999176 ],
           "Change" => "TimeInterval",
           "ChangePath" => "/Users/pivotal/Pictures/BackgroundsPrimary",
           "ChangeTime" => 5.0,
           "DSKDesktopPrefPane" => {
-            "UserFolderPaths" = [
+            "UserFolderPaths" => [
               "/Users/pivotal/Pictures/BackgroundsPrimary",
               "/Users/pivotal/Pictures/BackgroundsSecondary"
             ]
-          }
+          },
           "DrawBackgroundColor" => true,
           "LastName" => "pivID_orange-1004x400.png",
           "NewChangePath" => "~/Pictures/BackgroundsPrimary",
           "NoImage" => false,
           "Placement" => "Centered",
           "Random" => false,
-        },
+        }
       }
+    plist_handle = File.open(plist_file, "w")
+    plist_handle.puts Plist::Emit.dump(desktop_plist)
+    `killall Dock`
   end
 end
 
