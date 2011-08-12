@@ -10,6 +10,7 @@ end
   filename="pivID_#{color}-1004x400.png"
   remote_file "#{WS_HOME}/Pictures/BackgroundsPrimary/#{filename}" do
     source "http://cheffiles.pivotallabs.com/#{filename}"
+    owner WS_USER
     :create_if_missing
   end
 end
@@ -17,6 +18,7 @@ end
 %w{BackToTheEdward.png}.each do |filename|
   remote_file "#{WS_HOME}/Pictures/BackgroundsSecondary/#{filename}" do
     source "http://cheffiles.pivotallabs.com/#{filename}"
+    owner WS_USER
     :create_if_missing
   end
 end
@@ -25,6 +27,7 @@ end
   remote_file "#{WS_HOME}/Pictures/Icons/#{filename}" do
     filename = filename.gsub(" ","%20")
     source "http://cheffiles.pivotallabs.com/#{filename}"
+    owner WS_USER
     :create_if_missing
   end
 end
@@ -32,7 +35,7 @@ end
 ruby_block "install the pivotal tracker picture" do
   block do
     `dscl . delete /Users/#{WS_USER} JPEGPhoto`
-    `dscl . create /Users/#{WS_USER} Picture "#{WS_HOME}/Pictures/Icons/Pivotal Tracker.png"`
+    `dscl . create /Users/#{WS_USER} Picture "#{WS_HOME}/Pictures/Icons/tracker_dot.png"`
   end
 end
 
@@ -40,11 +43,7 @@ gem_package("plist")
 
 ruby_block "install the pivotal backgrounds" do
   block do
-    `dscl . delete /Users/#{WS_USER} JPEGPhoto`
-    `dscl . create /Users/#{WS_USER} Picture "#{WS_HOME}/Pictures/Icons/tracker_dot.png"`
-
     Gem.clear_paths
-    require 'rubygems'
 
     require 'plist'
     # FIXME:  if plist  doesn't exist, create it.
