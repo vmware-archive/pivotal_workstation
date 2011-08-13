@@ -23,7 +23,7 @@ end
   end
 end
 
-%w{Pivot.jpeg Pivotal\ Tracker.png tracker_dot.png}.each do |filename|
+%w{Pivot.jpeg tracker_dot.png tracker_dot.jpeg}.each do |filename|
   remote_file "#{WS_HOME}/Pictures/Icons/#{filename}" do
     filename = filename.gsub(" ","%20")
     source "http://cheffiles.pivotallabs.com/#{filename}"
@@ -32,12 +32,22 @@ end
   end
 end
 
-ruby_block "install the pivotal tracker picture" do
-  block do
-    `dscl . delete /Users/#{WS_USER} JPEGPhoto`
-    `dscl . create /Users/#{WS_USER} Picture "#{WS_HOME}/Pictures/Icons/tracker_dot.png"`
-  end
+template "/tmp/jpegphoto.dsimport" do
+  source "pivotal_logos-dsimport.erb"
+  owner WS_USER
 end
+
+# OpenDirectory has a specific format for JPEGPhoto (320x320 72dpi)
+# easiest way to create one is to let Apple create it for you and
+# then extract their jpeg:
+# System Preferences
+#   ->Users & Groups
+#     ->select your username->click on icon->click "Edit Picture..."
+#     ->set your picture to the one you want.  Then:
+# dscl . read /Users/$USER JPEGPhoto |tail +2 |xxd -r -p > /tmp/precious.jpeg
+execute("dscl . delete /Users/#{WS_USER} JPEGPhoto")
+execute("dscl . create /Users/#{WS_USER} Picture \"#{WS_HOME}/Pictures/Icons/tracker_dot.png\"")
+execute("dsimport /tmp/jpegphoto.dsimport /Local/Default M")
 
 gem_package("plist")
 
