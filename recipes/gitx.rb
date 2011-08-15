@@ -30,7 +30,11 @@ end
 
 
 unless File.exists?(GITX_LINK)
-  raise "#{GITX_LINK_SRC} doesn't exist!  Can't create symbolic link!" unless File.exists?(GITX_LINK_SRC)
+  ruby_block "Check for existence of #{GITX_LINK_SRC}." do
+    block do
+      raise "#{GITX_LINK_SRC} doesn't exist!  Can't create symbolic link!" unless File.exists?(GITX_LINK_SRC)
+    end
+  end
 
   # ln -s /Applications/GitX.app/Contents/Resources/gitx /usr/local/bin/gitx
   link GITX_LINK do
