@@ -1,3 +1,6 @@
+# BUGS:  the screen-share-lock icon will NOT refresh to the
+# red dot until you log out & log in again.
+
 %w{Icons BackgroundsPrimary BackgroundsSecondary}.each do |dir|
   directory "#{WS_HOME}/Pictures/#{dir}" do
     mode "0755"

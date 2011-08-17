@@ -1,4 +1,4 @@
-# Base recipe
+# Base recipe for Lion
 include_recipe "pivotal_workstation::osx_updates"
 include_recipe "pivotal_workstation::java"
 include_recipe "pivotal_workstation::rvm"
