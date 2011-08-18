@@ -4,9 +4,20 @@ include_recipe "pivotal_workstation::git"
 
 brew_install "macvim"
 
-link "/Applications/MacVim.app" do
-  to "#{node["vim_app"]}"
-  owner WS_USER
+#link "/Applications/MacVim.app" do
+#  to "#{node["vim_app"]}"
+#  owner WS_USER
+#end
+
+# There may be multiple macvims; try to find the latest one
+# & link that to /Applications
+ruby_block "Link MacVim to /Applications" do
+  block do
+    macvim_app_glob="/usr/local/Cellar/macvim/*/MacVim.app"
+    if File.exists?(Dir[macvim_app_glob][-1])
+      system("ln -s "+Dir[macvim_app_glob][-1] + " /Applications/")
+    end
+  end
 end
 
 execute "move existing vim_home out of the way if necessary" do
