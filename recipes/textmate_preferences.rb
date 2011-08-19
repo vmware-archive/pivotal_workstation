@@ -12,16 +12,14 @@ end
 
 gem_package("plist")
 
+plist_file = "#{ENV['HOME']}/Library/Preferences/com.macromates.textmate.plist"
 ruby_block "soft tabs & tabs stop of 2" do
   block do
-
     Gem.clear_paths
     require 'rubygems'
-
     require 'plist'
     require 'time'
     # FIXME:  if plist  doesn't exist, create it.
-    plist_file = "#{ENV['HOME']}/Library/Preferences/com.macromates.textmate.plist"
     `plutil -convert xml1 #{plist_file}`
     tmate_plist = Plist::parse_xml(plist_file)
     tmate_plist["OakTextViewLineNumbersEnabled"] = true
@@ -80,5 +78,7 @@ ruby_block "soft tabs & tabs stop of 2" do
     puts Plist::Emit.dump(tmate_plist["OakTextViewScopedTabSize"])
     plist_handle = File.open(plist_file, "w")
     plist_handle.puts Plist::Emit.dump(tmate_plist)
+    # .close is critical if you modify the plist further in the run
+    plist_handle.close
   end
 end
