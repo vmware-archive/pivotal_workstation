@@ -13,9 +13,9 @@ brew_install "macvim"
 # & link that to /Applications
 ruby_block "Link MacVim to /Applications" do
   block do
-    macvim_app_glob="/usr/local/Cellar/macvim/*/MacVim.app"
-    if File.exists?(Dir[macvim_app_glob][-1])
-      system("ln -s "+Dir[macvim_app_glob][-1] + " /Applications/")
+    macvim_app=Dir["/usr/local/Cellar/macvim/*/MacVim.app"].last
+    if File.exists?(macvim_app)
+      system("ln -s #{macvim_app} /Applications/")
     end
   end
 end
