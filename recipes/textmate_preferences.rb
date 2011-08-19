@@ -76,9 +76,8 @@ ruby_block "soft tabs & tabs stop of 2" do
         }
       }
     puts Plist::Emit.dump(tmate_plist["OakTextViewScopedTabSize"])
-    plist_handle = File.open(plist_file, "w")
-    plist_handle.puts Plist::Emit.dump(tmate_plist)
-    # .close is critical if you modify the plist further in the run
-    plist_handle.close
+    File.open(plist_file, "w") do |plist_handle|
+      plist_handle.puts Plist::Emit.dump(tmate_plist)
+    end
   end
 end
