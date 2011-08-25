@@ -42,28 +42,8 @@ unless File.exists?(node['mouse_locator_dst'])
   end
 
   execute "Activate Mouse Locator" do
-    command "#{node["mouse_locator_exe"]} &"
+    command "open #{node["mouse_locator_app"]} &"
     user WS_USER
-  end
-
-  gem_package("plist")
-  plist_file = "#{ENV['HOME']}/Library/Preferences/loginwindow.plist"
-  ruby_block "Add to auto-launch" do
-    block do
-      Gem.clear_paths
-      require 'rubygems'
-      require 'plist'
-      `plutil -convert xml1 #{plist_file}`
-      plist = Plist::parse_xml(plist_file)
-      new_mouselocator = { "Hide" => false,
-        "Path" => "#{node["mouse_locator_exe"]}"
-      }
-      plist["AutoLaunchedApplicationDictionary"] = [] unless plist["AutoLaunchedApplicationDictionary"]
-      plist["AutoLaunchedApplicationDictionary"] = (plist["AutoLaunchedApplicationDictionary"] + [ new_mouselocator ]).uniq
-      File.open(plist_file, "w") do |plist_handle|
-        plist_handle.puts Plist::Emit.dump(plist)
-      end
-    end
   end
 
   ruby_block "test to see if mouse_locator was installed" do
