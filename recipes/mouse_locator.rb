@@ -48,7 +48,7 @@ unless File.exists?(node['mouse_locator_dst'])
 
   ruby_block "test to see if mouse_locator was installed" do
     block do
-      raise "Chrome install failed" unless File.exists?(node['mouse_locator_dst'])
+      raise "Mouse Locator install failed" unless File.exists?(node['mouse_locator_dst'])
     end
   end
 end
