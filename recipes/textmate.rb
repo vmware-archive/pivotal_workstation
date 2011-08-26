@@ -1,7 +1,6 @@
 include_recipe "pivotal_workstation::user_owns_usr_local"
 
-
-run_unless_marker_file_exists("text_mate_1_5_10") do
+unless File.exists?("/Applications/TextMate.app")
   execute "download text mate to temp dir" do
     command "curl -o /tmp/textmate.zip http://dl.macromates.com/TextMate_1.5.10_r1623.zip"
     user WS_USER
@@ -15,6 +14,12 @@ run_unless_marker_file_exists("text_mate_1_5_10") do
   execute "link textmate" do
     command "ln -s /Applications/TextMate.app/Contents/Resources/mate /usr/local/bin/mate"
     not_if "test -e /usr/local/bin/mate"
+  end
+
+  ruby_block "test to see if TextMate was installed" do
+    block do
+      raise "TextMate install failed" unless File.exists?("/Applications/TextMate.app")
+    end
   end
 end
 
