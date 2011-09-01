@@ -17,24 +17,24 @@ run_unless_marker_file_exists(marker_version_string_for("rvm")) do
     command "curl -Lsf http://github.com/wayneeseguin/rvm/tarball/#{rvm_git_revision_hash} | tar xvz -C#{RVM_HOME}/src/rvm --strip 1"
     user WS_USER
   end
-  
+
   execute "install rvm" do
     cwd "#{RVM_HOME}/src/rvm"
     command "./install"
     user WS_USER
   end
-  
+
   bash_profile_include("rvm")
-  
+
   execute "check rvm" do
     command "#{RVM_COMMAND} --version | grep Wayne"
     user WS_USER
   end
-  
+
   execute "HACK the rvm openssl install script.  ./Configure was failing with 'target already defined'.  we've filed a bug about this" do
     command "perl -pi -e 's/os\\/compiler darwin/darwin/g' #{::RVM_HOME}/scripts/package"
   end
-  
+
   %w{readline autoconf openssl zlib}.each do |rvm_package|
     execute "install rvm package: #{rvm_package}" do
       command "#{::RVM_COMMAND} package install #{rvm_package}"
@@ -43,8 +43,8 @@ run_unless_marker_file_exists(marker_version_string_for("rvm")) do
   end
 end
 
-node["rvm"]["rubies"].each do |ruby_version_string|
-  rvm_ruby_install(ruby_version_string)
+node["rvm"]["rubies"].each do |ruby_version_string, env_override|
+  rvm_ruby_install(ruby_version_string,env_override)
 end
 
 run_unless_marker_file_exists("rvm_default_to_1.9.2") do
