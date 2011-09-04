@@ -1,13 +1,12 @@
 unless File.exists?("/Applications/Screen Sharing.app")
-
-  execute "create symbolic link in /Applications" do
-    command "ln -s /System/Library/CoreServices/Screen\\ Sharing.app /Applications/"
-    user WS_USER
+  
+  link "/Applications/Screen\ Sharing.app" do
+    to "/System/Library/CoreServices/Screen\ Sharing.app"
   end
 
-  ruby_block "test to see if Chrome was installed" do
+  ruby_block "test to see if Screen Sharing was installed" do
     block do
-      raise "Chrome install failed" unless File.exists?("/Applications/Screen Sharing.app")
+      raise "Screen Sharing install failed" unless File.exists?("/Applications/Screen Sharing.app")
     end
   end
 end
