@@ -9,7 +9,7 @@ unless brew_installed? "memcached"
   end
 
   execute "copy memcached plist to ~/Library/LaunchAgents" do
-    command "cp \`brew info memcached | grep 'cp /usr/local'  | head -n 1 | cut -f 6 -d ' '\` #{WS_HOME}/Library/LaunchAgents/"
+    command "cp `brew --prefix memcached`/com.danga.memcached.plist #{WS_HOME}/Library/LaunchAgents/"
     user WS_USER
   end
 

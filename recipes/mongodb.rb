@@ -9,7 +9,7 @@ unless brew_installed? "mongodb"
   end
 
   execute "copy mongodb plist to ~/Library/LaunchAgents" do
-    command "cp \`brew info mongodb | grep 'cp /usr/local'  | head -n 1 | cut -f 6 -d ' '\` #{WS_HOME}/Library/LaunchAgents/"
+    command "cp `brew --prefix mongodb`/org.mongodb.mongod.plist #{WS_HOME}/Library/LaunchAgents/"
     user WS_USER
   end
 
