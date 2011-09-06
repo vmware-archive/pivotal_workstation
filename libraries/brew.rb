@@ -5,6 +5,7 @@ class Chef::Recipe
     execute "brew install #{package}" do
       user WS_USER
       command "brew install #{package}"
+      not_if "brew list #{package}"
     end
   end
 
