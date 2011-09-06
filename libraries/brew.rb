@@ -9,6 +9,12 @@ class Chef::Recipe
     end
   end
 
+  def brew_installed?(package)
+    include_recipe "pivotal_workstation::homebrew"
+
+    system("brew list #{package}")
+  end
+
   def brew_remove(package)
     include_recipe "pivotal_workstation::homebrew"
 
