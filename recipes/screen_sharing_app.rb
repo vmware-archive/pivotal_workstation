@@ -5,9 +5,9 @@ unless File.exists?("/Applications/Screen Sharing.app")
     user WS_USER
   end
 
-  ruby_block "test to see if Chrome was installed" do
+  ruby_block "assure the link /Applications/Screen Sharing.app was successfully created" do
     block do
-      raise "Chrome install failed" unless File.exists?("/Applications/Screen Sharing.app")
+      raise "Linking /Applications/Screen Sharing.app to /System/Library/CoreServices/Screen Sharing.app failed." unless File.exists?("/Applications/Screen Sharing.app")
     end
   end
 end
