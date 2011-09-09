@@ -1,29 +1,7 @@
-`pkgutil --pkgs=com.apple.pkg.JavaForMacOSX107`
-if $? != 0
-
-  remote_file "/tmp/java.dmg" do
-    source node["java_download_uri"]
-    mode "0644" 
-  end
-
-  execute "mount java dmg" do
-    command "hdid /tmp/java.dmg"
-    user WS_USER
-  end
-
-  execute "intall java" do
-    command "installer -pkg /Volumes/Java\\ for\\ Mac\\ OS\\ X\\ 10.7/JavaForMacOSX10.7.pkg -target /"
-  end
-
-  execute "unmount dmg" do
-    command "hdiutil detach /Volumes/Java\\ for\\ Mac\\ OS\\ X\\ 10.7"
-    user WS_USER
-  end
-
-  ruby_block "test to see if java was installed" do
-    block do
-      `pkgutil --pkgs=com.apple.pkg.JavaForMacOSX107`
-      raise "Java install failed" if $? != 0
-    end
-  end
+pivotal_workstation_package "JavaForMacOSX10.7" do
+  source "http://support.apple.com/downloads/DL1421/en_US/JavaForMacOSX10.7.dmg"
+  volumes_dir "Java for Mac OS X 10.7"
+  action :install
+  type "pkg"
+  checksum "4c32d32cfeaaf4aab539a1385c4f55a97cf09c7d396f8b43257161616bba7070"
 end
