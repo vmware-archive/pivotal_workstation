@@ -21,7 +21,7 @@ def load_current_resource
   @dmgpkg = Chef::Resource::PivotalWorkstationPackage.new(new_resource.name)
   @dmgpkg.app(new_resource.app)
   Chef::Log.debug("Checking for application #{new_resource.app}")
-  installed = ::File.directory?("#{new_resource.destination}/#{new_resource.app}.app")
+  installed = (new_resource.type == "app")?(::File.directory?("#{new_resource.destination}/#{new_resource.app}.app")):system("pkgutil --pkgs=#{new_resource.pkg_id}")
   @dmgpkg.installed(installed)
 end
 
@@ -43,22 +43,32 @@ action :install do
       end
     end
 
-    execute "hdid #{dmg_file}" do
+    execute "hdiutil attach #{dmg_file}" do
       not_if "hdiutil info | grep -q 'image-path.*#{dmg_file}'"
     end
 
     case new_resource.type
     when "app"
       execute "cp -r '/Volumes/#{volumes_dir}/#{new_resource.app}.app' '#{new_resource.destination}'"
-
+        user WS_USER
+        group "admin"
       file "#{new_resource.destination}/#{new_resource.app}.app/Contents/MacOS/#{new_resource.app}" do
         mode 0755
         ignore_failure true
       end
     when "mpkg"
-      execute "sudo installer -pkg '/Volumes/#{volumes_dir}/#{new_resource.app}.mpkg' -target /"
-    when "pkg"
-      execute "sudo installer -pkg '/Volumes/#{volumes_dir}/#{new_resource.app}.pkg' -target /"
+      ruby_block "installing /Volumes/#{volumes_dir}/#{new_resource.app}.*pkg" do
+        block do
+          if ::File.exists?("/Volumes/#{volumes_dir}/#{new_resource.app}.mpkg")
+            `sudo installer -pkg '/Volumes/#{volumes_dir}/#{new_resource.app}.mpkg' -target /`
+          # Some packages, e.g. Lion's Java, end in ".pkg", not ".mpkg"
+          elsif ::File.exists?("/Volumes/#{volumes_dir}/#{new_resource.app}.pkg")
+            `sudo installer -pkg '/Volumes/#{volumes_dir}/#{new_resource.app}.pkg' -target /`
+          else
+            raise "I couldn't find /Volumes/#{volumes_dir}/#{new_resource.app}.mpkg"
+          end
+        end
+      end
     end
 
     execute "hdiutil detach '/Volumes/#{volumes_dir}'"
