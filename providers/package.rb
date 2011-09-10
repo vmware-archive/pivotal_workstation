@@ -43,7 +43,7 @@ action :install do
       end
     end
 
-    execute "hdiutil attach #{dmg_file}" do
+    execute "hdiutil attach '#{dmg_file}'" do
       not_if "hdiutil info | grep -q 'image-path.*#{dmg_file}'"
     end
 
