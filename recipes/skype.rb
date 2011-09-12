@@ -1,21 +1,5 @@
-run_unless_marker_file_exists("skype_5_beta") do
-  execute "download skype to temp dir" do
-    command "curl -o /tmp/skype.dmg http://download.skype.com/macosx/Skype_5.0.0.6378.dmg"
-    user WS_USER
-  end
-  
-  execute "mount dmg" do
-    command "hdid /tmp/skype.dmg"
-    user WS_USER
-  end
-  
-  execute "copy skype to /Applications" do
-    command 'cp -rf /Volumes/Skype/Skype.app /Applications/'
-    user WS_USER
-  end
-  
-  execute "unmount dmg" do
-    command "hdiutil detach  /Volumes/Skype"
-    user WS_USER
-  end
+pivotal_workstation_package "Skype" do
+  source "http://www.skype.com/go/getskype-macosx.dmg"
+  action :install
+  checksum "ad4f5a8f2312597b98c420045d0828ec40d440fe0da187bde34b7f40294b8e08"
 end

@@ -1,6 +1,6 @@
 # This is obviously a destructive recipe.
 
-run_unless_marker_file_exists("removing garage band") do
+run_unless_marker_file_exists("removed_garage_band") do
   execute "Deleting Garage Band Support Files" do
     command "rm -rf /Library/Application\ Support/GarageBand"
   end

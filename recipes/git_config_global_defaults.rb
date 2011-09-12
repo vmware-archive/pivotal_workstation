@@ -1,4 +1,5 @@
 include_recipe "pivotal_workstation::git"
+bash_profile_include("git_vim")
 
 execute "set alias st=status" do
   command "git config --global alias.st status"

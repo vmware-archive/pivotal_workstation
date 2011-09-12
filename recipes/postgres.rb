@@ -23,7 +23,7 @@ run_unless_marker_file_exists("postgres") do
   brew_install "postgresql"
 
   execute "create the database" do
-    command %'initdb -U #{node["postgres_settings"]["name"]} --encoding=utf8 --locale=en_US /usr/local/var/postgres'
+    command %'initdb -U #{WS_USER} --encoding=utf8 --locale=en_US /usr/local/var/postgres'
     user WS_USER
   end
 
@@ -32,6 +32,20 @@ run_unless_marker_file_exists("postgres") do
     action :create
     recursive true
     owner WS_USER
+  end
+
+  ruby_block "rename Apple's stock postgres commands to avoid confusion" do
+    block do
+      new_dir="/usr/bin/postgres-orig"
+      if ! ( File.exists?(new_dir) && File.directory?(new_dir) )
+        Dir.mkdir(new_dir)
+      end
+      ["clusterdb", "createdb", "createlang", "createuser", "dropdb", "droplang", "dropuser", "ecpg", "initdb", "oid2name", "pg_archivecleanup", "pg_config", "pg_controldata", "pg_ctl", "pg_dump", "pg_dumpall", "pg_resetxlog", "pg_restore", "pg_standby", "pg_upgrade", "pgbench", "postgres", "postmaster", "psql", "reindexdb", "vacuumdb", "vacuumlo"].each do |pg_cmd|
+	if File.exists?("/usr/bin/#{pg_cmd}")
+	  File.rename("/usr/bin/#{pg_cmd}","/usr/bin/postgres-orig/#{pg_cmd}")
+	end
+      end
+    end
   end
 
   execute "copy over the plist" do
@@ -44,5 +58,32 @@ run_unless_marker_file_exists("postgres") do
     user WS_USER
   end
 
+  ruby_block "wait four seconds for the database to start" do
+    block do
+      sleep 4
+    end
+  end
+
+  execute "create the database" do
+    command "createdb"
+    user WS_USER
+  end
+
 end
 
+ruby_block "test to see if postgres is running" do
+  block do
+    require 'socket'
+    postgres_port = 5432
+    begin
+      s = TCPSocket.open('localhost',postgres_port)
+    rescue => e
+      raise "postgres is not running: " << e
+    end
+    s.close
+    `sudo -u #{WS_USER} psql < /dev/null`
+    if $?.to_i != 0
+      raise "I couldn't invoke postgres!"
+    end
+  end
+end

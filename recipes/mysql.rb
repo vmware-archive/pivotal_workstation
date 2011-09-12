@@ -6,17 +6,17 @@ include_recipe "pivotal_workstation::homebrew"
 
 run_unless_marker_file_exists("mysql_" + marker_version_string_for("homebrew")) do
   brew_install "mysql"
-  
+
   directory "/Users/#{WS_USER}/Library/LaunchAgents" do
     owner WS_USER
     action :create
   end
-  
+
   execute "copy mysql plist to ~/Library/LaunchAgents" do
-    command "cp \`brew info mysql | grep 'cp /usr/local'  | head -n 1 | cut -f 6 -d ' '\` #{WS_HOME}/Library/LaunchAgents/"
+    command "cp `brew --prefix mysql`/com.mysql.mysqld.plist #{WS_HOME}/Library/LaunchAgents/"
     user WS_USER
   end
-  
+
   execute "mysql_install_db" do
     command "mysql_install_db --verbose --user=#{WS_USER} --basedir=\"$(brew --prefix mysql)\" --datadir=/usr/local/var/mysql --tmpdir=/tmp"
     user WS_USER
@@ -26,7 +26,7 @@ run_unless_marker_file_exists("mysql_" + marker_version_string_for("homebrew")) 
     command "launchctl load -w #{WS_HOME}/Library/LaunchAgents/com.mysql.mysqld.plist"
     user WS_USER
   end
-  
+
   ruby_block "wait for mysql to come up" do
     block do
       Timeout::timeout(60) do
