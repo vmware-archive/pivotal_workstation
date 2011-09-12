@@ -25,10 +25,6 @@ def load_current_resource
   @dmgpkg.installed(installed)
 end
 
-def shell_escape(str)
-  Regexp.escape(str)
-end
-
 action :install do
   unless @dmgpkg.installed
 
@@ -51,6 +47,8 @@ action :install do
       remote_file dmg_file do
         source new_resource.source
         checksum new_resource.checksum if new_resource.checksum
+        group "admin"
+        mode 0644
       end
     end
 
