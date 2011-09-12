@@ -58,7 +58,11 @@ action :install do
 
     case new_resource.type
     when "app"
-      execute "cp -r '/Volumes/#{volumes_dir}/#{new_resource.app}.app' '#{new_resource.destination}'" do
+      # use "rsync -aH" instead of "cp -r" because rsync
+      # won't exit(1) when it hits a bad symbolic link (e.g.
+      # Dropbox's site.py).  The "-H" flag is to copy
+      # hard-links, and mostly to show how cool I am.
+      execute "rsync -aH '/Volumes/#{volumes_dir}/#{new_resource.app}.app' '#{new_resource.destination}'" do
         user WS_USER
         group "admin"
       end
