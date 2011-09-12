@@ -36,6 +36,15 @@ action :install do
     dmg_name = new_resource.dmg_name ? new_resource.dmg_name : new_resource.app
     dmg_file = "#{Chef::Config[:file_cache_path]}/#{dmg_name}.dmg"
 
+    # cachedir needs to be writeable by admin grp because downloads
+    # may be done by non-root users.
+    directory Chef::Config[:file_cache_path] do
+      owner "root"
+      group "admin"
+      mode 0775
+      action :create
+    end
+
     if new_resource.source
       remote_file dmg_file do
         source new_resource.source
