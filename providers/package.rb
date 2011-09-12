@@ -37,12 +37,14 @@ action :install do
     dmg_file = "#{Chef::Config[:file_cache_path]}/#{dmg_name}.dmg"
 
     # cachedir needs to be writeable by admin grp because downloads
-    # may be done by non-root users.
+    # may be done by non-root users.  Also, on brand-new machines
+    # this directory doesn't exist & needs to be created.
     directory Chef::Config[:file_cache_path] do
       owner "root"
       group "admin"
       mode 0775
       action :create
+      recursive true
     end
 
     if new_resource.source
