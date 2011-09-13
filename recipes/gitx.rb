@@ -11,14 +11,20 @@ unless File.exists?(GITX_PATH)
     owner WS_USER
   end
 
+  directory "/tmp/GitX.app" do
+    action :delete
+    recursive true
+  end
+
   execute "unzip gitx" do
     command "unzip /tmp/gitx.zip -d /tmp/"
     user WS_USER
   end
 
   execute "copy gitx to /Applications" do
-    command "mv /tmp/GitX.app #{GITX_PATH}"
+    command "rsync -a /tmp/GitX.app /Applications"
     user WS_USER
+    group "admin"
   end
 
   ruby_block "test to see if GitX.app was installed" do
