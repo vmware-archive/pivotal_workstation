@@ -13,6 +13,7 @@ unless File.exists?(node["github_for_mac_app_path"])
   execute "copy github_for_mac to /Applications" do
     command "mv /tmp/GitHub.app #{Regexp.escape(node["github_for_mac_app_path"])}"
     user WS_USER
+    group "admin"
   end
 
   ruby_block "test to see if GitHub.app was installed" do
