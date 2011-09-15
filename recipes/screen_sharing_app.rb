@@ -1,8 +1,7 @@
 unless File.exists?("/Applications/Screen Sharing.app")
-
-  execute "create symbolic link in /Applications" do
-    command "ln -s /System/Library/CoreServices/Screen\\ Sharing.app /Applications/"
-    user WS_USER
+  
+  link "/Applications/Screen\ Sharing.app" do
+    to "/System/Library/CoreServices/Screen\ Sharing.app"
   end
 
   ruby_block "assure the link /Applications/Screen Sharing.app was successfully created" do

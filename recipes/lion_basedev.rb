@@ -1,4 +1,5 @@
 # Base recipe for Lion
+include_recipe "pivotal_workstation::workspace_directory"
 include_recipe "pivotal_workstation::osx_updates"
 include_recipe "pivotal_workstation::java"
 include_recipe "pivotal_workstation::rvm"
@@ -34,3 +35,4 @@ include_recipe "pivotal_workstation::vim"
 include_recipe "pivotal_workstation::pivotal_logos"
 include_recipe "pivotal_workstation::mouse_locator"
 include_recipe "pivotal_workstation::ccmenu"
+include_recipe "pivotal_workstation::github_for_mac"

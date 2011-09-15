@@ -21,7 +21,7 @@ def load_current_resource
   @dmgpkg = Chef::Resource::PivotalWorkstationPackage.new(new_resource.name)
   @dmgpkg.app(new_resource.app)
   Chef::Log.debug("Checking for application #{new_resource.app}")
-  installed = (new_resource.type == "app")?(::File.directory?("#{new_resource.destination}/#{new_resource.app}.app")):system("pkgutil --pkgs=#{new_resource.pkg_id}")
+  installed = (new_resource.type == "app") ? (::File.directory?("#{new_resource.destination}/#{new_resource.app}.app")) : system("pkgutil --pkgs=#{new_resource.package_id}")
   @dmgpkg.installed(installed)
 end
 
@@ -51,8 +51,13 @@ action :install do
         mode 0644
       end
     end
-
-    execute "hdiutil attach '#{dmg_file}'" do
+        
+    ruby_block "attach #{dmg_file}" do
+      block do
+        software_license_agreement = system("hdiutil imageinfo #{dmg_file} | grep -q 'Software License Agreement: true'")
+        confirm_mount_cmd = software_license_agreement ? "echo Y |" : ""
+        system "#{confirm_mount_cmd} hdiutil attach '#{dmg_file}'"
+      end
       not_if "hdiutil info | grep -q 'image-path.*#{dmg_file}'"
     end
 
