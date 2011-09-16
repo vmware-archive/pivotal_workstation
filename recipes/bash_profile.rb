@@ -1,5 +1,5 @@
 ::BASH_INCLUDES_DIRNAME = ".bash_profile_includes"
-::BASH_INCLUDES_SUBDIR = File.expand_path("#{WS_HOME}/.#{BASH_INCLUDES_DIRNAME}")
+::BASH_INCLUDES_SUBDIR = File.expand_path("#{WS_HOME}/#{BASH_INCLUDES_DIRNAME}")
 
 directory BASH_INCLUDES_SUBDIR do
   owner WS_USER

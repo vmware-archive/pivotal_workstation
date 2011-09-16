@@ -7,6 +7,8 @@ rvm_git_revision_hash  = version_string_for("rvm")
 ::RVM_HOME = "#{WS_HOME}/.rvm"
 ::RVM_COMMAND = "#{::RVM_HOME}/bin/rvm"
 
+bash_profile_include("rvm")
+
 run_unless_marker_file_exists(marker_version_string_for("rvm")) do
   recursive_directories [RVM_HOME, 'src', 'rvm'] do
     owner WS_USER
@@ -24,15 +26,9 @@ run_unless_marker_file_exists(marker_version_string_for("rvm")) do
     user WS_USER
   end
 
-  bash_profile_include("rvm")
-
   execute "check rvm" do
     command "#{RVM_COMMAND} --version | grep Wayne"
     user WS_USER
-  end
-
-  execute "HACK the rvm openssl install script.  ./Configure was failing with 'target already defined'.  we've filed a bug about this" do
-    command "perl -pi -e 's/os\\/compiler darwin/darwin/g' #{::RVM_HOME}/scripts/package"
   end
 
   %w{readline autoconf openssl zlib}.each do |rvm_package|
