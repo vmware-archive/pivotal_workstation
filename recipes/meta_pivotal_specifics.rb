@@ -1,0 +1,6 @@
+include_recipe "pivotal_workstation::osx_updates"
+include_recipe "pivotal_workstation::set_screensaver_preferences"
+include_recipe "pivotal_workstation::libreoffice"
+include_recipe "pivotal_workstation::timemachine_preferences"
+include_recipe "pivotal_workstation::pivotal_logos"
+include_recipe "pivotal_workstation::screen_sharing_on"
