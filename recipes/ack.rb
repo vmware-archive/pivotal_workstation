@@ -1,1 +1,1 @@
-brew_install "ack"
+brew_install "ack" unless system('which ack')
