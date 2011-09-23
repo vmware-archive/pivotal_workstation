@@ -32,15 +32,15 @@ action :install do
     dmg_name = new_resource.dmg_name ? new_resource.dmg_name : new_resource.app
     dmg_file = "#{Chef::Config[:file_cache_path]}/#{dmg_name}.dmg"
 
-    # cachedir needs to be writeable by admin grp because downloads
-    # may be done by non-root users.  Also, on brand-new machines
-    # this directory doesn't exist & needs to be created.
+    # Solo doesn't necessarily create the file_cache_path,
+    # but we don't want to mess with it if it exists
     directory Chef::Config[:file_cache_path] do
       owner "root"
       group "admin"
       mode 0775
       action :create
       recursive true
+      not_if { ::File.exists?(Chef::Config[:file_cache_path]) }
     end
 
     if new_resource.source
@@ -64,9 +64,7 @@ action :install do
     case new_resource.type
     when "app"
       # use "rsync -aH" instead of "cp -r" because rsync
-      # won't exit(1) when it hits a bad symbolic link (e.g.
-      # Dropbox's site.py).  The "-H" flag is to copy
-      # hard-links, and mostly to show how cool I am.
+      # won't exit(1) when it hits a bad symbolic link (e.g. Dropbox's site.py).
       execute "rsync -aH '/Volumes/#{volumes_dir}/#{new_resource.app}.app' '#{new_resource.destination}'" do
         user WS_USER
         group "admin"
@@ -80,7 +78,6 @@ action :install do
         block do
           if ::File.exists?("/Volumes/#{volumes_dir}/#{new_resource.app}.mpkg")
             `sudo installer -pkg '/Volumes/#{volumes_dir}/#{new_resource.app}.mpkg' -target /`
-          # Some packages, e.g. Lion's Java, end in ".pkg", not ".mpkg"
           elsif ::File.exists?("/Volumes/#{volumes_dir}/#{new_resource.app}.pkg")
             `sudo installer -pkg '/Volumes/#{volumes_dir}/#{new_resource.app}.pkg' -target /`
           else
