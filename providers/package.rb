@@ -51,14 +51,15 @@ action :install do
         mode 0644
       end
     end
-        
+
+    passphrase_cmd = new_resource.dmg_passphrase ? "-passphrase #{new_resource.dmg_passphrase}" : ""
     ruby_block "attach #{dmg_file}" do
       block do
-        software_license_agreement = system("hdiutil imageinfo #{dmg_file} | grep -q 'Software License Agreement: true'")
+        software_license_agreement = system("hdiutil imageinfo #{passphrase_cmd} #{dmg_file} | grep -q 'Software License Agreement: true'")
         confirm_mount_cmd = software_license_agreement ? "echo Y |" : ""
-        system "#{confirm_mount_cmd} hdiutil attach '#{dmg_file}'"
+        system "#{confirm_mount_cmd} hdiutil attach #{passphrase_cmd} '#{dmg_file}'"
       end
-      not_if "hdiutil info | grep -q 'image-path.*#{dmg_file}'"
+      not_if "hdiutil info #{passphrase_cmd} | grep -q 'image-path.*#{dmg_file}'"
     end
 
     case new_resource.type
