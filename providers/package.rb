@@ -56,8 +56,9 @@ action :install do
     ruby_block "attach #{dmg_file}" do
       block do
         software_license_agreement = system("hdiutil imageinfo #{passphrase_cmd} #{dmg_file} | grep -q 'Software License Agreement: true'")
-        confirm_mount_cmd = software_license_agreement ? "echo Y |" : ""
-        system "#{confirm_mount_cmd} hdiutil attach #{passphrase_cmd} '#{dmg_file}'"
+        raise "Requires EULA Acceptance; add 'accept_eula true' to package resource" if software_license_agreement && ! new_resource.accept_eula
+        accept_eula_cmd = new_resource.accept_eula ? "echo Y |" : ""
+        system "#{accept_eula_cmd} hdiutil attach #{passphrase_cmd} '#{dmg_file}'"
       end
       not_if "hdiutil info #{passphrase_cmd} | grep -q 'image-path.*#{dmg_file}'"
     end
