@@ -4,7 +4,7 @@ node_version = "1.0.30"
 
 npm_git_location = "#{Chef::Config[:file_cache_path]}/npm"
 
-directory npm_git_localation do
+directory npm_git_location do
   owner WS_USER
   action :create
   recursive true
