@@ -2,16 +2,13 @@ brew_install "node"
 
 node_version = "1.0.30"
 
-directory Chef::Config[:file_cache_path] do
-  owner "root"
-  group "admin"
-  mode 0775
+npm_git_location = "#{Chef::Config[:file_cache_path]}/npm"
+
+directory npm_git_location do
+  owner WS_USER
   action :create
   recursive true
-  not_if { ::File.exists?(Chef::Config[:file_cache_path]) }
 end
-
-npm_git_location = "#{Chef::Config[:file_cache_path]}/npm"
 
 git npm_git_location do
   repository "https://github.com/isaacs/npm.git"
