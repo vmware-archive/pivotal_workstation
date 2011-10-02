@@ -5,7 +5,7 @@ DEFAULT_PIVOTAL_MYSQL_PASSWORD = "password"
 include_recipe "pivotal_workstation::homebrew"
 
 run_unless_marker_file_exists("mysql_" + marker_version_string_for("homebrew")) do
-  brew_install "mysql"
+  brew_install("mysql", true)
 
   directory "/Users/#{WS_USER}/Library/LaunchAgents" do
     owner WS_USER
