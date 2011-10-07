@@ -1,5 +1,5 @@
 class Chef::Recipe
-  def bash_profile_include(bash_file)
+  def bash_profile_include(bash_file, cookbook="pivotal_workstation")
     include_recipe "pivotal_workstation::bash_profile"
 
     template "#{BASH_INCLUDES_SUBDIR}/#{bash_file}.sh" do

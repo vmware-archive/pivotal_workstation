@@ -43,11 +43,9 @@ node["rvm"]["rubies"].each do |ruby_version_string, env_override|
   rvm_ruby_install(ruby_version_string,env_override)
 end
 
-run_unless_marker_file_exists("rvm_default_to_1.9.2") do
-  if node["rvm"]["default_ruby"]
-    execute "making 1.9.2 with rvm the default" do
-      command "#{::RVM_COMMAND} --default #{node["rvm"]["default_ruby"]}"
-      user WS_USER
-    end
+if node["rvm"]["default_ruby"]
+  execute "making 1.9.2 with rvm the default" do
+    command "#{::RVM_COMMAND} --default #{node["rvm"]["default_ruby"]}"
+    user WS_USER
   end
 end
