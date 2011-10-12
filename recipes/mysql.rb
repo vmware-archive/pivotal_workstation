@@ -10,7 +10,7 @@ directory "/Users/#{WS_USER}/Library/LaunchAgents" do
 end
 
 run_unless_marker_file_exists("mysql_" + marker_version_string_for("homebrew")) do
-  # brew_install("mysql")
+  brew_install("mysql")
 
   execute "copy mysql plist to ~/Library/LaunchAgents" do
     command "cp `brew --prefix mysql`/com.mysql.mysqld.plist #{WS_HOME}/Library/LaunchAgents/"
