@@ -39,12 +39,12 @@ ruby_block "Checking that mysql is running" do
   end
 end  
 
+execute "set the root password to the default" do
+    command "mysqladmin -uroot password #{DEFAULT_PIVOTAL_MYSQL_PASSWORD}"
+    not_if "mysql -uroot -p#{DEFAULT_PIVOTAL_MYSQL_PASSWORD} -e 'show databases'"
+end
+
 execute "insert time zone info" do
   command "mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -uroot -p#{DEFAULT_PIVOTAL_MYSQL_PASSWORD} mysql"
   not_if "mysql -uroot -ppassword mysql -e 'select * from time_zone_name' | grep -q UTC"
-end
-
-execute "set the root password to the default" do
-  command "mysqladmin -uroot password #{DEFAULT_PIVOTAL_MYSQL_PASSWORD}"
-  not_if "mysql -uroot -p#{DEFAULT_PIVOTAL_MYSQL_PASSWORD} -e 'show databases'"
 end
