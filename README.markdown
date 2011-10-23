@@ -21,8 +21,10 @@ Soloist (or your preferred method of running chef) usually runs chef-solo as roo
 # Does this thing actually work?
 Yes.  At Pivotal we take testing seriously, and have all projects under CI.  Chef recipes for OSX didn't fit into any existing CI solution, so pivotal_workstation [got its own](https://github.com/mkocher/chefci) which builds [most of the recipes](https://github.com/mkocher/chefci/blob/master/build_scripts/build_all.command) every night and on every check in.
 
-# Pull Requests
+# Forking and Pull Requests
 Pull requests are welcomed.  Creating a cookbook to keep along side pivotal_workstation allows for easy separation between personal/project metadata/recipes and recipes that are of general utility.
+
+Chef node attributes allow for easy overriding in your own cookbook.  All attributes in pivotal_workstation are set at the default level, so you may simply set node.normal or node.override in your own cookbook.  We don't tend to extract node attributes preemptively, but pull requests extracting a node variable so you can override it in your own cookbook are welcomed.
 
 # Where's pivotal_server?
 It's something we're considering, but it doesn't exist yet.  It'll probably show up over at [pivotal_experimental](https://github.com/pivotalexperimental) first.
