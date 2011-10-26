@@ -8,7 +8,7 @@ while ( uids.include?(uid) ) do
   uid += 1
 end
 
-username="santa"
+username="ops"
 user username do
   comment username.capitalize
   gid 20
