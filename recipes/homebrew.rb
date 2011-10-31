@@ -31,3 +31,7 @@ ruby_block "Check that homebrew is running & working" do
     end
   end
 end
+
+directory "/usr/local/sbin" do
+  owner WS_USER
+end
