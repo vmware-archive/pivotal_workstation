@@ -22,6 +22,20 @@ run_unless_marker_file_exists("postgres") do
   brew_remove "postgresql"
   brew_install "postgresql"
 
+  ruby_block "rename Apple's stock postgres commands to avoid confusion" do
+    block do
+      new_dir="/usr/bin/postgres-orig"
+      if ! ( File.exists?(new_dir) && File.directory?(new_dir) )
+        Dir.mkdir(new_dir)
+      end
+      ["clusterdb", "createdb", "createlang", "createuser", "dropdb", "droplang", "dropuser", "ecpg", "initdb", "oid2name", "pg_archivecleanup", "pg_config", "pg_controldata", "pg_ctl", "pg_dump", "pg_dumpall", "pg_resetxlog", "pg_restore", "pg_standby", "pg_upgrade", "pgbench", "postgres", "postmaster", "psql", "reindexdb", "vacuumdb", "vacuumlo"].each do |pg_cmd|
+        if File.exists?("/usr/bin/#{pg_cmd}")
+          File.rename("/usr/bin/#{pg_cmd}","/usr/bin/postgres-orig/#{pg_cmd}")
+        end
+      end
+    end
+  end
+
   execute "create the database" do
     command %'initdb -U #{WS_USER} --encoding=utf8 --locale=en_US /usr/local/var/postgres'
     user WS_USER
@@ -55,6 +69,23 @@ run_unless_marker_file_exists("postgres") do
     command "createdb"
     user WS_USER
   end
+  # "initdb /tmp/junk.$$" will fail unless you modify sysctl variables
+  # Michael Sofaer says that these are probably the right settings:
+  #   kern.sysv.shmall=65535
+  #   kern.sysv.shmmax=16777216
+  #not_if File.exists?("/etc/sysctl.conf") do
+  # check if the sysctl variables are big enough
+  #   if not, set them
+  # check if /etc/sysctl.conf exists
+  #   if so, check if kern.sysv.{shmall,shmmax} are set
+  #     if so, check that they're set large enough
+  #       if so, go on
+  #   otherwise
+  #     modify /etc/sysctl.conf to make them big enough
+  # otherwise
+  #   create /etc/sysctl.conf & make these settings big enough
+  #
+
 end
 
 # An Apple Upgrade (e.g. 10.7.2) may re-introduce the executables we
@@ -90,3 +121,5 @@ block do
     end
   end
 end
+
+
