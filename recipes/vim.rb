@@ -2,12 +2,9 @@ include_recipe "pivotal_workstation::homebrew"
 include_recipe "pivotal_workstation::ack"
 include_recipe "pivotal_workstation::git"
 
-brew_install "macvim"
-
-#link "/Applications/MacVim.app" do
-#  to "#{node["vim_app"]}"
-#  owner WS_USER
-#end
+# https://github.com/mxcl/homebrew/pull/8394
+# default macvim doesn't compile yet with xcode 4.2
+brew_install("macvim", :brew_args => "--HEAD")
 
 # There may be multiple macvims; try to find the latest one
 # & link that to /Applications
