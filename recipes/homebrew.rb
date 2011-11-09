@@ -1,4 +1,5 @@
 include_recipe "pivotal_workstation::user_owns_usr_local"
+include_recipe "pivotal_workstation::bash_path_order"
 
 homebrew_git_revision_hash  = version_string_for("homebrew")
 
