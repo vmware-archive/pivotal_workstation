@@ -1,11 +1,11 @@
 class Chef::Recipe
-  def brew_install(package, force=false)
+  def brew_install(package, opts={})
     include_recipe "pivotal_workstation::homebrew"
 
-    execute "brew install #{package}" do
+    execute "brew install #{package} #{opts[:brew_args]}" do
       user WS_USER
       command "brew install #{package}"
-      not_if { force ? false : system("brew list #{package}") }
+      not_if "brew list | grep '^#{package}$'"
     end
   end
 
