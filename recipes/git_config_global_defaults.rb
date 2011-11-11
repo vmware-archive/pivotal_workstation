@@ -70,3 +70,8 @@ execute "set branch autosetupmerge=true" do
   command "git config --global branch.autosetupmerge true"
   user WS_USER
 end
+
+execute "set push default=current" do
+  command "git config --global push.default current"
+  user WS_USER
+end
