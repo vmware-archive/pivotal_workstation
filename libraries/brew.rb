@@ -5,6 +5,7 @@ class Chef::Recipe
     execute "brew install #{package} #{opts[:brew_args]}" do
       user WS_USER
       command "brew install #{package} #{opts[:brew_args]}"
+      command "brew link #{package}" if opts[:link]
       not_if "brew list | grep '^#{package}$'"
     end
   end

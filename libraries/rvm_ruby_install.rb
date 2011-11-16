@@ -11,7 +11,7 @@ class Chef::Recipe
         user WS_USER
       end
 
-      install_cmd = "#{env_override} #{RVM_COMMAND} install #{ruby_version}"
+      install_cmd = "#{RVM_COMMAND} install #{ruby_version} #{env_override}"
 
       #this fixes an rvm problem with openssl when installing an mri version
       install_cmd << " -C --with-openssl-dir=#{::RVM_HOME}/usr" if ruby_version =~ /^ruby-/
