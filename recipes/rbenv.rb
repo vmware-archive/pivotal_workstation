@@ -7,6 +7,9 @@ include_recipe "pivotal_workstation::git"
 
 brew_install("rbenv")
 brew_install("ruby-build")
+brew_install("lzlib")
+brew_install("readline")
+brew_install("openssl")
 
 bash_profile_include("rbenv")
 
