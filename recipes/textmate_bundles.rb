@@ -2,10 +2,10 @@ bundle_dir = "#{WS_HOME}/Library/Application Support/TextMate/Bundles"
 filename = "Pivotal.tmbundle"
 tarfile = "#{filename}.tar.gz"
 unless File.exists?("#{bundle_dir}/#{filename}")
-  directory bundle_dir do
-    action :create
-    recursive true
-    owner WS_USER
+  execute "make textmate bundles directory" do
+    command "mkdir -p '#{bundle_dir}'"
+    user WS_USER
+    not_if { File.exists?(bundle_dir) }
   end
 
   remote_file "#{bundle_dir}/#{tarfile}" do
