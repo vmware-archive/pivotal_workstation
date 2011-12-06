@@ -65,11 +65,10 @@ action :install do
 
     case new_resource.type
     when "app"
-      # use "rsync -aH" instead of "cp -r" because rsync
-      # won't exit(1) when it hits a bad symbolic link (e.g. Dropbox's site.py).
-      execute "rsync -aH '/Volumes/#{volumes_dir}/#{new_resource.app}.app' '#{new_resource.destination}'" do
-        user WS_USER
-        group "admin"
+      ruby_block  "Copy /Volumes/#{volumes_dir}/#{new_resource.app}.app to #{new_resource.destination}" do
+        block do
+          FileUtils.cp_r("/Volumes/#{volumes_dir}/#{new_resource.app}.app", new_resource.destination)
+        end
       end
       file "#{new_resource.destination}/#{new_resource.app}.app/Contents/MacOS/#{new_resource.app}" do
         mode 0755
