@@ -1,6 +1,6 @@
 pivotal_workstation_package "Dropbox" do
   volumes_dir "Dropbox Installer"
   source "http://www.dropbox.com/download?plat=mac"
-  checksum "a721c6e7fa9ae0d07f220901764ac65190d9299c7a0b62cd8a6822a27365e275"
+  checksum "859b1cc1c4da488a8a367efa04992a8f8974528614e9ccfd54a4f40c68ba6d43"
   action :install
 end
