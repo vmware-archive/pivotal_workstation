@@ -2,7 +2,7 @@ menu_meters_uri = "http://www.ragingmenace.com/software/download/MenuMeters.dmg"
 menu_meters_dmg = Chef::Config[:file_cache_path] + "/MenuMeters.dmg"
 menu_meters_mnt = "/Volumes/MenuMeters 1.5"
 menu_meters_src = menu_meters_mnt + "/MenuMeters Installer.app/Contents/Resources/MenuMeters.prefPane"
-menu_meters_destdir = ENV['HOME'] + "/Library/PreferencePanes/"
+menu_meters_destdir = "/Library/PreferencePanes/"
 menu_meters_dst = menu_meters_destdir + "MenuMeters.prefPane"
 
 unless File.exists?(menu_meters_dst)
@@ -19,10 +19,9 @@ unless File.exists?(menu_meters_dst)
   end
 
   # We're bypassing the installer.app because it requires user intervention.
-
-  execute "Copy MenuMeters to ~/Library/PreferencePanes/" do
+  # FIXME: use FileUtils.cp_r instead of forking out to cp.
+  execute "Copy MenuMeters to /Library/PreferencePanes/" do
     command "cp -rf #{Regexp.escape(menu_meters_src)} #{Regexp.escape(menu_meters_destdir)}"
-    user WS_USER
   end
 
   execute "unmount dmg" do
@@ -30,14 +29,30 @@ unless File.exists?(menu_meters_dst)
     user WS_USER
   end
 
-  execute "Turn on the meters" do
-    command "defaults write com.apple.systemuiserver menuExtras -array-add \
-      '~/Library/PreferencePanes/MenuMeters.prefPane/Contents/Resources/MenuMeterNet.menu' \
-      '~/Library/PreferencePanes/MenuMeters.prefPane/Contents/Resources/MenuMeterDisk.menu' \
-      '~/Library/PreferencePanes/MenuMeters.prefPane/Contents/Resources/MenuMeterCPU.menu' \
-      '~/Library/PreferencePanes/MenuMeters.prefPane/Contents/Resources/MenuMeterMem.menu' \
-      '~/Library/PreferencePanes/MenuMeters.prefPane/Contents/Resources/MenuCracker.menu' "
-    user WS_USER
+  # Can't use defaults(1) because we need to insert MenuMeters at the _beginning_
+  # of the plist so that it doesn't push the clock to the left.  We need plist gem.
+  gem_package("plist")
+
+  plist_file = "#{ENV['HOME']}/Library/Preferences/com.apple.systemuiserver.plist"
+
+  ruby_block "Put MenuMeters on the Taskbar" do
+    block do
+      Gem.clear_paths
+      require 'rubygems'
+      require 'plist'
+      `plutil -convert xml1 #{plist_file}`
+      ui_plist = Plist::parse_xml(plist_file)
+      ui_plist['menuExtras'].unshift(
+      '/Library/PreferencePanes/MenuMeters.prefPane/Contents/Resources/MenuMeterNet.menu',
+      '/Library/PreferencePanes/MenuMeters.prefPane/Contents/Resources/MenuMeterDisk.menu',
+      '/Library/PreferencePanes/MenuMeters.prefPane/Contents/Resources/MenuMeterMem.menu',
+      '/Library/PreferencePanes/MenuMeters.prefPane/Contents/Resources/MenuMeterCPU.menu',
+      '/Library/PreferencePanes/MenuMeters.prefPane/Contents/Resources/MenuCracker.menu'
+      )
+      File.open(plist_file, "w") do |plist_handle|
+        plist_handle.puts Plist::Emit.dump(ui_plist)
+      end
+    end
     # long path because this command runs as root, and we're in WS_USER's preferences, not root's
     not_if "defaults read ~#{WS_USER}/Library/Preferences/com.apple.systemuiserver menuExtras | grep 'MenuMeters.prefPane'"
   end
