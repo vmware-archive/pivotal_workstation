@@ -1,6 +1,6 @@
 include_recipe "pivotal_workstation::homebrew"
 
-brew_install "htop"
+brew_install "htop", :brew_args => "--HEAD"
 brew_install "watch"
 brew_install "ack"
 brew_install "ssh-copy-id"
