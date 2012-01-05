@@ -21,7 +21,7 @@ execute "move existing vim_home out of the way if necessary" do
   user WS_USER
   command "mv #{node["vim_home"]} #{WS_HOME}/.vim-old"
   only_if {
-    File.exists?(node["vim_home"]) && !system("cd #{node["vim_home"]} && git remote -v | grep pivotal/vim-config")
+    File.exists?(node["vim_home"]) && !system("cd #{node["vim_home"]} && git remote -v | grep pivotal/vim-config") && !File.exists?("#{WS_HOME}/.vim-old")
   }
 end
 
