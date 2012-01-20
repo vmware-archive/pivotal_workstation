@@ -33,7 +33,7 @@ run_unless_marker_file_exists(marker_version_string_for("rvm")) do
 
   %w{readline autoconf openssl zlib}.each do |rvm_package|
     execute "install rvm package: #{rvm_package}" do
-      command "#{::RVM_COMMAND} package install #{rvm_package}"
+      command "#{::RVM_COMMAND} pkg install #{rvm_package}"
       user WS_USER
     end
   end
