@@ -17,7 +17,7 @@ git npm_git_location do
   user WS_USER
 end
 
-execute "compile rvm" do
+execute "compile npm" do
   command "cd #{npm_git_location} && make clean && make install"
   user WS_USER
   not_if "npm -v | grep #{node_version}"
