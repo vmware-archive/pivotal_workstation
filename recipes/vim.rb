@@ -21,24 +21,30 @@ execute "move existing vim_home out of the way if necessary" do
   user WS_USER
   command "mv #{node["vim_home"]} #{WS_HOME}/.vim-old"
   only_if {
-    File.exists?(node["vim_home"]) && !system("cd #{node["vim_home"]} && git remote -v | grep pivotal/vim-config")
+    File.exists?(node["vim_home"]) && !system("cd #{node["vim_home"]} && git remote -v | grep pivotal/vim-config") && !File.exists?("#{WS_HOME}/.vim-old")
   }
 end
 
-execute "clone the .vim directory" do
+git "#{node["vim_home"]}" do
+  only_if { system("test ! -d #{node["vim_home"]}") }
+  repository "git@github.com:casecommons/vim-config.git"
+  branch "master"
+  revision node["vim_hash"] || "HEAD"
+  action :checkout
   user WS_USER
-  command "git clone https://github.com/pivotal/vim-config.git #{node["vim_home"]}"
-  not_if "cd #{node["vim_home"]} && git remote -v | grep pivotal/vim-config"
+  enable_submodules true
 end
 
-execute "ensure we're on the approved hash" do
+git "#{node["vim_home"]}" do
+  only_if {
+    system("test ! -d #{node["vim_home"]} || cd #{node["vim_home"]} && git remote -v | grep pivotal/vim-config")
+  }
+  repository "git@github.com:casecommons/vim-config.git"
+  branch "master"
+  revision node["vim_hash"] || "HEAD"
+  action :sync
   user WS_USER
-  command "cd #{node["vim_home"]} && git checkout #{node["vim_hash"]}"
-end
-
-execute "get the submodules" do
-  user WS_USER
-  command "cd #{node["vim_home"]} && git submodule update --init"
+  enable_submodules true
 end
 
 link "#{WS_HOME}/.vimrc" do
@@ -49,6 +55,7 @@ end
 brew_install "ctags"
 
 execute "compile command-t" do
+  only_if "test -d #{node["vim_home"]}/bundle/command-t/ruby/command-t"
   cwd "#{node["vim_home"]}/bundle/command-t/ruby/command-t"
   command "ruby extconf.rb && make"
   user WS_USER
