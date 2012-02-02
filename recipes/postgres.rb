@@ -23,7 +23,7 @@ run_unless_marker_file_exists("postgres") do
   brew_install "postgresql"
 
   execute "create the database" do
-    command %'initdb -U #{WS_USER} --encoding=utf8 --locale=en_US /usr/local/var/postgres'
+    command %'initdb -U postgres --encoding=utf8 --locale=en_US /usr/local/var/postgres'
     user WS_USER
   end
 
@@ -52,7 +52,7 @@ run_unless_marker_file_exists("postgres") do
   end
 
   execute "create the database" do
-    command "createdb"
+    command "createdb -U postgres"
     user WS_USER
   end
   # "initdb /tmp/junk.$$" will fail unless you modify sysctl variables
@@ -84,7 +84,7 @@ block do
       raise "postgres is not running: " << e
     end
     s.close
-    `sudo -u #{WS_USER} psql < /dev/null`
+    `sudo -u #{WS_USER} psql -U postgres < /dev/null`
     if $?.to_i != 0
       raise "I couldn't invoke postgres!"
     end
