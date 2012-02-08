@@ -5,12 +5,12 @@ unless File.exists?("/Applications/SizeUp.app")
     mode "0644"
   end
 
-  # The following doesn't work - it causes the checkbox to be enabled, but doesn't turn it on.
-  # other people want this feature, leaving this in to remind me or someone else
-  # to google for it in the future
-  # execute "turn on Access for Assistive Devices" do
-  #   command "touch /private/var/db/.AccessibilityAPIEnabled"
-  # end
+  # May not work if System Preferences is open while this is running
+  file "/private/var/db/.AccessibilityAPIEnabled" do
+    action :create_if_missing
+    content "a"
+    mode "0444"
+  end
 
   execute "unzip sizeup" do
     command "unzip /tmp/sizeup.zip SizeUp.app/* -d /Applications/"

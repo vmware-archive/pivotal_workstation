@@ -1,6 +1,6 @@
 brew_install "node"
 
-node_version = "1.0.30"
+node_version = "1.1.0-2"
 
 npm_git_location = "#{Chef::Config[:file_cache_path]}/npm"
 
@@ -18,7 +18,7 @@ git npm_git_location do
 end
 
 execute "compile rvm" do
-  command "cd #{npm_git_location} && make clean && make install"
+  command "cd #{npm_git_location} &&  make install"
   user WS_USER
   not_if "npm -v | grep #{node_version}"
 end

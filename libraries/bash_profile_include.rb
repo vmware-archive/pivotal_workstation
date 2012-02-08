@@ -6,6 +6,7 @@ class Chef::Recipe
       source "bash_profile-#{bash_file}.sh.erb"
       owner WS_USER
       backup false
+      mode "0755"
     end
   end
 end
