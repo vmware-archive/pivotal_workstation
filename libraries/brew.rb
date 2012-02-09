@@ -2,10 +2,16 @@ class Chef::Recipe
   def brew_install(package, opts={})
     include_recipe "pivotal_workstation::homebrew"
 
-    execute "brew install #{package} #{opts[:brew_args]}" do
-      user WS_USER
-      command "brew install #{package} #{opts[:brew_args]}"
-      not_if "brew list | grep '^#{package}$'"
+    if brew_installed?(package)
+      execute "brew upgrade #{package} #{opts[:brew_args]}" do
+        user WS_USER
+        command "brew install #{package} #{opts[:brew_args]}"
+      end
+    else
+      execute "brew install #{package} #{opts[:brew_args]}" do
+        user WS_USER
+        command "brew upgrade #{package} #{opts[:brew_args]}"
+      end
     end
   end
 
