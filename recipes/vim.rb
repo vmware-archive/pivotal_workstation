@@ -25,7 +25,7 @@ git "#{node["vim_home"]}" do
   repository "git://github.com/pivotal/vim-config.git"
   branch "master"
   revision node["vim_hash"] || "HEAD"
-  action :checkout
+  action :sync
   user WS_USER
   enable_submodules true
 end
