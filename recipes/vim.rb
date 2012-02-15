@@ -30,9 +30,11 @@ git "#{node["vim_home"]}" do
   enable_submodules true
 end
 
-link "#{WS_HOME}/.vimrc" do
-  to "#{node["vim_home"]}/vimrc"
-  owner WS_USER
+%w{vimrc gvimrc}.each do |vimrc|
+  link "#{WS_HOME}/.#{vimrc}" do
+    to "#{node["vim_home"]}/#{vimrc}"
+    owner WS_USER
+  end
 end
 
 brew_install "ctags"
