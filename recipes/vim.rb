@@ -25,17 +25,26 @@ git "#{node["vim_home"]}" do
   repository "git://github.com/pivotal/vim-config.git"
   branch "master"
   revision node["vim_hash"] || "HEAD"
-  action :checkout
+  action :sync
   user WS_USER
   enable_submodules true
 end
 
-link "#{WS_HOME}/.vimrc" do
-  to "#{node["vim_home"]}/vimrc"
-  owner WS_USER
+%w{vimrc gvimrc}.each do |vimrc|
+  link "#{WS_HOME}/.#{vimrc}" do
+    to "#{node["vim_home"]}/#{vimrc}"
+    owner WS_USER
+  end
 end
 
 brew_install "ctags"
+
+execute "compile command-t" do
+  not_if "test -f #{node["vim_home"]}/bundle/command-t/ruby/command-t/compiled"
+  cwd "#{node["vim_home"]}/bundle/command-t/ruby/command-t"
+  command "rvm use system && ruby extconf.rb && make && touch compiled"
+  user WS_USER
+end
 
 ruby_block "test to see if MacVim link worked" do
   block do
