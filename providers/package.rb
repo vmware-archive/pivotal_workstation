@@ -67,7 +67,7 @@ action :install do
     when "app"
       ruby_block  "Copy /Volumes/#{volumes_dir}/#{new_resource.app}.app to #{new_resource.destination}" do
         block do
-          FileUtils.cp_r("/Volumes/#{volumes_dir}/#{new_resource.app}.app", new_resource.destination)
+          FileUtils.cp_r("/Volumes/#{volumes_dir}/#{new_resource.app}.app", new_resource.destination, :preserve => true, :remove_destination => true)
         end
       end
       file "#{new_resource.destination}/#{new_resource.app}.app/Contents/MacOS/#{new_resource.app}" do
