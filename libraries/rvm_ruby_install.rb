@@ -1,6 +1,8 @@
 class Chef::Recipe
-  def rvm_ruby_install(ruby_version, env_override)
+  def rvm_ruby_install(ruby_version, options)
     include_recipe "pivotal_workstation::rvm"
+
+    raise "options should be a hash with :env and :command_line_options keys" unless options.is_a?(Hash)
 
     #don't use the marker file system for this.  we guess that people are likely to be installing rubies by hand using rvm.
       #...that guess might be wrong.
@@ -11,10 +13,7 @@ class Chef::Recipe
         user WS_USER
       end
 
-      install_cmd = "#{env_override} #{RVM_COMMAND} install #{ruby_version}"
-
-      #this fixes an rvm problem with openssl when installing an mri version
-      install_cmd << " -C --with-openssl-dir=#{::RVM_HOME}/usr" if ruby_version =~ /^ruby-/
+      install_cmd = "#{options[:env]} #{RVM_COMMAND} install #{ruby_version} #{options[:command_line_options]}"
 
       #| (! grep 'error') : if we see rvm errors in stderr, fail
       #this is due to an rvm bug (we've notified the author).  as soon as curl error cause rvm to exit nonzero,
