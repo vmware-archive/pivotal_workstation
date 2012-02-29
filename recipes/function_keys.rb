@@ -1,4 +1,4 @@
-node.default['function_keys']['use_function_keys_as_function_keys'] = false
+node.default['function_keys']['use_function_keys_as_function_keys'] = true
 
 as_fn_keys = node.default['function_keys']['use_function_keys_as_function_keys'] ? "0" : "1"
 
