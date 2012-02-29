@@ -32,7 +32,7 @@ execute "set alias sta=stash" do
 end
 
 execute "set alias llog=log --date=local" do
-  command "git config --global alias.llog 'log --date=local'"
+  command "git config --replace-all --global alias.llog 'log --date=local'"
   user WS_USER
 end
 
