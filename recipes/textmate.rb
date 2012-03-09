@@ -2,7 +2,7 @@ include_recipe "pivotal_workstation::user_owns_usr_local"
 
 unless File.exists?("/Applications/TextMate.app")
   execute "download text mate to temp dir" do
-    command "curl -o /tmp/textmate.zip http://dl.macromates.com/TextMate_1.5.10_r1623.zip"
+    command "curl -o /tmp/textmate.zip http://dl.macromates.com/TextMate_1.5.10_r1631.zip"
     user WS_USER
   end
 

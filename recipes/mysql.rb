@@ -1,4 +1,5 @@
 #http://solutions.treypiepmeier.com/2010/02/28/installing-mysql-on-snow-leopard-using-homebrew/
+require 'pathname'
 
 DEFAULT_PIVOTAL_MYSQL_PASSWORD = "password"
 
@@ -9,18 +10,25 @@ directory "/Users/#{WS_USER}/Library/LaunchAgents" do
   action :create
 end
 
-run_unless_marker_file_exists("mysql_" + marker_version_string_for("homebrew")) do
-  brew_install("mysql")
+brew_install("mysql")
 
-  execute "copy mysql plist to ~/Library/LaunchAgents" do
-    command "cp `brew --prefix mysql`/com.mysql.mysqld.plist #{WS_HOME}/Library/LaunchAgents/"
-    user WS_USER
+ruby_block "copy mysql plist to ~/Library/LaunchAgents" do
+  block do
+    active_mysql = Pathname.new("/usr/local/bin/mysql").realpath
+    plist_location = (active_mysql + "../../"+"com.mysql.mysqld.plist").to_s
+    destination = "#{WS_HOME}/Library/LaunchAgents/com.mysql.mysqld.plist"
+    system("cp #{plist_location} #{destination} && chown #{WS_USER} #{destination}") || raise("Couldn't find the plist")
   end
+end
 
-  execute "mysql_install_db" do
-    command "mysql_install_db --verbose --user=#{WS_USER} --basedir=\"$(brew --prefix mysql)\" --datadir=/usr/local/var/mysql --tmpdir=/tmp"
-    user WS_USER
+ruby_block "mysql_install_db" do
+  block do
+    active_mysql = Pathname.new("/usr/local/bin/mysql").realpath
+    basedir = (active_mysql + "../../").to_s
+    data_dir = "/usr/local/var/mysql"
+    system("mysql_install_db --verbose --user=#{WS_USER} --basedir=#{basedir} --datadir=#{data_dir} --tmpdir=/tmp && chown #{WS_USER} #{data_dir}") || raise("Failed initializing mysqldb")
   end
+  not_if { File.exists?("/usr/local/var/mysql/mysql/user.MYD")}
 end
 
 execute "load the mysql plist into the mac daemon startup thing" do

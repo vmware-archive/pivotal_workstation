@@ -5,7 +5,7 @@ include_recipe "pivotal_workstation::rvm"
 
 execute "brew install macvim with system ruby" do
   user WS_USER
-  command "rvm use system && brew install macvim"
+  command "rvm use system; brew install macvim"
   not_if "brew list | grep '^macvim$'"
 end
 
@@ -25,14 +25,16 @@ git "#{node["vim_home"]}" do
   repository "git://github.com/pivotal/vim-config.git"
   branch "master"
   revision node["vim_hash"] || "HEAD"
-  action :checkout
+  action :sync
   user WS_USER
   enable_submodules true
 end
 
-link "#{WS_HOME}/.vimrc" do
-  to "#{node["vim_home"]}/vimrc"
-  owner WS_USER
+%w{vimrc gvimrc}.each do |vimrc|
+  link "#{WS_HOME}/.#{vimrc}" do
+    to "#{node["vim_home"]}/#{vimrc}"
+    owner WS_USER
+  end
 end
 
 brew_install "ctags"
@@ -40,7 +42,7 @@ brew_install "ctags"
 execute "compile command-t" do
   not_if "test -f #{node["vim_home"]}/bundle/command-t/ruby/command-t/compiled"
   cwd "#{node["vim_home"]}/bundle/command-t/ruby/command-t"
-  command "rvm use system && ruby extconf.rb && make && touch compiled"
+  command "rvm use system; ruby extconf.rb && make && touch compiled"
   user WS_USER
 end
 
