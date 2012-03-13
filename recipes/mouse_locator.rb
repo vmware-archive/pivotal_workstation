@@ -1,13 +1,13 @@
 unless File.exists?(node['mouse_locator_dst'])
 
-  remote_file "/tmp/mouse_locator.dmg" do
+  remote_file "#{Chef::Config[:file_cache_path]}/mouse_locator.dmg" do
     source node["mouse_locator_download_uri"]
     mode "0644"
     action :create_if_missing
   end
 
   execute "mount mouse_locator dmg" do
-    command "hdid /tmp/mouse_locator.dmg"
+    command "hdid #{Chef::Config[:file_cache_path]}/mouse_locator.dmg"
     user WS_USER
   end
 

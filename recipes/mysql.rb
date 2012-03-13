@@ -34,7 +34,7 @@ end
 execute "load the mysql plist into the mac daemon startup thing" do
   command "launchctl load -w #{WS_HOME}/Library/LaunchAgents/homebrew.mxcl.mysql.plist"
   user WS_USER
-  not_if "launchctl list com.mysql.mysqld"
+  not_if { system("launchctl list com.mysql.mysqld") }
 end
 
 ruby_block "Checking that mysql is running" do

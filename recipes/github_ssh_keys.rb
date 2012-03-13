@@ -48,13 +48,13 @@ execute "make sure .ssh/config is owned by the user" do
 end
 
 execute "create SSH key pair for Github" do
-  command "ssh-keygen -N '' -f #{WS_HOME}/.ssh/id_github_#{node["github_project"] || node[:fqdn]}"
+  command "ssh-keygen -N '' -f #{WS_HOME}/.ssh/id_github_#{node["github_project"] || node['fqdn']}"
   user WS_USER
-  not_if "test -e #{WS_HOME}/.ssh/id_github_#{node["github_project"] || node[:fqdn]}"
+  not_if "test -e #{WS_HOME}/.ssh/id_github_#{node["github_project"] || node['fqdn']}"
 end
 
 execute "symlink Github key for git-project" do
-  command "ln -nfs #{WS_HOME}/.ssh/id_github_{#{node["github_project"] || node[:fqdn]},current}"
+  command "ln -nfs #{WS_HOME}/.ssh/id_github_{#{node["github_project"] || node['fqdn']},current}"
   user WS_USER
 end
 
@@ -67,15 +67,15 @@ end
 
 # add ssh keys to github account if possible
 if node["github_username"].to_s != "" && node["github_password"].to_s != ""
-  github_name="#{WS_USER}@#{node[:fqdn]}"
+  github_name="#{WS_USER}@#{node['fqdn']}"
   curl_options = %[--retry 3 --retry-delay 5 --retry-max-time 30 --connect-timeout 5 --max-time 30 -u "#{node["github_username"]}:#{node["github_password"]}"]
   execute "upload ssh key to github if it does not already exist there" do
     not_if <<-SH
-      curl #{curl_options} https://api.github.com/user/keys | grep "`cat #{WS_HOME}/.ssh/id_github_#{node["github_project"] || node[:fqdn]}.pub` | cut -f 2 -d ' '`"
+      curl #{curl_options} https://api.github.com/user/keys | grep "`cat #{WS_HOME}/.ssh/id_github_#{node["github_project"] || node["fqdn"]}.pub` | cut -f 2 -d ' '`"
     SH
     command <<-SH
     curl -X POST --verbose #{curl_options} \
-         --data "{ \\"key\\": \\"`cat #{WS_HOME}/.ssh/id_github_#{node["github_project"] || node[:fqdn]}.pub`\\", \\"title\\": \\"#{github_name}\\" }" \
+         --data "{ \\"key\\": \\"`cat #{WS_HOME}/.ssh/id_github_#{node["github_project"] || node["fqdn"]}.pub`\\", \\"title\\": \\"#{github_name}\\" }" \
          https://api.github.com/user/keys
     SH
   end

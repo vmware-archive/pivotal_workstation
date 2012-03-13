@@ -2,12 +2,12 @@ include_recipe "pivotal_workstation::user_owns_usr_local"
 
 unless File.exists?("/Applications/TextMate.app")
   execute "download text mate to temp dir" do
-    command "curl -L -o /tmp/textmate.zip http://download.macromates.com/TextMate_1.5.10.zip"
+    command "curl -o #{Chef::Config[:file_cache_path]}/textmate.zip http://download.macromates.com/TextMate_1.5.10.zip"
     user WS_USER
   end
 
   execute "extract text mate to /Applications" do
-    command 'unzip -o /tmp/textmate.zip -x __MACOSX* -d /Applications/'
+    command 'unzip -o #{Chef::Config[:file_cache_path]}/textmate.zip -x __MACOSX* -d /Applications/'
     user WS_USER
   end
 

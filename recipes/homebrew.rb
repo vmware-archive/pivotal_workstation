@@ -10,16 +10,16 @@ homebrew_git_revision_hash  = version_string_for("homebrew")
 # recipe creates it, and that's a pre-req.  Also, things like
 # MacFuse, Audacity, and others tend to put things in /usr/local
 
-git "/tmp/homebrew" do
+git "#{Chef::Config[:file_cache_path]}/homebrew" do
   repository "https://github.com/mxcl/homebrew.git"
   revision homebrew_git_revision_hash
-  destination "/tmp/homebrew"
+  destination "#{Chef::Config[:file_cache_path]}/homebrew"
   action :sync
   user WS_USER
 end
 
 execute "Copying homebrew's .git to /usr/local" do
-  command "rsync -axSH /tmp/homebrew/ /usr/local/"
+  command "rsync -axSH #{Chef::Config[:file_cache_path]}/homebrew/ /usr/local/"
   user WS_USER
 end
 

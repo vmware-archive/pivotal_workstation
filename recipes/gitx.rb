@@ -6,23 +6,23 @@ GITX_LINK_SRC = "/Applications/GitX.app/Contents/Resources/gitx"
 
 unless File.exists?(GITX_PATH)
 
-  remote_file "/tmp/gitx.zip" do
+  remote_file "#{Chef::Config[:file_cache_path]}/gitx.zip" do
     source node["gitx_download_location"]
     owner WS_USER
   end
 
-  directory "/tmp/GitX.app" do
+  directory "#{Chef::Config[:file_cache_path]}/GitX.app" do
     action :delete
     recursive true
   end
 
   execute "unzip gitx" do
-    command "unzip /tmp/gitx.zip -d /tmp/"
+    command "unzip #{Chef::Config[:file_cache_path]}/gitx.zip -d #{Chef::Config[:file_cache_path]}/"
     user WS_USER
   end
 
   execute "copy gitx to /Applications" do
-    command "rsync -a /tmp/GitX.app /Applications"
+    command "rsync -a #{Chef::Config[:file_cache_path]}/GitX.app /Applications"
     user WS_USER
     group "admin"
   end
