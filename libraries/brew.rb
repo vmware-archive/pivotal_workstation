@@ -16,17 +16,23 @@ class Chef::Recipe
   end
 
   def brew_outdated?(package)
-    system("brew outdated | grep -q #{package}")
+    outdated=system("brew outdated | grep -q #{package}")
+    Chef::Log.debug("brew package #{package} " << (outdated ?"IS":"IS NOT") << " outdated.") 
+    outdated
   end
 
   def brew_installed?(package)
     include_recipe "pivotal_workstation::homebrew"
 
-    system("brew list #{package} > /dev/null") || brew_has_multiple_versions_installed?(package)
+    installed=(system("brew list #{package} > /dev/null") || brew_has_multiple_versions_installed?(package))
+    Chef::Log.debug("brew package #{package} " << (installed ?"IS":"IS NOT") << " installed.")
+    installed
   end
   
   def brew_has_multiple_versions_installed?(package)
-    system("brew list #{package} | grep -q '#{package} has multiple installed versions'")
+    multiple=system("brew list #{package} | grep -q '#{package} has multiple installed versions'")
+    Chef::Log.debug("brew package #{package} " << (multiple ?"HAS":"does NOT HAVE") << " multiple versions.") 
+    multiple
   end
 
   def brew_remove(package)
