@@ -1,5 +1,5 @@
 pivotal_workstation_package "Skype" do
-  source "http://download.skype.com/macosx/Skype_5.3.0.1093.dmg"
+  source "http://download.skype.com/macosx/Skype_5.6.0.143.dmg"
   action :install
-  checksum "ad4f5a8f2312597b98c420045d0828ec40d440fe0da187bde34b7f40294b8e08"
+  checksum "cba00426c2a4d529d50ae4a912b1c1020aced40c47b356c33fcbad87fc103fcb"
 end
