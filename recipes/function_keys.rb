@@ -13,10 +13,12 @@ end
 # THE SUSPENDERS
 ruby_block "Fix Function Keys" do
   block do
-    # check if we are logged into the console
-    if system("ps aux | grep SystemUI | grep -v grep")
-      # check if assistive devices is enabled
-      if system("osascript -e '
+    def are_we_logged_in?
+      system("ps aux | grep SystemUI | grep -v grep")
+    end
+
+    def are_assistive_devices_enabled?
+      system("osascript -e '
         tell application \"System Events\"
          set UI_enabled to UI elements enabled
         end tell
@@ -25,20 +27,23 @@ ruby_block "Fix Function Keys" do
         else
          return \"access for assistive devices IS enabled!\"
         end if'")
-        system("osascript -e '
-          tell application \"System Preferences\"
-            set current pane to pane \"com.apple.preference.keyboard\"
+    end
+
+    # check if we are logged into the console
+    if  are_we_logged_in? &&  are_assistive_devices_enabled?
+      system("osascript -e '
+        tell application \"System Preferences\"
+          set current pane to pane \"com.apple.preference.keyboard\"
+        end tell
+        tell application \"System Events\"
+          tell application process \"System Preferences\"
+            click radio button \"Keyboard\" of tab group 1 of window \"Keyboard\"
+            if value of checkbox \"Use all F1, F2, etc. keys as standard function keys\" of tab group 1 of window \"Keyboard\" is #{as_fn_keys} then
+              click checkbox \"Use all F1, F2, etc. keys as standard function keys\" of tab group 1 of window \"Keyboard\"
+            end if
           end tell
-          tell application \"System Events\"
-            tell application process \"System Preferences\"
-              click radio button \"Keyboard\" of tab group 1 of window \"Keyboard\"
-              if value of checkbox \"Use all F1, F2, etc. keys as standard function keys\" of tab group 1 of window \"Keyboard\" is #{as_fn_keys} then
-                click checkbox \"Use all F1, F2, etc. keys as standard function keys\" of tab group 1 of window \"Keyboard\"
-              end if
-            end tell
-            quit application \"System Preferences\"
-          end tell'")
-      end
+          quit application \"System Preferences\"
+        end tell'")
     end
   end
 end
