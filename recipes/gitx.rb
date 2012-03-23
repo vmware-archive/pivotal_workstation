@@ -1,3 +1,5 @@
+#TODO - package resource
+
 include_recipe "pivotal_workstation::user_owns_usr_local"
 
 GITX_PATH = "/Applications/GitX.app"

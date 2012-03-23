@@ -1,3 +1,4 @@
+#todo remove marker file
 # This is obviously a destructive recipe.
 
 run_unless_marker_file_exists("removed_garage_band") do

@@ -1,3 +1,4 @@
+#TODO clean this up
 include_recipe "pivotal_workstation::bash_profile"
 GIT_COMP_PATH = "#{WS_HOME}/.bash_profile_includes/git-completion.sh"
 GIT_COMP_SRC  = "http://repo.or.cz/w/git.git/blob_plain/HEAD:/contrib/completion/git-completion.bash"

@@ -1,3 +1,5 @@
+#todo - clean up
+
 include_recipe "pivotal_workstation::homebrew"
 
 run_unless_marker_file_exists("postgres") do

@@ -1,3 +1,4 @@
+#todo not if
 execute "ask for password when screen is locked" do
   command "defaults write com.apple.screensaver askForPassword -int 1"
   user WS_USER

@@ -1,3 +1,4 @@
+#todo eliminate marker file
 pivotal_rubymine_git_revision_hash  = version_string_for("Pivotal-Preferences-RubyMine")
 rubymine_version_string  = version_string_for("RubyMine-VersionString")
 

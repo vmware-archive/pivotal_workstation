@@ -1,3 +1,5 @@
+#todo package
+
 include_recipe "pivotal_workstation::user_owns_usr_local"
 
 unless File.exists?("/Applications/TextMate.app")

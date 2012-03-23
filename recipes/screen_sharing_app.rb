@@ -1,3 +1,4 @@
+#todo marker file
 unless File.exists?("/Applications/Screen Sharing.app")
 
   ruby_block "Copy Screen Sharing to /Applications" do

@@ -1,3 +1,5 @@
+#TODO move to using the package resource
+
 unless File.exists?(node["github_for_mac_app_path"])
 
   remote_file "/tmp/github_for_mac.zip" do

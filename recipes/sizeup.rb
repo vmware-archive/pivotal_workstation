@@ -1,3 +1,4 @@
+#todo no unless, use package
 unless File.exists?("/Applications/SizeUp.app")
 
   remote_file "/tmp/sizeup.zip" do
