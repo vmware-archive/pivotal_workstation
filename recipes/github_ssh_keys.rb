@@ -47,3 +47,23 @@ execute "add Github configuration to .ssh/config" do
   not_if "grep 'id_github_current' #{WS_HOME}/.ssh/config"
   user WS_USER
 end
+
+# add ssh keys to github account if possible
+if node["github_username"].to_s != "" && node["github_password"].to_s != ""
+  github_name="#{WS_USER}@#{node[:fqdn]}"
+  curl_options = %[--retry 3 --retry-delay 5 --retry-max-time 30 --connect-timeout 5 --max-time 30 -u "#{node["github_username"]}:#{node["github_password"]}"]
+  execute "upload ssh key to github if it does not already exist there" do
+    not_if <<-SH
+      curl #{curl_options} https://api.github.com/user/keys | grep "`cat #{WS_HOME}/.ssh/id_github_#{node["github_project"] || node[:fqdn]}.pub` | cut -f 2 -d ' '`"
+    SH
+    command <<-SH
+    curl -X POST --verbose #{curl_options} \
+         --data "{ \\"key\\": \\"`cat #{WS_HOME}/.ssh/id_github_#{node["github_project"] || node[:fqdn]}.pub`\\", \\"title\\": \\"#{github_name}\\" }" \
+         https://api.github.com/user/keys
+    SH
+  end
+  user WS_USER
+else
+  log "No GITHUB_USERNAME or GITHUB_PASSWORD provided, skipping steps to upload ssh keys to github.com"
+end
+
