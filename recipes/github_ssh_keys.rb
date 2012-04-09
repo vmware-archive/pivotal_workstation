@@ -12,6 +12,23 @@ file "#{WS_HOME}/.ssh/known_hosts" do
   mode "0644"
 end
 
+if !File.exist?("#{WS_HOME}/.ssh/known_hosts") || !File.read("#{WS_HOME}/.ssh/known_hosts").include?("github.com")
+  if node["github_username"].nil? || node["github_password"].nil?
+    require "tempfile"
+    credentials_script = Tempfile.new("github_credentials")
+    credentials_script << <<-RUBY
+      value = gets
+      puts value
+    RUBY
+    credentials_script.rewind
+    print "Github Username: "
+    node["github_username"] = `ruby #{credentials_script.path}`.strip
+    print "Github Password: "
+    node["github_password"] = `ruby #{credentials_script.path}`.strip
+    credentials_script.close
+  end
+end
+
 # If there is no github_project defined, we will use the name of the machine as the SSH key,
 # therefore make sure we have a name first.
 include_recipe "pivotal_workstation::rename_machine" unless node["github_project"]
