@@ -4,7 +4,7 @@ class Chef::Recipe
 
     #don't use the marker file system for this.  we guess that people are likely to be installing rubies by hand using rbenv.
       #...that guess might be wrong.
-    unless File.exists?("#{::RBENV_HOME}/#{ruby_version}/bin/ruby")
+    unless File.exists?("#{::RBENV_HOME}/versions/#{ruby_version}/bin/ruby")
 
       install_cmd = "#{env_override} #{RBENV_COMMAND} install #{ruby_version}"
 
