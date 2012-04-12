@@ -7,7 +7,7 @@ unless File.exists?("/Applications/TextMate.app")
   end
 
   execute "extract text mate to /Applications" do
-    command 'unzip -o #{Chef::Config[:file_cache_path]}/textmate.zip -x __MACOSX* -d /Applications/'
+    command "unzip -o #{Chef::Config[:file_cache_path]}/textmate.zip -x __MACOSX* -d /Applications/"
     user WS_USER
   end
 
