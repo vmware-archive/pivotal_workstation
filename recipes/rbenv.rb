@@ -14,9 +14,8 @@ node["rbenv"]["rubies"].each do |ruby_version_string, env_override|
   rbenv_ruby_install(ruby_version_string,env_override)
 end
 
-if node["rbenv"]["default_ruby"]
-  execute "making #{node["rbenv"]["default_ruby"]} with rbenv the default" do
-    command "rbenv global #{node["rbenv"]["default_ruby"]}"
-    user WS_USER
-  end
+execute "making #{node["rbenv"]["default_ruby"]} with rbenv the default" do
+  not_if { node["rbenv"]["default_ruby"].nil? }
+  command "rbenv global #{node["rbenv"]["default_ruby"]}"
+  user WS_USER
 end

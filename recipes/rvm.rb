@@ -43,9 +43,8 @@ node["rvm"]["rubies"].each do |ruby_version_string, options|
   rvm_ruby_install(ruby_version_string,options)
 end
 
-if node["rvm"]["default_ruby"]
-  execute "making 1.9.2 with rvm the default" do
-    command "#{::RVM_COMMAND} --default #{node["rvm"]["default_ruby"]}"
-    user WS_USER
-  end
+execute "making 1.9.2 with rvm the default" do
+  not_if { node["rvm"]["default"].nil? }
+  command "#{::RVM_COMMAND} --default #{node["rvm"]["default_ruby"]}"
+  user WS_USER
 end
