@@ -58,6 +58,11 @@ execute "symlink Github key for git-project" do
   user WS_USER
 end
 
+execute "symlink Github public key for git-project" do
+  command "ln -nfs #{WS_HOME}/.ssh/id_github_{#{node["github_project"] || node['fqdn']},current}.pub"
+  user WS_USER
+end
+
 execute "add Github configuration to .ssh/config" do
   config = "\n\nHost github.com\n  User git\n  IdentityFile #{WS_HOME}/.ssh/id_github_current"
   command "echo '#{config}' >> #{WS_HOME}/.ssh/config"
