@@ -5,7 +5,7 @@ homebrew_git_revision_hash  = version_string_for("homebrew")
 
 # Do not be tempted to use the git-resource to check out
 # homebrew directly into /usr/local; it will fail if
-# it finds *anything* in /usr/local, and it will find 
+# it finds *anything* in /usr/local, and it will find
 # at least a bin directory because the user_owns_usr_local
 # recipe creates it, and that's a pre-req.  Also, things like
 # MacFuse, Audacity, and others tend to put things in /usr/local

@@ -12,7 +12,7 @@ run_unless_marker_file_exists("textmate_plugins_0") do
   execute "clear out the existing plugin if it's there" do
     command "rm -rf '#{WS_HOME}/Library/Application Support/TextMate/PlugIns/ProjectPlus.tmplugin'"
   end
-  
+
   execute "make textmate plugins directory" do
     command "mkdir -p '#{WS_HOME}/Library/Application Support/TextMate/PlugIns'"
     user WS_USER

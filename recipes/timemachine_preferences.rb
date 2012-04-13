@@ -4,7 +4,7 @@ execute "TimeMachine should NOT ask to use every new disk"   do
 end
 
 ruby_block "TimeMachine should NOT appear in the status bar" do
-  block do 
+  block do
     new_menuExtras=""
     `sudo -u #{WS_USER} defaults read com.apple.systemuiserver menuExtras`.split("\n").each do |line|
       if line !~ /TimeMachine.menu/

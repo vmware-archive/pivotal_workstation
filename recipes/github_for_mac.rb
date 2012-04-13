@@ -21,5 +21,5 @@ unless File.exists?(node["github_for_mac_app_path"])
       raise "GitHub.app was not installed" unless File.exists?(node["github_for_mac_app_path"])
     end
   end
-  
+
 end

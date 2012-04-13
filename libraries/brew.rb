@@ -17,7 +17,7 @@ class Chef::Recipe
 
   def brew_outdated?(package)
     outdated=system("brew outdated | grep -q #{package}")
-    Chef::Log.debug("brew package #{package} " + (outdated ? "IS" : "IS NOT") + " outdated.") 
+    Chef::Log.debug("brew package #{package} " + (outdated ? "IS" : "IS NOT") + " outdated.")
     outdated
   end
 
@@ -28,10 +28,10 @@ class Chef::Recipe
     Chef::Log.debug("brew package #{package} " + (installed ? "IS" : "IS NOT") + " installed.")
     installed
   end
-  
+
   def brew_has_multiple_versions_installed?(package)
     multiple=system("brew list #{package} | grep -q '#{package} has multiple installed versions'")
-    Chef::Log.debug("brew package #{package} " + (multiple ? "HAS" : "does NOT HAVE") + " multiple versions.") 
+    Chef::Log.debug("brew package #{package} " + (multiple ? "HAS" : "does NOT HAVE") + " multiple versions.")
     multiple
   end
 

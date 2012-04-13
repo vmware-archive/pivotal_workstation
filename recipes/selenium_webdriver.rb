@@ -5,7 +5,7 @@ run_unless_marker_file_exists("selenium_webdriver_13_0_775_3") do
     command "curl -o #{Chef::Config[:file_cache_path]}/webdriver.zip #{webdriver_location}"
     user WS_USER
   end
-  
+
   execute "unzip" do
     command "unzip -o #{Chef::Config[:file_cache_path]}/webdriver.zip chromedriver -d /usr/bin/"
   end

@@ -36,7 +36,7 @@ run_unless_marker_file_exists("ssl_certificate") do
   execute "generate server key" do
     command "openssl genrsa 1024 > #{cert_path}/server.key"
     user WS_USER
-  end  
+  end
 
   execute "generate request" do
     command "openssl req -new -key #{cert_path}/server.key -out #{cert_path}/request.csr -subj '/CN=#{node["ssl_settings"]["common_name"]}/OU=Org Unit/O=My Org Pty Ltd/L=Sydney/ST=NSW/C=AU/emailAddr=someoneATexample.com'"
