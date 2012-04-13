@@ -10,8 +10,10 @@ brew_install("ruby-build")
 
 bash_profile_include("rbenv")
 
-node["rbenv"]["rubies"].each do |ruby_version_string, env_override|
-  rbenv_ruby_install(ruby_version_string,env_override)
+node["rbenv"]["rubies"].each do |version, options|
+  rbenv_ruby_install version do
+    options options
+  end
 end
 
 execute "making #{node["rbenv"]["default_ruby"]} with rbenv the default" do
