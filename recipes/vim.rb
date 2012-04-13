@@ -5,7 +5,7 @@ include_recipe "pivotal_workstation::rvm"
 
 execute "brew install macvim with system ruby" do
   user WS_USER
-  command "rvm use system; brew install macvim"
+  command "test -e #{WS_HOME}/.rvm/bin/rvm && (rvm use system); brew install macvim"
   not_if "brew list | grep '^macvim$'"
 end
 
@@ -42,7 +42,7 @@ brew_install "ctags"
 execute "compile command-t" do
   not_if "test -f #{node["vim_home"]}/bundle/command-t/ruby/command-t/compiled"
   cwd "#{node["vim_home"]}/bundle/command-t/ruby/command-t"
-  command "rvm use system; ruby extconf.rb && make && touch compiled"
+  command "test -e #{WS_HOME}/.rvm/bin/rvm && (rvm use system); ruby extconf.rb && make && touch compiled"
   user WS_USER
 end
 
