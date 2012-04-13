@@ -7,5 +7,5 @@ node.default["rvm"]= {
     #"ruby-1.9.2-p290" => { :env => "CC=gcc-4.2" },
     "ruby-1.9.3-p125" => { :command_line_options => "--with-gcc=clang" },
   },
-  "default_ruby" => "ruby-1.9.2-p290"
+  "default_ruby" => "ruby-1.9.3-p125"
 }
