@@ -39,13 +39,14 @@ run_unless_marker_file_exists(marker_version_string_for("rvm")) do
   end
 end
 
-node["rvm"]["rubies"].each do |ruby_version_string, options|
-  rvm_ruby_install(ruby_version_string,options)
+node["rvm"]["rubies"].each do |version, options|
+  rvm_ruby_install version do
+    options options
+  end
 end
 
-if node["rvm"]["default_ruby"]
-  execute "making 1.9.2 with rvm the default" do
-    command "#{::RVM_COMMAND} --default #{node["rvm"]["default_ruby"]}"
-    user WS_USER
-  end
+execute "making #{node["rvm"]["default_ruby"]} with rvm the default" do
+  not_if { node["rvm"]["default_ruby"].nil? }
+  command "#{::RVM_COMMAND} alias create default #{node["rvm"]["default_ruby"]}"
+  user WS_USER
 end

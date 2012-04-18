@@ -1,7 +1,7 @@
 # This is a theorteically flawed chef recipe.  This installs anything apple thinks
 # is a good idea.  Please understand why you shouldn't use this before using it.
 
-last_update_touchfile = "/tmp/last_software_update"
+last_update_touchfile = "#{Chef::Config[:file_cache_path]}/last_software_update"
 
 execute "Check & install all available OS X updates from Apple" do
   command "softwareupdate -i -a && touch #{last_update_touchfile}"

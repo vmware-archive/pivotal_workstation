@@ -4,5 +4,5 @@ pivotal_workstation_package "JavaForMacOSX10.7" do
   action :install
   type "mpkg"
   package_id "com.apple.pkg.JavaForMacOSX107"
-  checksum "f12f356c5788abaf48434fa16f5f69f4e10ae3caab08e0c2d81924336fc4e292"
+  checksum "a1b493280c0854f5b7357dab00115db2db48df6463ba7c53c5fd10675c066783"
 end

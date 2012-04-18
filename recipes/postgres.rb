@@ -19,7 +19,7 @@ run_unless_marker_file_exists("postgres") do
     recursive true
   end
 
-  brew_remove "postgresql"
+  # brew_remove "postgresql"
   brew_install "postgresql"
 
   execute "create the database" do
@@ -36,12 +36,12 @@ run_unless_marker_file_exists("postgres") do
 
 
   execute "copy over the plist" do
-    command %'cp /usr/local/Cellar/postgresql/9.*/org.postgresql.postgres.plist ~/Library/LaunchAgents/'
+    command %'cp /usr/local/Cellar/postgresql/9.*/homebrew.mxcl.postgresql.plist ~/Library/LaunchAgents/'
     user WS_USER
   end
 
   execute "start the daemon" do
-    command %'launchctl load -w ~/Library/LaunchAgents/org.postgresql.postgres.plist'
+    command %'launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist'
     user WS_USER
   end
 

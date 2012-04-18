@@ -14,7 +14,7 @@ corners = {
   :tl => :all_windows,
   :tr => :dashboard,
   :br => :noop,
-  :bl => :noop 
+  :bl => :noop
 }
 
 corners.each do |corner, value|

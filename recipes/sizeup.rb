@@ -1,6 +1,6 @@
 unless File.exists?("/Applications/SizeUp.app")
 
-  remote_file "/tmp/sizeup.zip" do
+  remote_file "#{Chef::Config[:file_cache_path]}/sizeup.zip" do
     source node["sizeup_download_uri"]
     mode "0644"
   end
@@ -13,7 +13,7 @@ unless File.exists?("/Applications/SizeUp.app")
   end
 
   execute "unzip sizeup" do
-    command "unzip /tmp/sizeup.zip SizeUp.app/* -d /Applications/"
+    command "unzip #{Chef::Config[:file_cache_path]}/sizeup.zip SizeUp.app/* -d /Applications/"
     user WS_USER
   end
 end

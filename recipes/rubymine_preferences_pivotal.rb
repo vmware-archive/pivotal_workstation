@@ -2,7 +2,7 @@ pivotal_rubymine_git_revision_hash  = version_string_for("Pivotal-Preferences-Ru
 rubymine_version_string  = version_string_for("RubyMine-VersionString")
 
 run_unless_marker_file_exists("#{marker_version_string_for("Pivotal-Preferences-RubyMine")}-#{rubymine_version_string}") do
-  download_dir = "/tmp/Pivotal-Preferences-RubyMine"
+  download_dir = "#{Chef::Config[:file_cache_path]}/Pivotal-Preferences-RubyMine"
   rubymine_preferences_dir = "#{WS_HOME}/Library/Preferences/RubyMine#{rubymine_version_string}"
 
   execute "reset dir" do

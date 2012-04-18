@@ -40,7 +40,7 @@ run_unless_marker_file_exists("pivotal_logos") do
     end
   end
 
-  template "/tmp/jpegphoto.dsimport" do
+  template "#{Chef::Config[:file_cache_path]}/jpegphoto.dsimport" do
     source "pivotal_logos-dsimport.erb"
     owner WS_USER
   end
@@ -52,10 +52,10 @@ run_unless_marker_file_exists("pivotal_logos") do
   #   ->Users & Groups
   #     ->select your username->click on icon->click "Edit Picture..."
   #     ->set your picture to the one you want.  Then:
-  # dscl . read /Users/$USER JPEGPhoto |tail +2 |xxd -r -p > /tmp/precious.jpeg
+  # dscl . read /Users/$USER JPEGPhoto |tail +2 |xxd -r -p > #{Chef::Config[:file_cache_path]}/precious.jpeg
   execute("dscl . delete /Users/#{WS_USER} JPEGPhoto")
   execute("dscl . create /Users/#{WS_USER} Picture \"#{WS_HOME}/Pictures/Icons/tracker_dot.png\"")
-  execute("dsimport /tmp/jpegphoto.dsimport /Local/Default M")
+  execute("dsimport #{Chef::Config[:file_cache_path]}/jpegphoto.dsimport /Local/Default M")
 
   gem_package("plist")
 
