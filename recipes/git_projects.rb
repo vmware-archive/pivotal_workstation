@@ -1,6 +1,6 @@
 include_recipe "pivotal_workstation::workspace_directory"
 
-node.git_projects.each do |repo_name, repo_address|
+node['git_projects'].each do |repo_name, repo_address|
   execute "clone #{repo_name}" do
     command "git clone #{repo_address} #{repo_name}"
     user WS_USER

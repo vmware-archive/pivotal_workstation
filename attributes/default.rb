@@ -16,5 +16,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-default[:pivotal_workstation][:base_dir] = "/Applications"
-default[:pivotal_workstation][:cache_dir] = Chef::Config[:file_cache_path]
+default['pivotal_workstation']['base_dir'] = "/Applications"
+default['pivotal_workstation']['cache_dir'] = Chef::Config['file_cache_path']

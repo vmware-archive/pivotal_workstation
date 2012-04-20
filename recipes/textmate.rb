@@ -1,13 +1,22 @@
 include_recipe "pivotal_workstation::user_owns_usr_local"
 
+node.default["textmate"]["url"] = "http://dl.macromates.com/TextMate_1.5.10_r1631.zip"
+node.default["textmate"]["shasum"] = "325f061fb19f87ea61df672df619065ea34e2c88fba30c84635368ea0a40c406"
+
 unless File.exists?("/Applications/TextMate.app")
-  execute "download text mate to temp dir" do
-    command "curl -L -o /tmp/textmate.zip http://download.macromates.com/TextMate_1.5.10.zip"
-    user WS_USER
+  directory Chef::Config[:file_cache_path] do
+    action :create
+    recursive true
+  end
+
+  remote_file "#{Chef::Config[:file_cache_path]}/textmate.zip" do
+    source node["textmate"]["url"]
+    checksum node["textmate"]["shasum"]
+    owner WS_USER
   end
 
   execute "extract text mate to /Applications" do
-    command 'unzip -o /tmp/textmate.zip -x __MACOSX* -d /Applications/'
+    command "unzip -o #{Chef::Config[:file_cache_path]}/textmate.zip -x __MACOSX* -d /Applications/"
     user WS_USER
   end
 

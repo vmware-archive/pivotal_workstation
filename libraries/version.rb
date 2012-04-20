@@ -4,6 +4,6 @@ class Chef::Recipe
   end
 
   def version_string_for(application_name)
-    node[:versions][application_name] || raise("you must define a version for #{application_name} in attributes.")
+    node['versions'][application_name] || raise("you must define a version for #{application_name} in attributes.")
   end
 end
