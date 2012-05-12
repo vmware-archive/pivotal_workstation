@@ -1,6 +1,6 @@
 include_recipe "pivotal_workstation::user_owns_usr_local"
 
-node.default["textmate"]["url"] = "http://dl.macromates.com/TextMate_1.5.10_r1631.zip"
+node.default["textmate"]["url"] = "http://download.macromates.com/TextMate_1.5.10.zip"
 node.default["textmate"]["shasum"] = "325f061fb19f87ea61df672df619065ea34e2c88fba30c84635368ea0a40c406"
 
 unless File.exists?("/Applications/TextMate.app")
