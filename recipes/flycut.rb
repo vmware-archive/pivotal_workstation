@@ -8,6 +8,12 @@ ruby_block "Install Flycut" do
   not_if {File.exists?("/Applications/Flycut.app")}
 end
 
+# start up on login
+execute "Start Flycut automatically" do
+  command "launchctl submit -l com.github.termit.flycut -- /Applications/Flycut.app/Contents/MacOS/Flycut"
+  user WS_USER
+end
+
 ruby_block "test that Flycut install worked" do
   block do
     raise "Flycut install failed!" if ! File.exists?("/Applications/Flycut.app")
