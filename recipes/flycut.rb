@@ -8,6 +8,12 @@ ruby_block "Install Flycut" do
   not_if {File.exists?("/Applications/Flycut.app")}
 end
 
+# start up on login
+execute "Start Flycut automatically" do
+  command "defaults write loginwindow AutoLaunchedApplicationDictionary -array-add '{ \"Path\" = \"/Applications/Flycut.app\"; \"Hide\" = 0; }'"
+  user WS_USER
+end
+
 ruby_block "test that Flycut install worked" do
   block do
     raise "Flycut install failed!" if ! File.exists?("/Applications/Flycut.app")
