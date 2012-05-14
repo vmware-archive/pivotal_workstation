@@ -10,7 +10,7 @@ end
 
 # start up on login
 execute "Start Flycut automatically" do
-  command "launchctl submit -l com.github.termit.flycut -- /Applications/Flycut.app/Contents/MacOS/Flycut"
+  command "defaults write loginwindow AutoLaunchedApplicationDictionary -array-add '{ \"Path\" = \"/Applications/Flycut.app\"; \"Hide\" = 0; }'"
   user WS_USER
 end
 
