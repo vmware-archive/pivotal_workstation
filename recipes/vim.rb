@@ -22,7 +22,7 @@ ruby_block "Link MacVim to /Applications" do
 end
 
 git node["vim_home"] do
-  repository "git://github.com/pivotal/vim-config.git"
+  repository node["vim_config_git"]
   branch "master"
   revision node["vim_hash"] || "HEAD"
   action :sync
