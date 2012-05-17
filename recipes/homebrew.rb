@@ -10,7 +10,7 @@ homebrew_git_revision_hash  = version_string_for("homebrew")
 # recipe creates it, and that's a pre-req.  Also, things like
 # MacFuse, Audacity, and others tend to put things in /usr/local
 
-directory "#{Chef::Config[:file_cache_path]}" do
+directory Chef::Config[:file_cache_path] do
   action :create
   recursive true
   mode "0775"
