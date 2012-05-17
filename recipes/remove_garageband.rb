@@ -1,11 +1,11 @@
 # This is obviously a destructive recipe.
 
-run_unless_marker_file_exists("removed_garage_band") do
-  execute "Deleting Garage Band Support Files" do
-    command "rm -rf /Library/Application\ Support/GarageBand"
-  end
+directory "/Library/Application\ Support/GarageBand" do
+  action :delete
+  recursive true
+end
 
-  execute "Deleting Garage Band Application" do
-    command "rm -rf /Applications/GarageBand.app"
-  end
+directory "/Applications/GarageBand.app" do
+  action :delete
+  recursive true
 end
