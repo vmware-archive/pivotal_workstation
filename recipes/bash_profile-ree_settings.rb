@@ -1,1 +1,1 @@
-bash_profile_include("ree_settings")
+pivotal_workstation_bash_profile_include "ree_settings"

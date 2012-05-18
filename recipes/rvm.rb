@@ -1,5 +1,4 @@
 include_recipe "pivotal_workstation::java"
-include_recipe "pivotal_workstation::bash_profile"
 include_recipe "pivotal_workstation::git"
 
 rvm_git_revision_hash  = version_string_for("rvm")
@@ -7,7 +6,7 @@ rvm_git_revision_hash  = version_string_for("rvm")
 ::RVM_HOME = "#{WS_HOME}/.rvm"
 ::RVM_COMMAND = "#{::RVM_HOME}/bin/rvm"
 
-bash_profile_include("rvm")
+pivotal_workstation_bash_profile_include "rvm"
 
 run_unless_marker_file_exists(marker_version_string_for("rvm")) do
   recursive_directories [RVM_HOME, 'src', 'rvm'] do
