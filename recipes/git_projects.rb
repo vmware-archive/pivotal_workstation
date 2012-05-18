@@ -8,22 +8,11 @@ node['git_projects'].each do |repo_name, repo_address|
     not_if { ::File.exists?("#{WS_HOME}/#{node['workspace_directory']}/#{repo_name}") }
   end
 
-  execute "track origin master" do
-    command "git branch --set-upstream master origin/master"
-    cwd "#{WS_HOME}/#{node['workspace_directory']}/#{repo_name}"
-    user WS_USER
-  end
-
-  execute "git submodule init for #{repo_name}" do
-    command "git submodule init"
-    cwd "#{WS_HOME}/#{node['workspace_directory']}/#{repo_name}"
-    user WS_USER
-  end
-
-  execute "git submodule update for #{repo_name}" do
-    command "git submodule update"
-    cwd "#{WS_HOME}/#{node['workspace_directory']}/#{repo_name}"
-    user WS_USER
+  [ "git branch --set-upstream master origin/master",  "git submodule init", "git submodule update" ].each do |git_cmd|
+    execute git_cmd do
+      cwd "#{WS_HOME}/#{node['workspace_directory']}/#{repo_name}"
+      user WS_USER
+      not_if { ::File.exists?("#{WS_HOME}/#{node['workspace_directory']}/#{repo_name}") }
+    end
   end
 end
-
