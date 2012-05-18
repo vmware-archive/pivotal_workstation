@@ -1,7 +1,7 @@
 include_recipe "pivotal_workstation::homebrew"
+include_recipe "pivotal_workstation::ack"
 
 brew_install "watch"
-brew_install "ack"
 brew_install "ssh-copy-id"
 brew_install "pstree"
 brew_install "tmux"

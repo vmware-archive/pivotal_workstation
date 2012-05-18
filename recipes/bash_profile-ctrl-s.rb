@@ -1,1 +1,1 @@
-bash_profile_include("ctrl-s")
+pivotal_workstation_bash_profile_include "ctrl-s"

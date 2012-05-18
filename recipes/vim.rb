@@ -52,4 +52,4 @@ ruby_block "test to see if MacVim link worked" do
   end
 end
 
-bash_profile_include("vi_is_minimal_vim")
+pivotal_workstation_bash_profile_include "vi_is_minimal_vim"
