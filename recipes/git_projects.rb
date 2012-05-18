@@ -9,8 +9,7 @@ node['git_projects'].each do |repo_name, repo_address|
   end
 
   [ "git branch --set-upstream master origin/master",  "git submodule init", "git submodule update" ].each do |git_cmd|
-    execute "#{repo_name} - #{git_cmd}" do
-      command git_cmd
+    execute git_cmd do
       cwd "#{WS_HOME}/#{node['workspace_directory']}/#{repo_name}"
       user WS_USER
       not_if { ::File.exists?("#{WS_HOME}/#{node['workspace_directory']}/#{repo_name}") }
