@@ -14,21 +14,12 @@ run_unless_marker_file_exists(marker_version_string_for("rvm")) do
     owner WS_USER
     recursive true
   end
-
-  execute "download rvm" do
-    command "curl -Lsf http://github.com/wayneeseguin/rvm/tarball/#{rvm_git_revision_hash} | tar xvz -C#{RVM_HOME}/src/rvm --strip 1"
-    user WS_USER
-  end
-
-  execute "install rvm" do
-    cwd "#{RVM_HOME}/src/rvm"
-    command "./install"
-    user WS_USER
-  end
-
-  execute "check rvm" do
-    command "#{RVM_COMMAND} --version | grep Wayne"
-    user WS_USER
+["curl -Lsf http://github.com/wayneeseguin/rvm/tarball/#{rvm_git_revision_hash} | tar xvz -C#{RVM_HOME}/src/rvm --strip 1",
+ "cd #{RVM_HOME}/src/rvm; ./install",
+ "#{RVM_COMMAND} --version | grep Wayne"].each do |rvm_cmd|
+    command rvm_cmd
+      user WS_USER
+    end
   end
 
   %w{readline autoconf openssl zlib}.each do |rvm_pkg|
