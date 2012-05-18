@@ -21,8 +21,7 @@ def load_current_resource
   @dmgpkg = Chef::Resource::PivotalWorkstationPackage.new(new_resource.name)
   @dmgpkg.app(new_resource.app)
   Chef::Log.debug("Checking for application #{new_resource.app}")
-  installed = (new_resource.type == "app") ? (::File.directory?("#{new_resource.destination}/#{new_resource.app}.app")) : system("pkgutil --pkgs=#{new_resource.package_id}")
-  @dmgpkg.installed(installed)
+  @dmgpkg.installed(installed?)
 end
 
 action :install do
@@ -32,31 +31,18 @@ action :install do
     dmg_name = new_resource.dmg_name ? new_resource.dmg_name : new_resource.app
     dmg_file = "#{Chef::Config[:file_cache_path]}/#{dmg_name}.dmg"
 
-    # Solo doesn't necessarily create the file_cache_path,
-    # but we don't want to mess with it if it exists
-    directory Chef::Config[:file_cache_path] do
-      owner "root"
-      group "admin"
-      mode 0775
-      action :create
-      recursive true
-      not_if { ::File.exists?(Chef::Config[:file_cache_path]) }
-    end
-
     if new_resource.source
       remote_file dmg_file do
         source new_resource.source
         checksum new_resource.checksum if new_resource.checksum
-        group "admin"
-        mode 0644
       end
     end
 
     passphrase_cmd = new_resource.dmg_passphrase ? "-passphrase #{new_resource.dmg_passphrase}" : ""
     ruby_block "attach #{dmg_file}" do
       block do
-        software_license_agreement = system("hdiutil imageinfo #{passphrase_cmd} #{dmg_file} | grep -q 'Software License Agreement: true'")
-        raise "Requires EULA Acceptance; add 'accept_eula true' to package resource" if software_license_agreement && ! new_resource.accept_eula
+        software_license_agreement = system("hdiutil imageinfo #{passphrase_cmd} '#{dmg_file}' | grep -q 'Software License Agreement: true'")
+        raise "Requires EULA Acceptance; add 'accept_eula true' to package resource" if software_license_agreement && !new_resource.accept_eula
         accept_eula_cmd = new_resource.accept_eula ? "echo Y |" : ""
         system "#{accept_eula_cmd} hdiutil attach #{passphrase_cmd} '#{dmg_file}'"
       end
@@ -65,30 +51,23 @@ action :install do
 
     case new_resource.type
     when "app"
-      # use "rsync -aH" instead of "cp -r" because rsync
-      # won't exit(1) when it hits a bad symbolic link (e.g. Dropbox's site.py, Skype's Growl).
-      execute "rsync -aH '/Volumes/#{volumes_dir}/#{new_resource.app}.app' '#{new_resource.destination}'" do
-        user WS_USER
-        group "admin"
-      end
+      execute "cp -R '/Volumes/#{volumes_dir}/#{new_resource.app}.app' '#{new_resource.destination}'"
+
       file "#{new_resource.destination}/#{new_resource.app}.app/Contents/MacOS/#{new_resource.app}" do
         mode 0755
         ignore_failure true
       end
-    when "mpkg"
-      ruby_block "installing /Volumes/#{volumes_dir}/#{new_resource.app}.*pkg" do
-        block do
-          if ::File.exists?("/Volumes/#{volumes_dir}/#{new_resource.app}.mpkg")
-            `sudo installer -pkg '/Volumes/#{volumes_dir}/#{new_resource.app}.mpkg' -target /`
-          elsif ::File.exists?("/Volumes/#{volumes_dir}/#{new_resource.app}.pkg")
-            `sudo installer -pkg '/Volumes/#{volumes_dir}/#{new_resource.app}.pkg' -target /`
-          else
-            raise "I couldn't find /Volumes/#{volumes_dir}/#{new_resource.app}.mpkg"
-          end
-        end
-      end
+    when "mpkg", "pkg"
+      execute "sudo installer -pkg '/Volumes/#{volumes_dir}/#{new_resource.app}.#{new_resource.type}' -target /"
     end
 
     execute "hdiutil detach '/Volumes/#{volumes_dir}'"
   end
+end
+
+private
+
+def installed?
+  ::File.directory?("#{new_resource.destination}/#{new_resource.app}.app") ||
+    system("pkgutil --pkgs=#{new_resource.package_id}")
 end
