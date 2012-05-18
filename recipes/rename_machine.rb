@@ -18,25 +18,13 @@ hostnames.each do |hostname|
 
     # The scutil commands need to run as root, unless
     # you're logged into the console, but we can't be sure of that.
-    execute "set the user friendly name for this system to #{hostname}" do
-      command "scutil --set ComputerName #{hostname}"
-    end
 
-    execute "set the local bonjour hostname for this system to #{hostname}" do
-       command "scutil --set LocalHostName #{hostname}"
-     end
-
-    execute "set the hostname for this system" do
-       command "scutil --set HostName #{hostname}"
-     end
-
-    execute "set the hostname for this system for the current session to #{hostname}" do
-       command "hostname #{hostname}"
-    end
-
-    execute "set the diskname this system to #{hostname}" do
-       command "diskutil rename / #{hostname}"
-       user WS_USER
+    ["scutil --set ComputerName #{hostname}",
+     "scutil --set LocalHostName #{hostname}",
+     "scutil --set HostName #{hostname}",
+     "hostname #{hostname}",
+     "diskutil rename / #{hostname}" ].each do |host_cmd|
+      execute host_cmd
     end
 
     ruby_block "test to see if hostname was set" do
