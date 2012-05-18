@@ -18,7 +18,7 @@ unless system("dscl . list /Users/ops")
     uid uid
     home "/Users/#{username}"
     shell "/bin/bash"
-    not_if { Kernel.system("id #{username}") }
+    not_if { system("id #{username}") }
   end
 
   #create the user's home directory
