@@ -16,7 +16,6 @@ end
 execute "restart SustemUIServer" do
   command "killall -HUP SystemUIServer"
   action :nothing
-  ignore_failure true # SystemUIServer is not running if not logged in
 end
 
 execute "make sure it doesn't exist"   do

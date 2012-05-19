@@ -31,11 +31,11 @@ action :install do
     dmg_name = new_resource.dmg_name ? new_resource.dmg_name : new_resource.app
     dmg_file = "#{Chef::Config[:file_cache_path]}/#{dmg_name}.dmg"
 
-    if new_resource.source
-      remote_file dmg_file do
-        source new_resource.source
-        checksum new_resource.checksum if new_resource.checksum
-      end
+    remote_file "#{dmg_file} - #{@dmgpkg.name}" do
+      path dmg_file
+      source new_resource.source
+      checksum new_resource.checksum if new_resource.checksum
+      only_if { new_resource.source }
     end
 
     passphrase_cmd = new_resource.dmg_passphrase ? "-passphrase #{new_resource.dmg_passphrase}" : ""
