@@ -68,9 +68,7 @@ unless File.exists?(menu_meters_dst)
   execute "Restart SystemUIServer" do
     command 'killall -HUP SystemUIServer'
     user WS_USER
-    # we don't care if it fails because it means
-    # SystemUIServer wasn't running in the first place
-    returns [0, 1]
+    ignore_failure true # SystemUIServer is not running if not logged in
   end
 
   ruby_block "test to see if MenuMeters was installed" do
