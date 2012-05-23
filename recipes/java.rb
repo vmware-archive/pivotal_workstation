@@ -3,6 +3,6 @@ pivotal_workstation_package "JavaForOSX" do
   volumes_dir "Java for OS X 2012-003"
   action :install
   type "pkg"
-  package_id "com.apple.pkg.JavaForMacOSX107"
+  package_id "com.apple.pkg.JavaForMacOSX107hklj"
   checksum "c9cf7cb663eb86e6d7598c2e9c82b00e039b391622802cbfdb03defbd47ba070"
 end
