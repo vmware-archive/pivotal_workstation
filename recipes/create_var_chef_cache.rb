@@ -3,8 +3,7 @@
 directory Chef::Config[:file_cache_path] do
   owner "root"
   group "admin"
-  mode 0775
+  mode 0777
   action :create
   recursive true
-  not_if { ::File.exists?(Chef::Config[:file_cache_path]) }
 end
