@@ -23,7 +23,6 @@ git "#{Chef::Config[:file_cache_path]}/homebrew" do
   revision homebrew_git_revision_hash
   destination "#{Chef::Config[:file_cache_path]}/homebrew"
   action :sync
-  user WS_USER
 end
 
 execute "Copying homebrew's .git to /usr/local" do
