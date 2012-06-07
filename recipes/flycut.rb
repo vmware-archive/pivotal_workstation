@@ -3,7 +3,7 @@
 ruby_block "Install Flycut" do
   block do
     system("cd #{Chef::Config[:file_cache_path]}/ && curl -OL https://github.com/downloads/TermiT/Flycut/flycut1.5.pkg")
-    system("installer -package  #{Chef::Config[:file_cache_path]}/flycut1.5.pkg -target /")
+    system("installer -allowUntrusted -package  #{Chef::Config[:file_cache_path]}/flycut1.5.pkg -target /")
   end
   not_if {File.exists?("/Applications/Flycut.app")}
 end
