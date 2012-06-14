@@ -3,8 +3,9 @@ run_unless_marker_file_exists("textmate_plugins_0") do
    "hdiutil mount #{Chef::Config[:file_cache_path]}/projectplus.dmg",
    "rm -rf '#{WS_HOME}/Library/Application Support/TextMate/PlugIns/ProjectPlus.tmplugin'",
   ].each do |tmate_cmd|
-  execute tmate_cmd do
-    user WS_USER
+    execute tmate_cmd do
+      user WS_USER
+    end
   end
 
   execute "make textmate plugins directory" do
