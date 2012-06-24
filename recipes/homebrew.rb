@@ -42,3 +42,7 @@ end
 directory "/usr/local/sbin" do
   owner WS_USER
 end
+
+directory "/Users/#{WS_USER}/Applications" do
+  owner WS_USER
+end
