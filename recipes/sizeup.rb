@@ -21,5 +21,6 @@ unless File.exists?("/Applications/SizeUp.app")
   execute "unzip sizeup" do
     command "unzip #{Chef::Config[:file_cache_path]}/sizeup.zip SizeUp.app/* -d /Applications/"
     user WS_USER
+    group "admin"
   end
 end
