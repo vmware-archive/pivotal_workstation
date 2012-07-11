@@ -1,4 +1,9 @@
-execute "set terminal color scheme" do
+execute "set default terminal color scheme" do
+  command "defaults write com.apple.Terminal 'Default Window Settings' -string #{node['terminal']['color_scheme']}"
+  user WS_USER
+end
+
+execute "set startup terminal color scheme" do
   command "defaults write com.apple.Terminal 'Startup Window Settings' -string #{node['terminal']['color_scheme']}"
   user WS_USER
 end
