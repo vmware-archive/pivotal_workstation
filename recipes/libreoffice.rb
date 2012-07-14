@@ -1,5 +1,5 @@
-node.default["libreoffice"]["source"] = "http://download.documentfoundation.org/libreoffice/stable/3.5.4/mac/x86/LibO_3.5.4_MacOS_x86_install_en-US.dmg"
-node.default["libreoffice"]["checksum"] = "b4302f30f6aafe384f13673aaba05ff85c1b4617f997c22e1079df48c6172fee"
+node.default["libreoffice"]["source"] = "http://download.documentfoundation.org/libreoffice/stable/3.5.5/mac/x86/LibO_3.5.5_MacOS_x86_install_en-US.dmg"
+node.default["libreoffice"]["checksum"] = "a6edaaf2c257d04fc33f8dbaaab9a98feb407e73bf33c5e6ec873b0b08413af4"
 
 pivotal_workstation_package "LibreOffice" do
   volumes_dir "LibreOffice"
