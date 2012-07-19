@@ -2,6 +2,7 @@ include_recipe "pivotal_workstation::homebrew"
 include_recipe "pivotal_workstation::ack"
 include_recipe "pivotal_workstation::git"
 include_recipe "pivotal_workstation::rvm"
+include_recipe "pivotal_workstation::tmux"
 
 execute "brew install macvim with system ruby" do
   user WS_USER
@@ -53,3 +54,6 @@ ruby_block "test to see if MacVim link worked" do
 end
 
 pivotal_workstation_bash_profile_include "vi_is_minimal_vim"
+pivotal_workstation_bash_profile_include "vim_tmux"
+
+
