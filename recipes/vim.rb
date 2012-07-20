@@ -14,18 +14,9 @@ execute "uninstall-vim" do
   only_if "brew list | grep '^vim$'"
 end
 
-execute "make-homebrew-temp-directory" do
-  command "mkdir -p /tmp/pivotal_workstation/homebrew_formulas"
-end
-
-cookbook_file "/tmp/pivotal_workstation/homebrew_formulas/vim.rb" do
-  source "vim_homebrew_formula.rb"
-  mode "0644"
-end
-
 execute "install-vim" do
   user WS_USER
-  command "brew install /tmp/pivotal_workstation/homebrew_formulas/vim.rb"
+  command "brew install https://raw.github.com/Homebrew/homebrew-dupes/c93e84ace76c58ae2386c439040110b57e510f04/vim.rb"
 end
 
 execute "brew-uninstall-macvim" do
