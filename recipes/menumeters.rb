@@ -11,7 +11,6 @@ unless File.exists?(menu_meters_dst)
     source menu_meters_uri
     mode "0644"
     checksum "2a21e11847a66ef6d290e08607b0494a1326b104c5d88c0d2b3e133604ca9d01"
-    action :create_if_missing
   end
 
   execute "mount MenuMeters dmg" do
