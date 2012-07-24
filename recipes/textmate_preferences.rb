@@ -6,7 +6,7 @@ pivotal_workstation_defaults "set save on losing focus" do
   boolean true
 end
 
-execute "show line numbers" do
+pivotal_workstation_defaults "show line numbers" do
   domain '~/Library/Preferences/com.macromates.textmate'
   key 'OakTextViewLineNumbersEnabled'
   boolean true
