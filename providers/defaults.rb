@@ -10,7 +10,8 @@ def type_flag
   return '-int' if new_resource.integer
   return '-string' if new_resource.string
   return '-float' if new_resource.float
-  return '-boolean' unless new_resource.nil?
+  return '-boolean' unless new_resource.boolean.nil?
+  ''
 end
 
 def value
