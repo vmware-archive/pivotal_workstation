@@ -1,18 +1,21 @@
-execute "ask for password when screen is locked" do
-  command "defaults write com.apple.screensaver askForPassword -int 1"
-  user WS_USER
+pivotal_workstation_defaults "ask for password when screen is locked" do
+  domain 'com.apple.screensaver'
+  key 'askForPassword'
+  integer 1
 end
 
-execute "wait 60 seconds between screensaver & lock" do
-  command "defaults write com.apple.screensaver askForPasswordDelay -float 60"
-  user WS_USER
+pivotal_workstation_defaults "wait 60 seconds between screensaver & lock" do
+  domain 'com.apple.screensaver'
+  key 'askForPasswordDelay'
+  float 60
 end
 
 plist_dir = ENV['HOME'] + "/Library/Preferences/ByHost"
 Dir["#{plist_dir}/com.apple.screensaver.*.plist"].each do |file|
-  execute "set screensaver timeout" do
-    command "defaults write #{file.chomp(".plist")} idleTime 600"
-    user WS_USER
+  pivotal_workstation_defaults "set screensaver timeout" do
+    domain file.chomp('plist')
+    key 'idleTime'
+    integer 600
   end
 end
 

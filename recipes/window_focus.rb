@@ -1,4 +1,5 @@
-execute "turn on focus-follows-window for browsers, etc.." do
-  command "defaults write org.x.X11 wm_ffm -bool true"
-  user WS_USER
+pivotal_workstation_defaults "turn on focus-follows-window for browsers, etc.." do
+  domain 'org.x.X11'
+  key 'wm_ffm'
+  boolean true
 end
