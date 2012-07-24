@@ -14,6 +14,7 @@ attribute :key, :kind_of => String, :default => nil
 attribute :integer, :kind_of => Integer, :default => nil
 attribute :string, :kind_of => String, :default => nil
 attribute :boolean, :kind_of => [ TrueClass, FalseClass ], :default => nil
+attribute :float, :kind_of => [Float, Integer], :default => nil
 
 def initialize(name, run_context=nil)
   super

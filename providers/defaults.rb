@@ -9,9 +9,13 @@ end
 def type_flag
   return '-int' if new_resource.integer
   return '-string' if new_resource.string
+  return '-float' if new_resource.float
   return '-boolean' unless new_resource.nil?
 end
 
 def value
-  new_resource.integer || new_resource.string || new_resource.boolean
+  new_resource.integer ||
+    new_resource.string ||
+    (new_resource.float && new_resource.float.to_f) ||
+    new_resource.boolean
 end
