@@ -1,4 +1,5 @@
-execute "set finder to display full path in title bar" do
-  command "defaults write com.apple.finder _FXShowPosixPathInTitle -bool YES"
-  user WS_USER
+pivotal_workstation_defaults "set finder to display full path in title bar" do
+  domain 'com.apple.finder'
+  key '_FXShowPosixPathInTitle'
+  boolean true
 end

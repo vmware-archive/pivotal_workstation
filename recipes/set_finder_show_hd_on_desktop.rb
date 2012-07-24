@@ -1,4 +1,5 @@
-execute "show hard drive on desktop" do
-  command "defaults write com.apple.finder ShowHardDrivesOnDesktop -bool YES"
-  user WS_USER
+pivotal_workstation_defaults "show hard drive on desktop" do
+  comain 'com.apple.finder'
+  key 'ShowHardDrivesOnDesktop'
+  boolean true
 end

@@ -1,4 +1,5 @@
-execute "set terminal color scheme" do
-  command "defaults write com.apple.Terminal 'Startup Window Settings' -string #{node['terminal']['color_scheme']}"
-  user WS_USER
+pivotal_workstation_defaults "Set terminal color scheme to #{node['terminal']['color_scheme']}" do
+  domain 'com.apple.Terminal'
+  key 'Startup Window Settings'
+  string node['terminal']['color_scheme']
 end

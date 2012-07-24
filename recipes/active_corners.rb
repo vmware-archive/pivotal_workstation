@@ -18,13 +18,16 @@ corners = {
 }
 
 corners.each do |corner, value|
-  execute "#{corner} right #{value}" do
-    command "defaults write com.apple.dock wvous-#{corner}-corner -int #{active_corner_value_to_int[value]}"
-    user WS_USER
+  pivotal_workstation_defaults "Active Corner: #{corner} right #{value}" do
+    domain 'com.apple.dock'
+    key "wvous-#{corner}-corner"
+    integer active_corner_value_to_int[value]
   end
-  execute "#{corner} modifier" do
-    command "defaults write com.apple.dock wvous-#{corner}-modifier -int 0"
-    user WS_USER
+
+  pivotal_workstation_defaults "Active Corner: #{corner} modifier" do
+    domain 'com.apple.dock'
+    key "wvous-#{corner}-modifier"
+    integer 0
   end
 end
 

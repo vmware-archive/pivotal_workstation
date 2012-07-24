@@ -1,9 +1,11 @@
-execute "allow clicking by touch" do
-  command "defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking 1"
-  user WS_USER
+pivotal_workstation_defaults "allow clicking by touch" do
+  domain 'com.apple.driver.AppleBluetoothMultitouch.trackpad'
+  key 'Clicking'
+  integer 1
 end
 
-execute "allow dragging by touch" do
-  command "defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Dragging 1"
-  user WS_USER
+pivotal_workstation_defaults "allow dragging by touch" do
+  domain 'com.apple.driver.AppleBluetoothMultitouch.trackpad'
+  key 'Dragging'
+  integer 1
 end

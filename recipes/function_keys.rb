@@ -4,9 +4,10 @@ as_fn_keys = node.default['function_keys']['use_function_keys_as_function_keys']
 
 # The following won't take effect until the person logs out & logs back in again.
 # THE BELT
-execute "Turn " + ( as_fn_keys ? "on" : "off" ) + " function-keys-work-as-function keys" do
-  command "defaults write .GlobalPreferences com.apple.keyboard.fnState -bool #{node.default['function_keys']['use_function_keys_as_function_keys']}"
-  user WS_USER
+pivotal_workstation_defaults "Turn #{as_fn_keys ? "on" : "off" } function-keys-work-as-function keys" do
+  domain '.GlobalPreferences'
+  key 'com.apple.keyboard.fnState'
+  boolean node.default['function_keys']['use_function_keys_as_function_keys']
 end
 
 # Attempt an interactive change.  Two req'ts: 1) user must be logged in 2) assistive devices enabled
