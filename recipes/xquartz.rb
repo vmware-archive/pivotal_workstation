@@ -1,8 +1,8 @@
 pivotal_workstation_package "XQuartz" do
-  source "http://xquartz.macosforge.org/downloads/SL/XQuartz-2.7.1.dmg"
+  source "http://xquartz.macosforge.org/downloads/SL/XQuartz-2.7.2.dmg"
   action :install
-  volumes_dir "XQuartz-2.7.1"
-  checksum "309c11099a8712db2f6f4fb3188e1c30d9f966f3e58a137b6c649a1dba448fce"
-  type "mpkg"
+  volumes_dir "XQuartz-2.7.2"
+  checksum "83ef52c93cd98213a6b847c3429359433d8cc16937007ba7ba41ad5588b6fd82"
+  type "pkg"
   package_id "org.macosforge.xquartz.pkg"
 end
