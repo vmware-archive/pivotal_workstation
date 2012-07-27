@@ -1,6 +1,20 @@
 include_recipe "pivotal_workstation::git"
 pivotal_workstation_bash_profile_include "git_vim"
 
+template "#{WS_HOME}/.gitignore_global" do
+  source "gitignore_global.erb"
+  owner WS_USER
+  variables(
+    :ignore_idea => node[:git_global_ignore_idea]
+  )
+end
+
+execute "set global git ignore" do
+  command "git config --global core.excludesfile #{WS_HOME}/.gitignore_global"
+  user WS_USER
+  not_if "git config --global core.excludesfile | grep -q .gitignore_global"
+end
+
 execute "set alias st=status" do
   command "git config --global alias.st status"
   user WS_USER

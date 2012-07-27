@@ -1,13 +1,15 @@
 include_recipe "pivotal_workstation::textmate"
 
-execute "set save on losing focus" do
-  command "defaults write ~/Library/Preferences/com.macromates.textmate OakSaveAllOnDeactivate -bool TRUE"
-  user WS_USER
+pivotal_workstation_defaults "set save on losing focus" do
+  domain '~/Library/Preferences/com.macromates.textmate'
+  key 'OakSaveAllOnDeactivate'
+  boolean true
 end
 
-execute "show line numbers" do
-  command "defaults write ~/Library/Preferences/com.macromates.textmate OakTextViewLineNumbersEnabled -bool TRUE"
-  user WS_USER
+pivotal_workstation_defaults "show line numbers" do
+  domain '~/Library/Preferences/com.macromates.textmate'
+  key 'OakTextViewLineNumbersEnabled'
+  boolean true
 end
 
 gem_package("plist")

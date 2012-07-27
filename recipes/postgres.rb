@@ -1,4 +1,5 @@
 include_recipe "pivotal_workstation::homebrew"
+include_recipe "pivotal_workstation::increase_shared_memory"
 
 run_unless_marker_file_exists("postgres") do
 
@@ -19,8 +20,11 @@ run_unless_marker_file_exists("postgres") do
     recursive true
   end
 
-  # brew_remove "postgresql"
-  brew_install "postgresql"
+  if node["kernel"]["release"] == "12.0.0"
+    brew_install("postgresql",:brew_args =>  "--without-ossp-uuid")
+  else
+    brew_install "postgresql"
+  end
 
   execute "create the database" do
     command %'initdb -U postgres --encoding=utf8 --locale=en_US /usr/local/var/postgres'

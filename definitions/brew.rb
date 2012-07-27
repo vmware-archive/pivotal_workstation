@@ -5,10 +5,10 @@ define :brew, :action => :install do
   case params[:action]
   when :install
 
-    outdated = system("brew outdated | grep -q #{package}")
+    outdated = system("brew outdated 2>/dev/null | grep -q #{package}")
     Chef::Log.debug("brew package #{package} " + (outdated ? "IS" : "IS NOT") + " outdated.")
 
-    multiple_versions_installed = system("brew list #{package} | grep -q '#{package} has multiple installed versions'")
+    multiple_versions_installed = system("brew list #{package} 2>/dev/null | grep -q '#{package} has multiple installed versions'")
     Chef::Log.debug("brew package #{package} " + (multiple_versions_installed ? "HAS" : "does NOT HAVE") + " multiple versions.")
 
     already_installed = brew_installed?(package)

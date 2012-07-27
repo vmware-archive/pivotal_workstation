@@ -1,6 +1,7 @@
-execute "TimeMachine should NOT ask to use every new disk"   do
-  command "defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool YES"
-  user WS_USER
+pivotal_workstation_defaults "TimeMachine should NOT ask to use every new disk"   do
+  domain 'com.apple.TimeMachine'
+  key 'DoNotOfferNewDisksForBackup'
+  boolean true
 end
 
 old_menu_extras = `sudo -u #{WS_USER} defaults read com.apple.systemuiserver menuExtras`

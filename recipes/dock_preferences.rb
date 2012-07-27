@@ -1,11 +1,13 @@
-execute "set dock to be on left" do
-  command "defaults write com.apple.dock orientation -string left"
-  user WS_USER
+pivotal_workstation_defaults "set dock to be on left" do
+  domain "com.apple.dock"
+  key "orientation"
+  string "left"
 end
 
-execute "set dock to autohide" do
-  command "defaults write com.apple.dock autohide -boolean true"
-  user WS_USER
+pivotal_workstation_defaults "set dock to autohide" do
+  domain "com.apple.dock"
+  key "autohide"
+  boolean true
 end
 
 execute "relaunch dock" do

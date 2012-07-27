@@ -1,4 +1,5 @@
-execute "turn on focus-follows-mouse for terminal" do
-  command "defaults write com.apple.Terminal FocusFollowsMouse -string YES"
-  user WS_USER
+pivotal_workstation_defaults "turn on focus-follows-mouse for terminal" do
+  domain 'com.apple.Terminal'
+  key 'FocusFollowsMouse'
+  string 'yes'
 end

@@ -1,3 +1,5 @@
-execute "Turn on Input menu in login screen (dvorak vs qwerty)" do
-  command "defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bool true"
+pivotal_workstation_defaults "Turn on Input menu in login screen (dvorak vs qwerty)" do
+  domain '/Library/Preferences/com.apple.loginwindow'
+  key 'showInputMenu'
+  boolean true
 end
