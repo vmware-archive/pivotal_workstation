@@ -1,4 +1,4 @@
-pivotal_workstation_package "JavaForOSX" do
+dmg_package "JavaForOSX" do
   source "http://support.apple.com/downloads/DL1515/en_US/"
   volumes_dir "Java for OS X 2012-004"
   action :install
