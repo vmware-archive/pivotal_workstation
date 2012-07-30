@@ -30,7 +30,7 @@ end
 
 execute "brew install macvim with system ruby" do
   user WS_USER
-  command "test -e #{WS_HOME}/.rvm/bin/rvm && (rvm use system); brew install macvim"
+  command "rvm use system; brew install macvim"
   not_if "brew list | grep '^macvim$'"
 end
 
@@ -81,7 +81,7 @@ end
 execute "compile command-t" do
   only_if "test -d #{vim_dir}/bundle/command-t/ruby/command-t"
   cwd "#{node["vim_home"]}/bundle/command-t/ruby/command-t"
-  command "rvm system exec ruby extconf.rb && make clean && make"
+  command "rvm use system; ruby extconf.rb && make clean && make"
   user WS_USER
 end
 
