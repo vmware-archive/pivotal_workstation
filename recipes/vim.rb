@@ -82,7 +82,7 @@ unless ( File.exists?("/usr/local/bin/vim") and File.exists?("/Applications/MacV
   execute "compile command-t" do
     only_if "test -d #{vim_dir}/bundle/command-t/ruby/command-t"
     cwd "#{node["vim_home"]}/bundle/command-t/ruby/command-t"
-    command "rvm use system; ruby extconf.rb && make clean && make"
+    command "rvm system exec ruby extconf.rb && make clean && make"
     user WS_USER
   end
 
