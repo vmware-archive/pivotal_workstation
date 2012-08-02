@@ -9,5 +9,6 @@ node.default["git_pairs_authors"] = [
   {"initials" => "rh", "name" => "Rob Head", "shortname" => "rhead"},
   {"initials" => "rk", "name" => "Reed Kennedy", "shortname" => "reed"},
   {"initials" => "jb", "name" => "Jonathan Berger", "shortname" => "jonathanpberger"},
+  {"initials" => "dr", "name" => "Doc Ritezel", "shortname" => "doc"},
   {"initials" => "sc", "name" => "Santa Claus"}
   ]
