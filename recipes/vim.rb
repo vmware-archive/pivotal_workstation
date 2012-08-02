@@ -9,7 +9,7 @@ include_recipe "pivotal_workstation::tmux"
 
 brew_install "mercurial"
 
-unless ( ! File.exists?("/usr/local/bin/vim") or ! File.exists?("/Applications/MacVim.app") )
+unless ( File.exists?("/usr/local/bin/vim") and File.exists?("/Applications/MacVim.app") )
   execute "uninstall-vim" do
     command "brew uninstall vim"
     only_if "brew list | grep '^vim$'"
