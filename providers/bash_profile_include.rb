@@ -8,6 +8,7 @@ action :create do
 
   template "#{WS_HOME}/.bash_profile" do
     source "bash_profile.erb"
+    cookbook 'pivotal_workstation'
     owner WS_USER
   end
 
