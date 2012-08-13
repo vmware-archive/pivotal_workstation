@@ -17,7 +17,7 @@ Yes.  Chef needs to be run as root - it can do whatever it wants to your system.
 
 To use:
 
-    gem install soloist
+    sudo gem install soloist
     mkdir ~/cookbooks; cd ~/cookbooks
     cat > soloistrc <<EOF
     cookbook_paths:
