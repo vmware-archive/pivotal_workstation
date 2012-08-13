@@ -16,9 +16,19 @@ Yes.  Chef needs to be run as root - it can do whatever it wants to your system.
 [Soloist](https://github.com/mkocher/soloist) is a simple tool to get started quickly with chef-solo and was written initially to make using the pivotal_workstation cookbook easy.  The pivotal_workstation cookbook and soloist were both extracted from wschef, the precursor to this effort.  Aside from chef-solo, you'll only need xcode installed.
 
 To use:
-- `git clone https://github.com/pivotal/pivotal_workstation.git`
-- `cd ~/.../pivotal_workstation`
-- `soloist`
+
+    gem install soloist
+    mkdir ~/cookbooks; cd ~/cookbooks
+    cat > soloistrc <<EOF
+    cookbook_paths:
+    - $PWD
+    recipes:
+    - pivotal_workstation::meta_osx_base
+    - pivotal_workstation::meta_osx_development
+    - pivotal_workstation::meta_ruby_development
+    EOF
+    git clone https://github.com/pivotal/pivotal_workstation.git
+    soloist
 
 # I want to write my own recipe, what should I know?
 Soloist (or your preferred method of running chef) usually runs chef-solo as root.  This means the current user is root, and ~ will be expanded to root's home directory.  Some constants, WS_USER and WS_HOME are available when needed.
