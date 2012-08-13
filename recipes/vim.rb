@@ -42,7 +42,7 @@ unless ( File.exists?("/usr/local/bin/vim") and File.exists?("/Applications/MacV
       macvim_app=Dir["/usr/local/Cellar/macvim/*/MacVim.app"].last
       raise "no macvim found" unless macvim_app
       if File.exists?(macvim_app)
-	system("ln -fs #{macvim_app} /Applications/")
+        system("ln -fs #{macvim_app} /Applications/")
       end
     end
   end
@@ -82,7 +82,7 @@ unless ( File.exists?("/usr/local/bin/vim") and File.exists?("/Applications/MacV
   execute "compile command-t" do
     only_if "test -d #{vim_dir}/bundle/command-t/ruby/command-t"
     cwd "#{node["vim_home"]}/bundle/command-t/ruby/command-t"
-    command "rvm use system; ruby extconf.rb && make clean && make"
+    command "rvm system exec ruby extconf.rb && make clean && make"
     user WS_USER
   end
 
