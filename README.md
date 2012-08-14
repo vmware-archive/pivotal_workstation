@@ -33,6 +33,9 @@ To use:
 # I want to write my own recipe, what should I know?
 Soloist (or your preferred method of running chef) usually runs chef-solo as root.  This means the current user is root, and ~ will be expanded to root's home directory.  Some constants, WS_USER and WS_HOME are available when needed.
 
+# I'm still running Lion; I haven't upgraded to Mountain Lion
+The current version is tested only tested on Mountain Lion (OS X 10.8); [Here](https://github.com/pivotal/pivotal_workstation/zipball/last_lion_release) you'll find the last release we tested on Lion (OS X 10.7).
+
 # Does this thing actually work?
 Yes.  At Pivotal we take testing seriously, and have all projects under CI.  Chef recipes for OSX didn't fit into any existing CI solution, so pivotal_workstation [got its own](https://github.com/mkocher/chefci) which builds [most of the recipes](https://github.com/mkocher/chefci/blob/master/build_scripts/build_all.command) every night and on every check in.
 
@@ -44,5 +47,5 @@ Chef node attributes allow for easy overriding in your own cookbook.  All attrib
 # Where's pivotal_server?
 It's something we're considering, but it doesn't exist yet.  It'll probably show up over at [pivotal_experimental](https://github.com/pivotalexperimental) first.
 
-# Who do I complain to?
+# To Whom do I complain?
 pivotal_workstation started as a side project of [Matthew Kocher](https://github.com/mkocher) and [Steve Conover](https://github.com/sconover) of Pivotal Labs in 2009, and made the move to a supported pivotal project at the beginning of 2010.
