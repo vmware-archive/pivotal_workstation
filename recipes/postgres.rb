@@ -88,7 +88,7 @@ block do
       raise "postgres is not running: " << e
     end
     s.close
-    `sudo -u #{WS_USER} psql -U postgres < /dev/null`
+    `sudo -u #{WS_USER} psql < /dev/null`
     if $?.to_i != 0
       raise "I couldn't invoke postgres!"
     end
