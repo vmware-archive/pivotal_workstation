@@ -42,7 +42,7 @@ unless ( File.exists?("/usr/local/bin/vim") and File.exists?("/Applications/MacV
       macvim_app=Dir["/usr/local/Cellar/macvim/*/MacVim.app"].last
       raise "no macvim found" unless macvim_app
       if File.exists?(macvim_app)
-	system("ln -fs #{macvim_app} /Applications/")
+        system("ln -fs #{macvim_app} /Applications/")
       end
     end
   end

@@ -15,8 +15,26 @@ Yes.  Chef needs to be run as root - it can do whatever it wants to your system.
 # OK, I'm ready to dive in. How should I use this?
 [Soloist](https://github.com/mkocher/soloist) is a simple tool to get started quickly with chef-solo and was written initially to make using the pivotal_workstation cookbook easy.  The pivotal_workstation cookbook and soloist were both extracted from wschef, the precursor to this effort.  Aside from chef-solo, you'll only need xcode installed.
 
+To use:
+
+    sudo gem install soloist
+    mkdir ~/cookbooks; cd ~/cookbooks
+    cat > soloistrc <<EOF
+    cookbook_paths:
+    - $PWD
+    recipes:
+    - pivotal_workstation::meta_osx_base
+    - pivotal_workstation::meta_osx_development
+    - pivotal_workstation::meta_ruby_development
+    EOF
+    git clone https://github.com/pivotal/pivotal_workstation.git
+    soloist
+
 # I want to write my own recipe, what should I know?
 Soloist (or your preferred method of running chef) usually runs chef-solo as root.  This means the current user is root, and ~ will be expanded to root's home directory.  Some constants, WS_USER and WS_HOME are available when needed.
+
+# I'm still running Lion; I haven't upgraded to Mountain Lion
+The current version is tested only tested on Mountain Lion (OS X 10.8); [Here](https://github.com/pivotal/pivotal_workstation/zipball/last_lion_release) you'll find the last release we tested on Lion (OS X 10.7).
 
 # Does this thing actually work?
 Yes.  At Pivotal we take testing seriously, and have all projects under CI.  Chef recipes for OSX didn't fit into any existing CI solution, so pivotal_workstation [got its own](https://github.com/mkocher/chefci) which builds [most of the recipes](https://github.com/mkocher/chefci/blob/master/build_scripts/build_all.command) every night and on every check in.
@@ -29,5 +47,5 @@ Chef node attributes allow for easy overriding in your own cookbook.  All attrib
 # Where's pivotal_server?
 It's something we're considering, but it doesn't exist yet.  It'll probably show up over at [pivotal_experimental](https://github.com/pivotalexperimental) first.
 
-# Who do I complain to?
+# To Whom do I complain?
 pivotal_workstation started as a side project of [Matthew Kocher](https://github.com/mkocher) and [Steve Conover](https://github.com/sconover) of Pivotal Labs in 2009, and made the move to a supported pivotal project at the beginning of 2010.
