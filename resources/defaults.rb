@@ -1,6 +1,6 @@
 =begin
 
-A resoudce/provider to call to MacOS's plist 'defaults' command line tool.
+A resource/provider to call to MacOS's plist 'defaults' command line tool.
 
 Syntax:
 
