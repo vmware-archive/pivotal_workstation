@@ -1,5 +1,6 @@
 include_recipe "pivotal_workstation::homebrew"
 include_recipe "pivotal_workstation::increase_shared_memory"
+include_recipe "pivotal_workstation::user_owns_usr_local"
 
 run_unless_marker_file_exists("postgres") do
 
