@@ -9,3 +9,9 @@ pivotal_workstation_defaults "allow dragging by touch" do
   key 'Dragging'
   integer 1
 end
+
+pivotal_workstation_defaults "disable swipe between pages" do
+  domain 'NSGlobalDomain'
+  key 'AppleEnableSwipeNavigateWithScrolls'
+  integer 0
+end
