@@ -72,33 +72,33 @@ unless ( File.exists?("/usr/local/bin/vim") and File.exists?("/Applications/MacV
     command "test -e #{vim_dir}"
   end
 
-  %w{vimrc gvimrc}.each do |vimrc|
-    link "#{WS_HOME}/.#{vimrc}" do
-      to "#{node["vim_home"]}/#{vimrc}"
-      owner WS_USER
-    end
-  end
-
-  execute "compile command-t" do
-    only_if "test -d #{vim_dir}/bundle/command-t/ruby/command-t"
-    cwd "#{node["vim_home"]}/bundle/command-t/ruby/command-t"
-    command "rvm use system; ruby extconf.rb && make clean && make"
-    user WS_USER
-  end
-
-  execute "verify-that-command-t-is-correctly-compiled-for-vim" do
-    command %{test "`otool -l #{node["vim_home"]}/bundle/command-t/ruby/command-t/ext.bundle | grep libruby`" = "`otool -l /usr/local/bin/vim | grep libruby`"}
-  end
-
-  execute "verify-that-command-t-is-correctly-compiled-for-mvim" do
-    command %{test "`otool -l #{node["vim_home"]}/bundle/command-t/ruby/command-t/ext.bundle | grep libruby`" = "`otool -l /Applications/MacVim.app/Contents/MacOS/Vim | grep libruby`"}
-  end
-
-  file "/Users/#{WS_USER}/.vimrc.local" do
-    action :touch
-    owner WS_USER
-  end
+  # %w{vimrc gvimrc}.each do |vimrc|
+  #   link "#{WS_HOME}/.#{vimrc}" do
+  #     to "#{node["vim_home"]}/#{vimrc}"
+  #     owner WS_USER
+  #   end
+  # end
+  #
+  # execute "compile command-t" do
+  #   only_if "test -d #{vim_dir}/bundle/command-t/ruby/command-t"
+  #   cwd "#{node["vim_home"]}/bundle/command-t/ruby/command-t"
+  #   command "rvm use system; ruby extconf.rb && make clean && make"
+  #   user WS_USER
+  # end
+  #
+  # execute "verify-that-command-t-is-correctly-compiled-for-vim" do
+  #   command %{test "`otool -l #{node["vim_home"]}/bundle/command-t/ruby/command-t/ext.bundle | grep libruby`" = "`otool -l /usr/local/bin/vim | grep libruby`"}
+  # end
+  #
+  # execute "verify-that-command-t-is-correctly-compiled-for-mvim" do
+  #   command %{test "`otool -l #{node["vim_home"]}/bundle/command-t/ruby/command-t/ext.bundle | grep libruby`" = "`otool -l /Applications/MacVim.app/Contents/MacOS/Vim | grep libruby`"}
+  # end
+  #
+  # file "/Users/#{WS_USER}/.vimrc.local" do
+  #   action :touch
+  #   owner WS_USER
+  # end
 end
 
-pivotal_workstation_bash_profile_include "vi_is_minimal_vim"
-pivotal_workstation_bash_profile_include "vim_tmux"
+# pivotal_workstation_bash_profile_include "vi_is_minimal_vim"
+# pivotal_workstation_bash_profile_include "vim_tmux"
