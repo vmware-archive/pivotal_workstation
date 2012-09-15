@@ -1,5 +1,5 @@
 pivotal_workstation_package "Firefox" do
-  source "http://download.mozilla.org/?product=firefox-13.0.1&os=osx&lang=en-US"
+  source "http://download.mozilla.org/?product=firefox-15.0.1&os=osx&lang=en-US"
   action :install
-  checksum "c0d708a371064350d754fc3c987b65e25a358514b573bea0b489506b27ed286c"
+  checksum "d769eeedf5828eddc0798a86bd390270e11cf468da4e1c0b59d77760196af258"
 end
