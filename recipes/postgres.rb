@@ -21,11 +21,7 @@ run_unless_marker_file_exists("postgres") do
     recursive true
   end
 
-  if node["kernel"]["release"] == "12.0.0"
-    brew_install("postgresql",:brew_args =>  "--without-ossp-uuid")
-  else
-    brew_install "postgresql"
-  end
+  brew_install "postgresql"
 
   execute "create the database" do
     command %'initdb -U postgres --encoding=utf8 --locale=en_US /usr/local/var/postgres'
