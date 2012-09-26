@@ -68,6 +68,14 @@ end
 private
 
 def installed?
-  ::File.directory?("#{new_resource.destination}/#{new_resource.app}.app") ||
-    system("pkgutil --pkgs=#{new_resource.package_id}")
+  installed = false
+  if ( ::File.directory?("#{new_resource.destination}/#{new_resource.app}.app") )
+    installed = true;
+    log "Already installed; to upgrade, remove \"#{new_resource.destination}/#{new_resource.app}.app\""
+  end
+  if ( system("pkgutil --pkgs=#{new_resource.package_id}") )
+    installed = true;
+    log "Already installed; to upgrade, try \"sudo pkgutil --forget #{new_resource.package_id}\""
+  end
+  installed
 end
