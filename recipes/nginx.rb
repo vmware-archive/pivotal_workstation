@@ -12,7 +12,7 @@ run_unless_marker_file_exists("nginx") do
 
   plist_path = File.expand_path('org.nginx.nginx.plist', File.join('~', 'Library', 'LaunchAgents'))
   if File.exists?(plist_path)
-    log "postgres plist found at #{plist_path}"
+    log "nginx plist found at #{plist_path}"
     execute "unload the plist (shuts down the daemon)" do
       command %'launchctl unload -w #{plist_path}'
       user "root"
