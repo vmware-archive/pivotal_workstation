@@ -4,3 +4,11 @@ pivotal_workstation_package "Sublime Text 2" do
   checksum "b5f91ee4f62d36c0490c021d5fb134b9e7cb3936"
   action :install
 end
+
+link "/usr/local/bin/subl" do
+  to "/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl"
+end
+
+template "#{WS_HOME}/Library/Application\ Support/Sublime\ Text\ 2/Packages/Default/Preferences.sublime-settings" do
+  source "sublime_text-Preferences.sublime-settings.erb"
+end
