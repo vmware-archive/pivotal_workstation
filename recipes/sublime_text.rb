@@ -11,4 +11,5 @@ end
 
 template "#{WS_HOME}/Library/Application\ Support/Sublime\ Text\ 2/Packages/Default/Preferences.sublime-settings" do
   source "sublime_text-Preferences.sublime-settings.erb"
+  owner WS_USER
 end
