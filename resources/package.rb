@@ -21,6 +21,7 @@ actions :install
 attribute :app, :kind_of => String, :name_attribute => true
 attribute :source, :kind_of => String, :default => nil
 attribute :destination, :kind_of => String, :default => "/Applications"
+attribute :user, :kind_of => String, :default => nil
 attribute :checksum, :kind_of => String, :default => nil
 attribute :volumes_dir, :kind_of => String, :default => nil
 attribute :dmg_name, :kind_of => String, :default => nil
