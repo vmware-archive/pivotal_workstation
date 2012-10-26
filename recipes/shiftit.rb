@@ -1,6 +1,8 @@
 include_recipe "pivotal_workstation::addloginitem"
 
-unless File.exists?("/Applications/ShiftIt.app")
+app_path="/Applications/ShiftIt.app"
+
+unless File.exists?(app_path)
   remote_file "#{Chef::Config[:file_cache_path]}/ShiftIt.app.zip" do
     source "https://github.com/downloads/onsi/ShiftIt/ShiftIt.app.zip"
     mode "0644"
@@ -14,7 +16,6 @@ unless File.exists?("/Applications/ShiftIt.app")
 
   # start up on login
   execute "Start ShiftIt on login" do
-    command "addloginitem /Applications/ShiftIt.app"
-    user WS_USER
+    command "su #{WS_USER} -c \"addloginitem #{app_path}\""
   end
 end
