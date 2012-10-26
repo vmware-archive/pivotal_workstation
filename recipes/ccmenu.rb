@@ -12,7 +12,6 @@ unless File.exists?(app_path)
   end
 
   execute "Start CCMenu on login" do
-    command "addloginitem #{app_path}"
-    user WS_USER
+    command "su #{WS_USER} -c \"addloginitem #{app_path}\""
   end
 end
