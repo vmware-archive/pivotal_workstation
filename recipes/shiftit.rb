@@ -13,7 +13,7 @@ unless File.exists?("/Applications/ShiftIt.app")
   end
 
   # start up on login
-  execute "Start ShiftIt automatically" do
+  execute "Start ShiftIt on login" do
     command "addloginitem /Applications/ShiftIt.app"
     user WS_USER
   end
