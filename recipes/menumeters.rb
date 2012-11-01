@@ -35,7 +35,7 @@ unless File.exists?(menu_meters_dst)
 
   plist_file = "#{ENV['HOME']}/Library/Preferences/com.apple.systemuiserver.plist"
 
-  ruby_block "Put MenuMeters on the Taskbar" do
+  ruby_block "Put MenuMeters on the Menubar" do
     block do
       Gem.clear_paths
       require 'rubygems'
