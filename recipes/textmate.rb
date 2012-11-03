@@ -1,7 +1,7 @@
 include_recipe "pivotal_workstation::user_owns_usr_local"
 
-node.default["textmate"]["url"] = "http://jayeshsir.com/sites/default/files/TextMate2.zip"
-node.default["textmate"]["shasum"] = "92d0aa8ab205797c3caddce19e011daa672e6942"
+node.default["textmate"]["url"] = "https://github.com/downloads/textmate/textmate/TextMate_r9307.tbz"
+node.default["textmate"]["shasum"] = "4bd51bae79a20e505fc172a5c4ee2a83930c1db9"
 
 unless File.exists?("/Applications/TextMate.app")
   directory Chef::Config[:file_cache_path] do
@@ -16,7 +16,7 @@ unless File.exists?("/Applications/TextMate.app")
   end
 
   execute "extract text mate to /Applications" do
-    command "unzip -o #{Chef::Config[:file_cache_path]}/textmate.zip -x __MACOSX* -d /Applications/"
+    command "tar -xvf #{Chef::Config[:file_cache_path]}/textmate.zip -C /Applications/"
     user WS_USER
 
     # This is required to unzip into Applications
