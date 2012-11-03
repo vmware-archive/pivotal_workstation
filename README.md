@@ -1,5 +1,8 @@
 Pivotal Workstation: A Repeatable, Documented, Decomposable, Shareable and Iterative OSX (ruby) Development Environment
 
+# NOTICE
+Pivotal Workstation is moving to using community cookbooks, and now depends on [opscode-cookbooks/dmg](https://github.com/opscode-cookbooks/dmg).  You will need to clone the dmg cookbook alongside pivotal_workstation.
+
 # Why?
 Development environments are very personal, yet pairing requires some standard be agreed upon.  Traditionally, Pivotal relied on imaging workstations from a gold master image which was updated as time allowed.  Creating an image that satisfies everyone is impossible, and creating one that satisfies most people is a time consuming process which happened when Apple happened to release hardware which was not compatible with the old image.  Chef and the Pivotal Workstation cookbook allows bringing up a new rails development environment with almost no effort, decide on standards on a per-project basis, then share changes with the rest of the users of the pivotal_workstation cookbook as time goes on.  Another motivation was to reduce the amount of time spent at standup discussing how to get xyz to compile/run/launch/work in development.
 
@@ -38,6 +41,11 @@ To use:
     else
       git clone https://github.com/pivotal/pivotal_workstation.git
     fi
+    if [[ -d dmg ]]; then
+      cd dmg && git pull && cd ..
+    else
+      git clone https://github.com/opscode-cookbooks/dmg.git
+    fi
     soloist
     popd
 
@@ -48,15 +56,14 @@ Soloist (or your preferred method of running chef) usually runs chef-solo as roo
 The current version is tested only tested on Mountain Lion (OS X 10.8); [Here](https://github.com/pivotal/pivotal_workstation/zipball/last_lion_release) you'll find the last release we tested on Lion (OS X 10.7).
 
 # Does this thing actually work?
-Yes.  At Pivotal we take testing seriously, and have all projects under CI.  Chef recipes for OSX didn't fit into any existing CI solution, so pivotal_workstation [got its own](https://github.com/mkocher/chefci) which builds [most of the recipes](https://github.com/mkocher/chefci/blob/master/build_scripts/build_all.command) every night and on every check in.
+Yes.  At Pivotal we take testing seriously, and have all projects under CI. Occasionally dependencies outside of our control disappear between times we are working on pivotal_workstation.  If you come across something which has broken, we welcome pull requests.
 
 # Forking and Pull Requests
 Pull requests are welcomed.  Creating a cookbook to keep along side pivotal_workstation allows for easy separation between personal/project metadata/recipes and recipes that are of general utility.
 
 Chef node attributes allow for easy overriding in your own cookbook.  All attributes in pivotal_workstation are set at the default level, so you may simply set node.normal or node.override in your own cookbook.  We don't tend to extract node attributes preemptively, but pull requests extracting a node variable so you can override it in your own cookbook are welcomed.
 
-# Where's pivotal_server?
-It's something we're considering, but it doesn't exist yet.  It'll probably show up over at [pivotal_experimental](https://github.com/pivotalexperimental) first.
+If you are making a pull request, please make your changes on a branch, rebase them to master of pivotal_workstation and open a pull request.
 
 # To Whom do I complain?
-pivotal_workstation started as a side project of [Matthew Kocher](https://github.com/mkocher) and [Steve Conover](https://github.com/sconover) of Pivotal Labs in 2009, and made the move to a supported pivotal project at the beginning of 2010.
+pivotal_workstation started as a side project of [Matthew Kocher](https://github.com/mkocher) and [Steve Conover](https://github.com/sconover) of Pivotal Labs in 2009, and made the move to a supported pivotal project at the beginning of 2010. [Brian Cunnie](https://github.com/briancunnie) now wrangles the many developers at Pivotal Labs who contribute and keeps the project going.
