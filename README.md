@@ -16,38 +16,16 @@ Anything you want, nothing you don't.  Packages are built with Homebrew, Ruby is
 Yes.  Chef needs to be run as root - it can do whatever it wants to your system.  The recipes have to make some hard assumptions about your machine, and take over parts of your system.  Reading any recipe you're thinking of using is a very good idea - a chef recipe shouldn't be difficult to follow, and it'll give you an idea of how to make your own.  In the case of your bash profile, it'll be backed up by chef (to /var/chef/backup), and you can move it into ~/.bash_profile_includes/ and it will be sourced by the provided .bash_profile.
 
 # OK, I'm ready to dive in. How should I use this?
-[Soloist](https://github.com/mkocher/soloist) is a simple tool to get started quickly with chef-solo and was written initially to make using the pivotal_workstation cookbook easy.  The pivotal_workstation cookbook and soloist were both extracted from wschef, the precursor to this effort.  Aside from chef-solo, you'll only need xcode installed and have opened & accepted the terms and conditions of xcode.
 
-To use:
+First, make sure you've got Xcode and the Xcode command line tools installed, then:
 
-    pushd `pwd`
-    if rvm --version 2>/dev/null; then
-      gem install soloist
-    else
-      sudo gem install soloist
-    fi
+- [SoloWizard](http://www.solowizard.com/)
 
-    mkdir -p ~/cookbooks; cd ~/cookbooks
-    cat > soloistrc <<EOF
-    cookbook_paths:
-    - $PWD
-    recipes:
-    - pivotal_workstation::meta_osx_base
-    - pivotal_workstation::meta_osx_development
-    - pivotal_workstation::meta_ruby_development
-    EOF
-    if [[ -d pivotal_workstation ]]; then
-      cd pivotal_workstation && git pull && cd ..
-    else
-      git clone https://github.com/pivotal/pivotal_workstation.git
-    fi
-    if [[ -d dmg ]]; then
-      cd dmg && git pull && cd ..
-    else
-      git clone https://github.com/opscode-cookbooks/dmg.git
-    fi
-    soloist
-    popd
+	This is the easiest way to get started, and it only involves cutting-and-pasting one line.  Many thanks to [Tom Hallett](https://github.com/tommyh/).
+	
+- [soloistrc builder](http://soloistrc-builder.herokuapp.com/)
+	
+	Soloistrc Builder can be pointed at any cookbook and will help you build a soloistrc. Many thanks to [Winston Teo](https://github.com/winston/).
 
 # I want to write my own recipe, what should I know?
 Soloist (or your preferred method of running chef) usually runs chef-solo as root.  This means the current user is root, and ~ will be expanded to root's home directory.  Some constants, WS_USER and WS_HOME are available when needed.
