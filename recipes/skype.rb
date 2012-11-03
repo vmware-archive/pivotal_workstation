@@ -1,6 +1,6 @@
 pivotal_workstation_package "Skype" do
-  source "http://download.skype.com/macosx/Skype_5.8.0.1027.dmg"
-  checksum "64ec1beaca76f648e7a5ba3bb1084afab735cbe6d6b17f9e2f52e22e14fcc596"
+  source "http://download.skype.com/macosx/Skype_6.0.0.2946.dmg"
+  checksum "98eb5f81f5f75c1d85e4ffee39ab36d58da5314d"
   owner WS_USER
   action :install
 end
