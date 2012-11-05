@@ -1,7 +1,11 @@
+[![Build Status](https://secure.travis-ci.org/pivotal/pivotal_workstation.png)](http://travis-ci.org/pivotal/pivotal_workstation)
+
 Pivotal Workstation: A Repeatable, Documented, Decomposable, Shareable and Iterative OSX (ruby) Development Environment
 
 # NOTICE
 Pivotal Workstation is moving to using community cookbooks, and now depends on [opscode-cookbooks/dmg](https://github.com/opscode-cookbooks/dmg).  You will need to clone the dmg cookbook alongside pivotal_workstation.
+
+	cd ~/cookbooks; git clone https://github.com/opscode-cookbooks/dmg
 
 # Why?
 Development environments are very personal, yet pairing requires some standard be agreed upon.  Traditionally, Pivotal relied on imaging workstations from a gold master image which was updated as time allowed.  Creating an image that satisfies everyone is impossible, and creating one that satisfies most people is a time consuming process which happened when Apple happened to release hardware which was not compatible with the old image.  Chef and the Pivotal Workstation cookbook allows bringing up a new rails development environment with almost no effort, decide on standards on a per-project basis, then share changes with the rest of the users of the pivotal_workstation cookbook as time goes on.  Another motivation was to reduce the amount of time spent at standup discussing how to get xyz to compile/run/launch/work in development.
