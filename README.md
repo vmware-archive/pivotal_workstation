@@ -8,16 +8,8 @@ Pivotal Workstation is moving to using community cookbooks, and now depends on [
 	cd ~/cookbooks; git clone https://github.com/opscode-cookbooks/dmg
 
 # Why?
-Development environments are very personal, yet pairing requires some standard be agreed upon.  Traditionally, Pivotal relied on imaging workstations from a gold master image which was updated as time allowed.  Creating an image that satisfies everyone is impossible, and creating one that satisfies most people is a time consuming process which happened when Apple happened to release hardware which was not compatible with the old image.  Chef and the Pivotal Workstation cookbook allows bringing up a new rails development environment with almost no effort, decide on standards on a per-project basis, then share changes with the rest of the users of the pivotal_workstation cookbook as time goes on.  Another motivation was to reduce the amount of time spent at standup discussing how to get xyz to compile/run/launch/work in development.
 
-# I'm just setting up my laptop, this all sounds like overkill.
-It might be, but it's probably not.  Have you ever spent hours trying to get the mysql gem to compile?  Do you go to RVM's home page to figure out how to install it?  What about homebrew?  Do you not test SSL on your local machine because getting nginx set up with a self signed certificate would take most of the morning?  Do you fear setting up a new machine because you'll spend a week running into things you vaguely remember how to fix?
-
-# Ok, what exactly do I get?
-Anything you want, nothing you don't.  Packages are built with Homebrew, Ruby is installed with RVM.  See the [recipes folder](https://github.com/pivotal/pivotal_workstation/tree/master/recipes) for a complete list.  Many recipes require homebrew or overwriting your .bash_profile.  If you want something that doesn't have a recipe, write one and make a pull request.
-
-# Hey, I'm attached to my .bash_profile, isn't this dangerous?
-Yes.  Chef needs to be run as root - it can do whatever it wants to your system.  The recipes have to make some hard assumptions about your machine, and take over parts of your system.  Reading any recipe you're thinking of using is a very good idea - a chef recipe shouldn't be difficult to follow, and it'll give you an idea of how to make your own.  In the case of your bash profile, it'll be backed up by chef (to /var/chef/backup), and you can move it into ~/.bash_profile_includes/ and it will be sourced by the provided .bash_profile.
+It takes a long time to set up a workstation, and doing it by hand leads to as many different setups as you have workstations.  Pivotal Workstation automates the  installation the applications you want (the canned ones, e.g. Chrome, Firefox, RubyMine, as well as the compiled ones, i.e. homebrew's suite) and tweaks the settings you usually set by hand.  Pivotal Workstation automates the process so you can decide what you want your machine to look like then do other things while your workstation chugs away, downloading, compiling, installing and configuring.
 
 # OK, I'm ready to dive in. How should I use this?
 
@@ -30,6 +22,19 @@ First, make sure you've got Xcode and the Xcode command line tools installed, th
 - [soloistrc builder](http://soloistrc-builder.herokuapp.com/)
 	
 	Soloistrc Builder can be pointed at any cookbook and will help you build a soloistrc. Many thanks to [Winston Teo](https://github.com/winston/).
+
+# Background
+
+Development environments are very personal, yet pairing requires some standard be agreed upon.  Traditionally, Pivotal relied on imaging workstations from a gold master image which was updated as time allowed.  Creating an image that satisfies everyone is impossible, and creating one that satisfies most people is a time consuming process which happened when Apple happened to release hardware which was not compatible with the old image.  Chef and the Pivotal Workstation cookbook allows bringing up a new rails development environment with almost no effort, decide on standards on a per-project basis, then share changes with the rest of the users of the pivotal_workstation cookbook as time goes on.  Another motivation was to reduce the amount of time spent at standup discussing how to get xyz to compile/run/launch/work in development.
+
+# I'm just setting up my laptop, this all sounds like overkill.
+It might be, but it's probably not.  Have you ever spent hours trying to get the mysql gem to compile?  Do you go to RVM's home page to figure out how to install it?  What about homebrew?  Do you not test SSL on your local machine because getting nginx set up with a self signed certificate would take most of the morning?  Do you fear setting up a new machine because you'll spend a week running into things you vaguely remember how to fix?
+
+# Ok, what exactly do I get?
+Anything you want, nothing you don't.  Packages are built with Homebrew, Ruby is installed with RVM.  See the [recipes folder](https://github.com/pivotal/pivotal_workstation/tree/master/recipes) for a complete list.  Many recipes require homebrew or overwriting your .bash_profile.  If you want something that doesn't have a recipe, write one and make a pull request.
+
+# Hey, I'm attached to my .bash_profile, isn't this dangerous?
+Yes.  Chef needs to be run as root - it can do whatever it wants to your system.  The recipes have to make some hard assumptions about your machine, and take over parts of your system.  Reading any recipe you're thinking of using is a very good idea - a chef recipe shouldn't be difficult to follow, and it'll give you an idea of how to make your own.  In the case of your bash profile, it'll be backed up by chef (to /var/chef/backup), and you can move it into ~/.bash_profile_includes/ and it will be sourced by the provided .bash_profile.
 
 # I want to write my own recipe, what should I know?
 Soloist (or your preferred method of running chef) usually runs chef-solo as root.  This means the current user is root, and ~ will be expanded to root's home directory.  Some constants, WS_USER and WS_HOME are available when needed.
