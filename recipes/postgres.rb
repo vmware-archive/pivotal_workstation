@@ -67,6 +67,8 @@ run_unless_marker_file_exists("postgres") do
     command "createuser -U postgres --superuser #{WS_USER}"
     user WS_USER
   end
+
+  log "Make sure /usr/local/bin comes first in your PATH, else you will invoke the wrong psql and error with '...Domain socket \"/var/pgsql_socket/.s.PGSQL.5432\""
 end
 
 ruby_block "test to see if postgres is running" do
