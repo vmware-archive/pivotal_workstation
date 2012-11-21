@@ -1,7 +1,6 @@
 dmg_package "Alfred" do
   volumes_dir "Alfred.app"
-  source "http://cachefly.alfredapp.com/alfred_1.3_249.dmg"
-  checksum "2f6924d537e35997075bd411199edcfdf19a21f607b613932c0c60df8a09e7c9"
-  # owner WS_USER
+  source "http://cachefly.alfredapp.com/alfred_1.3.1_261.dmg"
+  checksum "c951c4dc05ff1091359358d710142cabef2c190be41f799244669f879cff7e80"
   action :install
 end
