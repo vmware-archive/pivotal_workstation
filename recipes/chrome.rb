@@ -1,7 +1,6 @@
 dmg_package "Google Chrome" do
   dmg_name "googlechrome"
   source "https://dl-ssl.google.com/chrome/mac/stable/GGRM/googlechrome.dmg"
-  checksum "bd85e06643abc3af5b1a049d8031c29f339f456c2d25852a7a4a1e6578b49792"
-  # owner WS_USER
+  checksum "6d8c6f96c3ebc3a2688efb9d26bd67282c13d90097578782aa7d05a0b1458bfa"
   action :install
 end
