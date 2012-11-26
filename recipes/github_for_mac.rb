@@ -3,7 +3,7 @@ unless File.exists?(node["github_for_mac_app_path"])
   remote_file "#{Chef::Config[:file_cache_path]}/github_for_mac.zip" do
     source node["github_for_mac_download_uri"]
     owner WS_USER
-    checksum "1e95b3c16915efe171e53c2de31ae5b0b45cca6689a6923baa96cf754a06ed73"
+    checksum "b21158e5d76583097a8d7f6d2f6f5cea0ff78852711390ec6c05f94625ec0248"
   end
 
   execute "unzip github_for_mac" do
