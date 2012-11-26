@@ -1,6 +1,6 @@
 # Chef assumes that it owns this file.
-# Additions to bash should be placed into <%= BASH_INCLUDES_SUBDIR %> with a .sh extension
+# Additions to bash should be placed into <%= @subdir %> with a .sh extension
 
-for file in ~/<%= BASH_INCLUDES_DIRNAME %>/*.sh; do
+for file in <%= @subdir %>/*.sh; do
   [[ -r $file ]] && source $file;
 done
