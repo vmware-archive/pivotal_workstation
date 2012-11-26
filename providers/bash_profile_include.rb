@@ -1,16 +1,16 @@
 action :create do
 
-  directory "#{node["bash_includes_subdir"]}" do
+  directory node["bash_includes_subdir"] do
     owner WS_USER
   end
 
-  template "#{node["bash_bashrc"]}" do
+  template node["bash_bashrc"] do
     source "bash_profile.erb"
     cookbook 'pivotal_workstation'
     owner WS_USER
     mode "0755"
     variables({
-      :subdir => "#{node["bash_includes_subdir"]}"
+      :subdir => node["bash_includes_subdir"]
       })
   end
 
