@@ -1,5 +1,5 @@
 include_recipe "pivotal_workstation::git"
-pivotal_workstation_bash_profile_include "git_vim"
+pivotal_workstation_bash_it_custom_plugin "git-export_editor.bash"
 
 template "#{WS_HOME}/.gitignore_global" do
   source "gitignore_global.erb"

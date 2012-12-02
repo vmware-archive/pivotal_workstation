@@ -1,4 +1,4 @@
-bash_it_dir = "#{WS_HOME}/.bash_it"
+::BASH_IT_DIR = ::File.expand_path(".bash_it", WS_HOME)
 bash_it_version = version_string_for('bash_it')
 
 git "#{Chef::Config[:file_cache_path]}/bash_it" do
@@ -8,35 +8,32 @@ git "#{Chef::Config[:file_cache_path]}/bash_it" do
   action :sync
 end
 
-execute "Copying bash-it's .git to #{bash_it_dir}" do
-  command "rsync -axSH #{Chef::Config[:file_cache_path]}/bash_it/ #{bash_it_dir}"
+execute "Copying bash-it's .git to #{BASH_IT_DIR}" do
+  command "rsync -axSH #{Chef::Config[:file_cache_path]}/bash_it/ #{BASH_IT_DIR}"
   user WS_USER
 end
 
-node['bash_it']['enabled_plugins'].each do |type, scripts|
-  type_dir    = "#{bash_it_dir}/#{type}"
-  enabled_dir = "#{type_dir}/enabled"
-
-  execute "created enabled dir for bash-it #{type}" do
-    command "mkdir -p #{enabled_dir}"
-    user WS_USER
-  end
-
-  scripts.each do |script|
-    available_script_path = "#{type_dir}/available/#{script}.#{type}.bash"
-    enabled_script_path   = "#{enabled_dir}/#{script}.#{type}.bash"
-
-    execute "enable bash-it #{available_script_path}" do
-      command "ln -s #{available_script_path} #{enabled_script_path}"
-      user WS_USER
-      not_if { ::File.symlink?(enabled_script_path) }
-    end
-  end
+template ::File.expand_path(".bash_it_theme", WS_HOME) do
+  source "bash_it/theme.erb"
+  owner WS_USER
 end
 
-node['bash_it']['custom_plugins'].each do |custom_script|
-  template "#{bash_it_dir}/custom/#{custom_script}.bash" do
-    source custom_script
-    owner WS_USER
+execute "add BASH_IT configuration to .bash_profile" do
+  configuration = <<-CONFIGURATION.gsub(/^\s+/, '')
+    # START-BASH_IT
+    export BASH_IT=$HOME/.bash_it
+    source $HOME/.bash_it_theme
+
+    source $BASH_IT/bash_it.sh
+    # END-BASH_IT
+  CONFIGURATION
+  command "echo '#{configuration}' >> #{WS_HOME}/.bash_profile"
+  user WS_USER
+  not_if "grep 'START-BASH_IT' #{WS_HOME}/.bash_profile"
+end
+
+node['bash_it']['enabled_plugins'].each do |feature_type, features|
+  features.each do |feature_name|
+    pivotal_workstation_bash_it_enable_feature "#{feature_type}/#{feature_name}"
   end
 end
