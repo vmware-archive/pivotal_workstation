@@ -22,8 +22,8 @@ action :create do
     not_if { ::File.directory?(enabled_dir) }
   end
 
-  link ::File.expand_path(script_name, available_dir) do
-    to enabled_script_path
+  link enabled_script_path do
+    to ::File.expand_path(script_name, available_dir)
     user WS_USER
     not_if { ::File.symlink?(enabled_script_path) }
   end
