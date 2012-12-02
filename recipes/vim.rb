@@ -100,5 +100,5 @@ unless ( File.exists?("/usr/local/bin/vim") and File.exists?("/Applications/MacV
   end
 end
 
-pivotal_workstation_bash_profile_include "vi_is_minimal_vim"
-pivotal_workstation_bash_profile_include "vim_tmux"
+pivotal_workstation_bash_it_custom "vim-alias_vi_to_minimal_vim.bash"
+pivotal_workstation_bash_it_custom "vim-source_tmux_config.bash"
