@@ -1,8 +1,5 @@
 unless system("git --version | grep 'git version' > /dev/null")
-  include_recipe "pivotal_workstation::homebrew"
+  include_recipe "homebrew"
 
-  execute "brew install git" do
-    user WS_USER
-    command "brew install git"
-  end
+  package "git"
 end

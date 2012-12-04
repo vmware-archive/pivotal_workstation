@@ -4,8 +4,8 @@ include_recipe "pivotal_workstation::git"
 ::RBENV_COMMAND = "/usr/local/bin/rbenv"
 
 
-brew_install("rbenv")
-brew_install("ruby-build")
+package("rbenv")
+package("ruby-build")
 
 pivotal_workstation_bash_profile_include "rbenv"
 

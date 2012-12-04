@@ -1,3 +1,3 @@
-include_recipe "pivotal_workstation::homebrew"
+include_recipe "homebrew"
 
-brew_install "joe"
+package "joe"

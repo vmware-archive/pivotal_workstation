@@ -1,13 +1,13 @@
 # Acknowledgements: Some configuration source from
 # https://github.com/Casecommons/casecommons_workstation
 
-include_recipe "pivotal_workstation::homebrew"
+include_recipe "homebrew"
 include_recipe "pivotal_workstation::ack"
 include_recipe "pivotal_workstation::git"
 include_recipe "pivotal_workstation::rvm"
 include_recipe "pivotal_workstation::tmux"
 
-brew_install "mercurial"
+package "mercurial"
 
 unless ( File.exists?("/usr/local/bin/vim") and File.exists?("/Applications/MacVim.app") )
   execute "uninstall-vim" do

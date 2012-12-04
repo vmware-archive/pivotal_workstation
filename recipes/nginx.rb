@@ -1,4 +1,4 @@
-include_recipe "pivotal_workstation::homebrew"
+include_recipe "homebrew"
 include_recipe "pivotal_workstation::ssl_certificate"
 
 run_unless_marker_file_exists("nginx") do
@@ -8,7 +8,7 @@ run_unless_marker_file_exists("nginx") do
     command "sudo brew remove nginx"
   end
 
-  brew_install "nginx"
+  package "nginx"
 
   plist_path = File.expand_path('org.nginx.nginx.plist', File.join('~', 'Library', 'LaunchAgents'))
   if File.exists?(plist_path)

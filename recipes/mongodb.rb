@@ -1,7 +1,7 @@
-include_recipe "pivotal_workstation::homebrew"
+include_recipe "homebrew"
 
-unless brew_installed? "mongodb"
-  brew_install "mongodb"
+unless packageed? "mongodb"
+  package "mongodb"
 
   directory "/Users/#{WS_USER}/Library/LaunchAgents" do
     owner WS_USER

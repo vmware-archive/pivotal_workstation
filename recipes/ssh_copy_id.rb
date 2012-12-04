@@ -1,3 +1,3 @@
-include_recipe "pivotal_workstation::homebrew"
+include_recipe "homebrew"
 
-brew_install "ssh-copy-id"
+package "ssh-copy-id"
