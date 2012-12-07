@@ -78,7 +78,7 @@ run_unless_marker_file_exists("pivotal_logos") do
               [ 0.0, 0.250980406999588, 0.501960813999176 ],
             "Change" => "TimeInterval",
             "ChangePath" => "/Users/pivotal/Pictures/BackgroundsPrimary",
-            "ChangeTime" => 5.0,
+            "ChangeTime" => 300.0,
             "DSKDesktopPrefPane" => {
               "UserFolderPaths" => [
                 "/Users/pivotal/Pictures/BackgroundsPrimary",
