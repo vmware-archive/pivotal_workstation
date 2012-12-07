@@ -1,7 +1,7 @@
 #http://solutions.treypiepmeier.com/2010/02/28/installing-mysql-on-snow-leopard-using-homebrew/
 require 'pathname'
 
-PASSWORD = "password"
+PASSWORD = node["mysql_root_password"]
 # The next two directories will be owned by WS_USER
 DATA_DIR = "/usr/local/var/mysql"
 PARENT_DATA_DIR = "/usr/local/var"
