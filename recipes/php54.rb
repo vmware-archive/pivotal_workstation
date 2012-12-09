@@ -1,17 +1,13 @@
 include_recipe "pivotal_workstation::homebrew"
 
-tapped = system("brew tap | grep 'josegonzalez' > /dev/null 2>&1")
-unless tapped
-    execute "tap the josegonzalez repo" do
-        command "brew tap josegonzalez/php"
-    end
+execute "tap the josegonzalez repo" do
+    command "brew tap josegonzalez/php"
+    not_if { system("brew tap | grep 'josegonzalez' > /dev/null 2>&1") }
 end
 
-tapped = system("brew tap | grep 'dupes' > /dev/null 2>&1")
-unless tapped
-    execute "tap the dupes repo" do
-        command "brew tap homebrew/dupes"
-    end
+execute "tap the dupes repo" do
+    command "brew tap homebrew/dupes"
+    not_if { system("brew tap | grep 'dupes' > /dev/null 2>&1") }
 end
 
 brew_install "php54", {:brew_args => "--with-mysql --with-pgsql"}
