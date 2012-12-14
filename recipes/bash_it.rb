@@ -37,3 +37,7 @@ node['bash_it']['enabled_plugins'].each do |feature_type, features|
     pivotal_workstation_bash_it_enable_feature "#{feature_type}/#{feature_name}"
   end
 end
+
+node['bash_it']['custom_plugins'].each do |custom_script_name|
+  pivotal_workstation_bash_it_custom_plugin custom_script_name
+end
