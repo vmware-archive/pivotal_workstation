@@ -1,4 +1,3 @@
-::BASH_IT_DIR = ::File.expand_path(".bash_it", WS_HOME)
 bash_it_version = version_string_for('bash_it')
 
 git "#{Chef::Config[:file_cache_path]}/bash_it" do
@@ -8,28 +7,21 @@ git "#{Chef::Config[:file_cache_path]}/bash_it" do
   action :sync
 end
 
-execute "Copying bash-it's .git to #{BASH_IT_DIR}" do
-  command "rsync -axSH #{Chef::Config[:file_cache_path]}/bash_it/ #{BASH_IT_DIR}"
-  user WS_USER
-end
-
-template ::File.expand_path(".bash_it_theme", WS_HOME) do
-  source "bash_it/theme.erb"
+directory node['bash_it']['dir'] do
   owner WS_USER
+  mode "0777"
 end
 
-execute "add BASH_IT configuration to .bash_profile" do
-  configuration = <<-CONFIGURATION.gsub(/^\s+/, '')
-    # START-BASH_IT
-    export BASH_IT=$HOME/.bash_it
-    source $HOME/.bash_it_theme
-
-    source $BASH_IT/bash_it.sh
-    # END-BASH_IT
-  CONFIGURATION
-  command "echo '#{configuration}' >> #{WS_HOME}/.bash_profile"
+execute "Copying bash-it's .git to #{node['bash_it']['dir']}" do
+  command "rsync -axSH #{Chef::Config[:file_cache_path]}/bash_it/ #{node['bash_it']['dir']}"
   user WS_USER
-  not_if "grep 'START-BASH_IT' #{WS_HOME}/.bash_profile"
+end
+
+template node['bash_it']['bashrc_path'] do
+  source "bash_it/bashrc.erb"
+  cookbook 'pivotal_workstation'
+  owner WS_USER
+  mode "0777"
 end
 
 node['bash_it']['enabled_plugins'].each do |feature_type, features|

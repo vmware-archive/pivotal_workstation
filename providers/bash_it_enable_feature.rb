@@ -9,7 +9,7 @@ action :create do
     (type == 'plugins') ? 'plugin' : type
   end
 
-  type_dir            = ::File.expand_path(type, BASH_IT_DIR)
+  type_dir            = ::File.expand_path(type, node['bash_it']['dir'])
   enabled_dir         = ::File.expand_path("enabled", type_dir)
   available_dir       = ::File.expand_path("available", type_dir)
 
