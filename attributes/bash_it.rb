@@ -10,5 +10,7 @@ node.default['bash_it'] ={
     bash_it/custom/ensure_usr_local_bin_first.bash
     bash_it/custom/add_user_initials_to_git_prompt_info.bash
   ],
-  'theme' => 'bobby'
+  'theme' => 'bobby',
+  'dir' => ::File.expand_path(".bash_it", WS_HOME),
+  'bashrc_path' => ::File.expand_path(".bash_profile", WS_HOME)
 }
