@@ -1,7 +1,7 @@
 bash_it_version = version_string_for('bash_it')
 
 git "#{Chef::Config[:file_cache_path]}/bash_it" do
-  repository 'http://github.com/revans/bash-it.git'
+  repository node['bash_it']['repository']
   revision bash_it_version
   destination "#{Chef::Config[:file_cache_path]}/bash_it"
   action :sync
