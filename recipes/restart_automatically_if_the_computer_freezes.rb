@@ -1,0 +1,1 @@
+execute "systemsetup -setrestartfreeze on"
