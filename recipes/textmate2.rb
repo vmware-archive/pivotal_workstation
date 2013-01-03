@@ -1,7 +1,7 @@
 include_recipe "pivotal_workstation::user_owns_usr_local"
 
-node.default["textmate"]["url"] = "https://github.com/downloads/textmate/textmate/TextMate_r9307.tbz"
-node.default["textmate"]["shasum"] = "4bd51bae79a20e505fc172a5c4ee2a83930c1db9"
+node.default["textmate"]["url"] = "https://github.com/downloads/textmate/textmate/TextMate_r9333.tbz"
+node.default["textmate"]["shasum"] = "c0387b12fb6b827b05d90345a560dd790a5ceebe"
 
 unless File.exists?("/Applications/TextMate.app")
   directory Chef::Config[:file_cache_path] do
