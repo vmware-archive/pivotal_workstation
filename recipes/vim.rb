@@ -59,20 +59,20 @@ end
   end
 end
 
-execute "compile command-t" do
-  command "rvm use system; ruby extconf.rb && make clean && make"
-  cwd "#{node["vim_home"]}/bundle/command-t/ruby/command-t"
-  user WS_USER
-  only_if "test -d #{node["vim_home"]}/bundle/command-t/ruby/command-t"
-end
+#execute "compile command-t" do
+#  command "rvm use system; ruby extconf.rb && make clean && make"
+#  cwd "#{node["vim_home"]}/bundle/command-t/ruby/command-t"
+#  user WS_USER
+#  only_if "test -d #{node["vim_home"]}/bundle/command-t/ruby/command-t"
+#end
 
-execute "verify that command-t is correctly compiled" do
-  command %{test "`otool -l #{node["vim_home"]}/bundle/command-t/ruby/command-t/ext.bundle | grep libruby`" = "`otool -l /usr/local/bin/vim | grep libruby`"}
-end
+#execute "verify that command-t is correctly compiled" do
+#  command %{test "`otool -l #{node["vim_home"]}/bundle/command-t/ruby/command-t/ext.bundle | grep libruby`" = "`otool -l /usr/local/bin/vim | grep libruby`"}
+#end
 
-execute "verify that command-t is correctly compiled for macvim" do
-  command %{test "`otool -l #{node["vim_home"]}/bundle/command-t/ruby/command-t/ext.bundle | grep libruby`" = "`otool -l /Applications/MacVim.app/Contents/MacOS/Vim | grep libruby`"}
-end
+#execute "verify that command-t is correctly compiled for macvim" do
+#  command %{test "`otool -l #{node["vim_home"]}/bundle/command-t/ruby/command-t/ext.bundle | grep libruby`" = "`otool -l /Applications/MacVim.app/Contents/MacOS/Vim | grep libruby`"}
+#end
 
 file "#{WS_HOME}/.vimrc.local" do
   action :touch
