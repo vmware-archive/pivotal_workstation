@@ -2,6 +2,7 @@ unless File.exists?("/Applications/Flux.app")
 
   remote_file "#{Chef::Config[:file_cache_path]}/Flux.zip" do
     source node["flux_download_uri"]
+    checksum node["flux_download_checksum"]
     mode "0644"
   end
 
