@@ -1,1 +1,1 @@
-brew_install "zsh"
+package "zsh"

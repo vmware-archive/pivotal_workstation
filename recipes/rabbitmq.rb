@@ -1,1 +1,1 @@
-brew_install "rabbitmq"
+package "rabbitmq"

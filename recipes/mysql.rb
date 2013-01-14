@@ -6,7 +6,7 @@ PASSWORD = node["mysql_root_password"]
 DATA_DIR = "/usr/local/var/mysql"
 PARENT_DATA_DIR = "/usr/local/var"
 
-include_recipe "pivotal_workstation::homebrew"
+include_recipe "homebrew"
 
 [ "/Users/#{WS_USER}/Library/LaunchAgents",
   PARENT_DATA_DIR,
@@ -17,7 +17,7 @@ include_recipe "pivotal_workstation::homebrew"
   end
 end
 
-brew_install("mysql")
+package("mysql")
 
 ruby_block "copy mysql plist to ~/Library/LaunchAgents" do
   block do

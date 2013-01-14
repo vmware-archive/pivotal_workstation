@@ -1,1 +1,1 @@
-brew_install "ack"
+package "ack"

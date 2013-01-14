@@ -1,6 +1,6 @@
-include_recipe "pivotal_workstation::homebrew"
+include_recipe "homebrew"
 include_recipe "pivotal_workstation::git"
-brew_install "tmux"
+package "tmux"
 
 remote_file "#{WS_HOME}/.tmux.conf" do
   source node["tmux_conf_file_url"]
