@@ -1,7 +1,7 @@
 dmg_package "LibreOffice" do
   volumes_dir "LibreOffice"
-  source "http://download.documentfoundation.org/libreoffice/stable/3.6.3/mac/x86/LibO_3.6.3_MacOS_x86_install_en-US.dmg"
-  checksum "d8537892049c053f91aff569a72c67bfd7559be4340588484025cf2d73adff5a"
-  # owner WS_USER
+  source "http://download.documentfoundation.org/libreoffice/stable/3.6.4/mac/x86/LibO_3.6.4_MacOS_x86_install_en-US.dmg"
+  checksum "4eb29ef38e009214e920fcd98ba0b4aaf2e4fd1d9e27ef5cb466af7ccaf64f88"
+  owner WS_USER
   action :install
 end

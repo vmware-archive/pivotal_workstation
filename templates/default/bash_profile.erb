@@ -1,6 +1,0 @@
-# Chef assumes that it owns this file.
-# Additions to bash should be placed into <%= @subdir %> with a .sh extension
-
-for file in <%= @subdir %>/*.sh; do
-  [[ -r $file ]] && source $file;
-done

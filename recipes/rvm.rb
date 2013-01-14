@@ -6,7 +6,7 @@ rvm_git_revision_hash  = version_string_for("rvm")
 ::RVM_HOME = "#{WS_HOME}/.rvm"
 ::RVM_COMMAND = "#{::RVM_HOME}/bin/rvm"
 
-pivotal_workstation_bash_profile_include "rvm"
+pivotal_workstation_bash_it_enable_feature "plugins/rvm"
 
 run_unless_marker_file_exists(marker_version_string_for("rvm")) do
   recursive_directories [RVM_HOME, 'src', 'rvm'] do
@@ -26,7 +26,7 @@ run_unless_marker_file_exists(marker_version_string_for("rvm")) do
 
   %w{readline autoconf openssl zlib}.each do |rvm_pkg|
     execute "install rvm pkg: #{rvm_pkg}" do
-      command "#{::RVM_COMMAND} pkg install #{rvm_pkg}"
+      command "#{::RVM_COMMAND} pkg install --verify-downloads 1 #{rvm_pkg}"
       user WS_USER
     end
   end

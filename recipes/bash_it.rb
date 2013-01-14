@@ -1,42 +1,35 @@
-bash_it_dir = "#{WS_HOME}/.bash_it"
 bash_it_version = version_string_for('bash_it')
 
 git "#{Chef::Config[:file_cache_path]}/bash_it" do
-  repository 'http://github.com/revans/bash-it.git'
+  repository node['bash_it']['repository']
   revision bash_it_version
   destination "#{Chef::Config[:file_cache_path]}/bash_it"
   action :sync
 end
 
-execute "Copying bash-it's .git to #{bash_it_dir}" do
-  command "rsync -axSH #{Chef::Config[:file_cache_path]}/bash_it/ #{bash_it_dir}"
+directory node['bash_it']['dir'] do
+  owner WS_USER
+  mode "0777"
+end
+
+execute "Copying bash-it's .git to #{node['bash_it']['dir']}" do
+  command "rsync -axSH #{Chef::Config[:file_cache_path]}/bash_it/ #{node['bash_it']['dir']}"
   user WS_USER
 end
 
-node['bash_it']['enabled_plugins'].each do |type, scripts|
-  type_dir    = "#{bash_it_dir}/#{type}"
-  enabled_dir = "#{type_dir}/enabled"
+template node['bash_it']['bashrc_path'] do
+  source "bash_it/bashrc.erb"
+  cookbook 'pivotal_workstation'
+  owner WS_USER
+  mode "0777"
+end
 
-  execute "created enabled dir for bash-it #{type}" do
-    command "mkdir -p #{enabled_dir}"
-    user WS_USER
-  end
-
-  scripts.each do |script|
-    available_script_path = "#{type_dir}/available/#{script}.#{type}.bash"
-    enabled_script_path   = "#{enabled_dir}/#{script}.#{type}.bash"
-
-    execute "enable bash-it #{available_script_path}" do
-      command "ln -s #{available_script_path} #{enabled_script_path}"
-      user WS_USER
-      not_if { ::File.symlink?(enabled_script_path) }
-    end
+node['bash_it']['enabled_plugins'].each do |feature_type, features|
+  features.each do |feature_name|
+    pivotal_workstation_bash_it_enable_feature "#{feature_type}/#{feature_name}"
   end
 end
 
-node['bash_it']['custom_plugins'].each do |custom_script|
-  template "#{bash_it_dir}/custom/#{custom_script}.bash" do
-    source custom_script
-    owner WS_USER
-  end
+node['bash_it']['custom_plugins'].each do |custom_script_name|
+  pivotal_workstation_bash_it_custom_plugin custom_script_name
 end
