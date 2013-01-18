@@ -1,6 +1,28 @@
-[![Build Status](https://secure.travis-ci.org/pivotal/pivotal_workstation.png)](http://travis-ci.org/pivotal/pivotal_workstation)
+# Pivotal Workstation [![Build Status](https://secure.travis-ci.org/pivotal/pivotal_workstation.png)](http://travis-ci.org/pivotal/pivotal_workstation)
 
-Pivotal Workstation: A Repeatable, Documented, Decomposable, Shareable and Iterative OSX (ruby) Development Environment
+A repeatable, documented, decomposable, shareable and iterative OSX (ruby) development environment
+
+
+Installation
+------------
+
+```bash
+mkdir ~/cookbooks
+cd ~/cookbooks
+git clone https://github.com/pivotal/pivotal_workstation
+git clone https://github.com/opscode-cookbooks/dmg
+cat > ~/soloistrc <<EOF
+cookbook_paths:
+- cookbooks
+recipes:
+- pivotal_workstation::meta_osx_base
+- pivotal_workstation::meta_osx_development
+- pivotal_workstation::meta_ruby_development
+EOF
+gem install soloist
+soloist
+```
+
 
 # NOTICE
 Pivotal Workstation is moving to using community cookbooks, and now depends on [opscode-cookbooks/dmg](https://github.com/opscode-cookbooks/dmg).  You will need to clone the dmg cookbook alongside pivotal_workstation.
