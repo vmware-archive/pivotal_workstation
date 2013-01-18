@@ -6,5 +6,6 @@ action :create do
     source new_resource.name
     owner WS_USER
     only_if { script_name =~ /\.bash$/ && ::File.directory?(bash_it_custom_dir) }
+    cookbook new_resource.cookbook
   end
 end
