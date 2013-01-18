@@ -1,12 +1,12 @@
 unless File.exists?("/Applications/Kaleidoscope.app")
 
-  remote_file "#{Chef::Config[:file_cache_path]}/kaleidoscope.zip" do
+  remote_file "#{Chef::Config[:file_cache_path]}/kaleidoscope2.tar.gz" do
     source "https://updates.blackpixel.com/latest-beta?app=ks"
     owner WS_USER
   end
 
   execute "unzip Kaleidoscope" do
-    command "unzip #{Chef::Config[:file_cache_path]}/kaleidoscope.zip -d #{Chef::Config[:file_cache_path]}/"
+    command "tar -xzf #{Chef::Config[:file_cache_path]}/kaleidoscope2.tar.gz -C #{Chef::Config[:file_cache_path]}/"
     user WS_USER
   end
 
