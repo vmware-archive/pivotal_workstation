@@ -1,3 +1,5 @@
+return unless node["platform"] == "mac_os_x"
+
 dmg_package "JavaForOSX" do
   source "http://support.apple.com/downloads/DL1572/en_US/"
   volumes_dir "Java for OS X 2012-006"
