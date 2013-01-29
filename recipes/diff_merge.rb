@@ -3,6 +3,7 @@ raise "DiffMerge for Mac only" unless node["platform"] == "mac_os_x"
 dmg_package "DiffMerge" do
   volumes_dir "DiffMerge 3.3.2.1139"
   source "http://download-us.sourcegear.com/DiffMerge/3.3.2/DiffMerge.3.3.2.1139.dmg"
+  checksum "aa1579bd60d7c05eb055e8d898223d6cc4ac5d6c1998bbc641adc5a2760a4841"
   action :install
 end
 
