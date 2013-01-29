@@ -16,6 +16,14 @@ define :rvm_ruby_install do
   #| (! grep 'error') : if we see rvm errors in stderr, fail
   #this is due to an rvm bug (we've notified the author).  as soon as curl error cause rvm to exit nonzero,
   #we can get rid of this
+  #
+  # Pat: if you get this error:
+  #   "There has been an error fetching the ruby interpreter. Halting the installation."
+  # then you probably need to add this to attributes/rvm.rb
+  #   :command_line_options => "--verify-downloads 1"
+  # For debugging you can add this after after 2>&1 below:
+  #   add " tee '/tmp/rvm_install_err.txt' |" to help with debugging
+  #
   install_cmd << " 2>&1 | (! grep error | grep -v \"clang: error: unsupported option '--with-libyaml'\")"
 
   execute "installing #{ruby_version} with RVM: #{install_cmd}" do
