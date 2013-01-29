@@ -1,1 +1,1 @@
-rvm use --create ruby-1.9.3-p286@pivotal_workstation
+rvm use --create ruby-1.9.3-p374@pivotal_workstation
