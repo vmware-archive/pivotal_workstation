@@ -67,16 +67,14 @@ end
 # Unpack and install
 if node["platform"] != "mac_os_x"
 
-  execute "Download Sublime Text 2" do
-    command "curl -L #{Sublime::download_url(node)} -o '/tmp/#{Sublime::filename(node)}'"
-    not_if {
-      File.exist?("/tmp/#{Sublime::filename(node)}") ||
-       File.exist?("#{Sublime::dstdir(node)}/sublime_text")
-    }
+  srcfile = "#{Chef::Config[:file_cache_path]}/#{Sublime::filename(node)}"
+  remote_file srcfile do
+    source Sublime::download_url(node)
+    checksum "858df93325334b7c7ed75daac26c45107e0c7cd194d522b42a6ac69fae6de404"
   end
 
-  execute "Unpack Sublime Text 2" do
-    command "tar --strip-components=1 -C '#{Sublime::dstdir(node)}' -xjf '/tmp/#{Sublime::filename(node)}'"
+  execute "Unpack Sublime Text" do
+    command "tar --strip-components=1 -C '#{Sublime::dstdir(node)}' -xjf '#{srcfile}'"
     not_if { File.exist?("#{Sublime::dstdir(node)}/sublime_text") }
   end
 
@@ -108,7 +106,6 @@ end
 
 # Install packages list in attributes
 packages_dir_array = Sublime::config_dir_array(node) << "Packages"
-
 recursive_directories packages_dir_array do
   owner WS_USER
 end
@@ -123,28 +120,28 @@ end
 
 
 # Configure user settings
-settings_dir_array = packages_dir_array.dup << "User"
-
-recursive_directories settings_dir_array do
+settings_dir = File.join(packages_dir_array, "User")
+directory settings_dir do
   owner WS_USER
 end
 
-template File.expand_path("Preferences.sublime-settings", File.join(settings_dir_array)) do
+template File.expand_path("Preferences.sublime-settings", settings_dir) do
   source "sublime_text-Preferences.sublime-settings.erb"
   owner WS_USER
+
+  # Don't blast over any customizations the user may have
+  # made since the last chef run; that would be rude
   action :create_if_missing
 end
 
 
 # Install Package Control, the essential Sublime Text plugin
-pkgcontrol_dir_array = Sublime::config_dir_array(node) << "Installed Packages"
-
-recursive_directories pkgcontrol_dir_array do
+pkgcontrol_dir = File.join(Sublime::config_dir_array(node), "Installed Packages")
+directory pkgcontrol_dir do
   owner WS_USER
 end
 
-remote_file "#{File.join pkgcontrol_dir_array}/Package Control.sublime-package" do
+remote_file "#{pkgcontrol_dir}/Package Control.sublime-package" do
   source 'http://sublime.wbond.net/Package%20Control.sublime-package'
   owner WS_USER
-  :create_if_missing
 end
