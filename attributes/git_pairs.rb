@@ -1,3 +1,5 @@
+node.default["git_pairs_domain"] = "pivotallabs.com"
+
 # Sort alphabetically by first initial
 node.default["git_pairs_authors"] = [
   {"initials" => "aml", "name" => "Alex Lobascio", "shortname" => "alobascio"},
