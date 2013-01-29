@@ -1,12 +1,13 @@
-# This file is managed by chef! Override node.default["git_pairs_authors"] in attributes/git_pairs.rb to modify.
+# This file is managed by Chef!
+# Override node.default["git_pairs_authors"] and node.default["git_pairs_domain"] in attributes/git_pairs.rb to modify.
 
 pairs:
-<% node.git_pairs_authors.each do |half_pair| %>
+<% node['git_pairs_authors'].each do |half_pair| %>
   <%= "#{half_pair["initials"]}: #{half_pair["name"]}"%><%= half_pair["shortname"] ? "; #{half_pair["shortname"]}" : "" %>
 <% end %>
 
 email:
   prefix: pair
-  domain: pivotallabs.com
+  domain: <%= node['git_pairs_domain'] %>
 
 global: true
