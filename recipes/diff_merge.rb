@@ -13,9 +13,8 @@ link "/usr/local/bin/diffmerge" do
 end
 
 # Configure git unless otherwise requested
-node["diffmerge"] ||= {}
-node["diffmerge"]["configure-git"] ||= 1
-if node["diffmerge"]["configure-git"] != 0
+diffmerge = node["diffmerge"] || {}
+if (diffmerge["configure-git"] || 1) != 0
 
   [
     %q[git config --global diff.tool diffmerge],
