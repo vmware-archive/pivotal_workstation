@@ -1,3 +1,21 @@
+# Recipe to clone git repositories into the users workspace_directory
+#
+# Repositories should be defined as an array in the node_attributes section of
+# your `soloistrc` file. eg:
+#
+# node_attributes:
+#   git_projects:
+#     -
+#       - repository-name (folder to be checked out into within your workspace folder)
+#       - repository-url (source url)
+#     -
+#       - rails
+#       - git@github.com:rails/rails.git
+#     -
+#       - hubot
+#       - git@github.com:github/hubot.git
+#
+
 include_recipe "pivotal_workstation::workspace_directory"
 
 node['git_projects'].each do |repo_name, repo_address|
