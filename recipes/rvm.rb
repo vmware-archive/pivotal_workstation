@@ -34,8 +34,10 @@ run_unless_marker_file_exists(marker_version_string_for("rvm")) do
 end
 
 # Installing gcc-4.2
-execute "update brew" do
+execute "update and tap brew" do
   command "brew update"
+  # || if it is already taped
+  command "brew tap homebrew/dupes || true"
 end
 
 brew_install "autoconf"
