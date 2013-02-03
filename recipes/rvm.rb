@@ -1,6 +1,5 @@
 include_recipe "pivotal_workstation::java"
 include_recipe "pivotal_workstation::git"
-include_recipe "pivotal_workstation::homebrew"
 
 rvm_git_revision_hash  = version_string_for("rvm")
 
@@ -34,8 +33,7 @@ run_unless_marker_file_exists(marker_version_string_for("rvm")) do
 end
 
 # Installing gcc-4.2
-execute "update and tap brew" do
-  command "brew update"
+execute "brew tap homebrew/dupes" do
   # || if it is already taped
   command "brew tap homebrew/dupes || true"
 end
@@ -43,6 +41,10 @@ end
 brew_install "autoconf"
 brew_install "automake"
 brew_install "apple-gcc42"
+
+execute "untap brew" do
+  command "brew untap homebrew/dupes"
+end
 
 node["rvm"]["rubies"].each do |version, options|
   rvm_ruby_install version do
