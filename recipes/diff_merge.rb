@@ -1,5 +1,3 @@
-raise "DiffMerge for Mac only" unless node["platform"] == "mac_os_x"
-
 dmg_package "DiffMerge" do
   volumes_dir "DiffMerge 3.3.2.1139"
   source "http://download-us.sourcegear.com/DiffMerge/3.3.2/DiffMerge.3.3.2.1139.dmg"
@@ -16,7 +14,6 @@ end
 # Configure git unless otherwise requested
 diffmerge = node["diffmerge"] || {}
 if (diffmerge["configure-git"] || 1) != 0
-
   [
     %q[git config --global diff.tool diffmerge],
     %q[git config --global difftool.diffmerge.cmd 'diffmerge "$LOCAL" "$REMOTE"'],
@@ -30,5 +27,4 @@ if (diffmerge["configure-git"] || 1) != 0
       user WS_USER
     end
   end
-
 end
