@@ -1,6 +1,6 @@
 dmg_package "Firefox" do
-  source "http://download.mozilla.org/?product=firefox-17.0&os=osx&lang=en-US"
-  checksum "abd7e8a4da8faf815d0bd96a6b1a6492e630c73433522c0c3dfd671f46cc2236"
+  source "http://download.mozilla.org/?product=firefox-18.0.2&os=osx&lang=en-US"
+  checksum "3987f23ab8eca77ec63007333f2314743d4fb4c791db2a2820841869ef015c8b"
   action :install
   owner WS_USER
 end
