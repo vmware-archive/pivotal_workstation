@@ -24,7 +24,7 @@ recipes:
 - pivotal_workstation::meta_osx_development
 - pivotal_workstation::meta_ruby_development
 EOF
-gem install soloist
+sudo gem install soloist
 soloist
 ```
 
