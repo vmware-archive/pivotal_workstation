@@ -32,6 +32,20 @@ run_unless_marker_file_exists(marker_version_string_for("rvm")) do
   end
 end
 
+# Installing gcc-4.2
+execute "brew tap homebrew/dupes" do
+  # || if it is already taped
+  command "brew tap homebrew/dupes || true"
+end
+
+brew_install "autoconf"
+brew_install "automake"
+brew_install "apple-gcc42"
+
+execute "untap brew" do
+  command "brew untap homebrew/dupes"
+end
+
 node["rvm"]["rubies"].each do |version, options|
   rvm_ruby_install version do
     options options
