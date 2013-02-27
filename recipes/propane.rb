@@ -18,7 +18,7 @@ unless File.exists?(node["propane_app_path"])
 
   ruby_block "test to see if Propane.app was installed" do
     block do
-      raise "GitHub.app was not installed" unless File.exists?(node["propane_app_path"])
+      raise "Propane.app was not installed" unless File.exists?(node["propane_app_path"])
     end
   end
 
