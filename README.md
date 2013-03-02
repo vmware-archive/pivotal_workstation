@@ -12,13 +12,14 @@ Installation
 ------------
 
 ```bash
-mkdir ~/cookbooks
-cd ~/cookbooks
-git clone https://github.com/pivotal/pivotal_workstation
-git clone https://github.com/opscode-cookbooks/dmg
+cat > ~/Cheffile <<EOF
+site 'http://community.opscode.com/api/v1'
+
+cookbook 'pivotal_workstation',
+  :git => 'git://github.com/pivotal/pivotal_workstation.git'
+EOF
+
 cat > ~/soloistrc <<EOF
-cookbook_paths:
-- cookbooks
 recipes:
 - pivotal_workstation::meta_osx_base
 - pivotal_workstation::meta_osx_development
@@ -33,8 +34,6 @@ Configuration
 You may want to change the default applications or preferences.  For example, you might want to install only Chrome and Sublime Text.  In that case, your `soloistrc` would look like this:
 
 ```yaml
-cookbook_paths:
-- cookbooks
 recipes:
 - pivotal_workstation::chrome
 - pivotal_workstation::sublime_text
@@ -48,9 +47,9 @@ There are two online tools you can use to generate `soloistrc` files:
 - [SoloWizard](http://www.solowizard.com)
 
 	This is the easiest way to get started, and it only involves cutting-and-pasting one line.  Many thanks to [Tom Hallett](https://github.com/tommyh).
-	
+
 - [soloistrc builder](http://soloistrc-builder.herokuapp.com)
-	
+
 	Soloistrc Builder can be pointed at any cookbook and will help you build a soloistrc. Many thanks to [Winston Teo](https://github.com/winston).
 
 
