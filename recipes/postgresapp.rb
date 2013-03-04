@@ -11,7 +11,7 @@ unless File.exists?("/Applications/Postgres.app")
   end
 
   execute "unzip PostgresApp.zip" do
-    command "unzip #{Chef::Config[:file_cache_path]}/PostgresApp.zip -d #{Chef::Config[:file_cache_path]}/;rm -rf #{Chef::Config[:file_cache_path]}/__MACOSX"
+    command "unzip #{Chef::Config[:file_cache_path]}/PostgresApp.zip -d #{Chef::Config[:file_cache_path]}/"
     user WS_USER
   end
 
