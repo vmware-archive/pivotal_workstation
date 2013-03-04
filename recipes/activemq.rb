@@ -1,1 +1,1 @@
-brew_install("activemq")
+brew "activemq"

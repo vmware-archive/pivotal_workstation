@@ -17,7 +17,7 @@ include_recipe "pivotal_workstation::homebrew"
   end
 end
 
-brew_install("mysql")
+brew "mysql"
 
 ruby_block "copy mysql plist to ~/Library/LaunchAgents" do
   block do

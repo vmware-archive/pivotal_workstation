@@ -1,1 +1,1 @@
-brew_install "heroku-toolbelt"
+brew "heroku-toolbelt"
