@@ -68,13 +68,16 @@ Contributing
 * Send me a pull request; bonus points for topic branches
 * If you submit several recipes, break them into several pull requests
 
+Maintainers
+-----------
+ * [Abhi Hiremagalur](https://github.com/hiremaga)
+ * [Brian Cunnie](https://github.com/cunnie)
 
 Authors
 -------
  * [Matthew Kocher](https://github.com/mkocher) & [Steve Conover](https://github.com/sconover)
  * [Brian Cunnie](https://github.com/cunnie)
  * [Doc Ritezel](https://github.com/ohrite)
-
 
 Thanks
 ------
