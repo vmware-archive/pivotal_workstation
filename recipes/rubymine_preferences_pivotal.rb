@@ -1,4 +1,4 @@
-rubymine_preferences_dir = "#{WS_HOME}/Library/Preferences/RubyMine40"
+rubymine_preferences_dir = "#{WS_HOME}/Library/Preferences/RubyMine50"
 preferences_git_repo_location =  "#{Chef::Config[:file_cache_path]}/Pivotal-Preferences-RubyMine"
 
 git preferences_git_repo_location do

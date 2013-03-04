@@ -4,100 +4,66 @@
 include_recipe "pivotal_workstation::homebrew"
 include_recipe "pivotal_workstation::ack"
 include_recipe "pivotal_workstation::git"
-include_recipe "pivotal_workstation::rvm"
 include_recipe "pivotal_workstation::tmux"
 
-brew_install "mercurial"
+execute "install macvim and use its vim as system vim" do
+  command "brew install macvim --override-system-vim"
+  user WS_USER
+  not_if "brew list | grep '^macvim$'"
+end
 
-unless ( File.exists?("/usr/local/bin/vim") and File.exists?("/Applications/MacVim.app") )
-  execute "uninstall-vim" do
-    command "brew uninstall vim"
-    only_if "brew list | grep '^vim$'"
-  end
+execute "link macvim into place" do
+  # Not using `brew linkapps` because that links to ~/Applications, not
+  # /Applications.  If you decide linkapps is better, be sure to modify the
+  # "verify that command-t is correctly compiled" task.
+  command "ln -s /usr/local/Cellar/macvim/*/MacVim.app /Applications/MacVim.app"
+  user WS_USER
+  not_if { File.symlink?("/Applications/MacVim.app") }
+end
 
-  execute "install-vim" do
-    user WS_USER
-    command "brew install https://raw.github.com/Homebrew/homebrew-dupes/c93e84ace76c58ae2386c439040110b57e510f04/vim.rb"
-  end
+execute "test to see if macvim link worked" do
+  command "test -L /Applications/MacVim.app"
+end
 
-  execute "brew-uninstall-macvim" do
-    command "brew uninstall macvim"
-    only_if "brew list | grep '^macvim$'"
-  end
+git node["vim_home"] do
+  repository node["vim_config_git"]
+  branch "master"
+  revision node["vim_hash"] || "HEAD"
+  action :sync
+  user WS_USER
+  enable_submodules true
+end
 
-  execute "delete-macvim-application-link" do
-    command "rm -rf /Applications/MacVim.app"
-  end
-
-  execute "brew install macvim with system ruby" do
-    user WS_USER
-    command "rvm use system; brew install macvim"
-    not_if "brew list | grep '^macvim$'"
-  end
-
-  # There may be multiple macvims; try to find the latest one
-  # & link that to /Applications
-  ruby_block "Link MacVim to /Applications" do
-    block do
-      macvim_app=Dir["/usr/local/Cellar/macvim/*/MacVim.app"].last
-      raise "no macvim found" unless macvim_app
-      if File.exists?(macvim_app)
-        system("ln -fs #{macvim_app} /Applications/")
-      end
-    end
-  end
-
-  ruby_block "test to see if MacVim link worked" do
-    block do
-      raise "/Applications/MacVim install failed" unless File.exists?("/Applications/MacVim.app")
-    end
-  end
-
-  vim_dir = "#{WS_HOME}/.vim"
-
-  execute "remove pre existing config" do
-    command "rm -rf #{vim_dir}"
-  end
-
-  git node["vim_home"] do
-    repository node["vim_config_git"]
-    branch "master"
-    revision node["vim_hash"] || "HEAD"
-    action :sync
-    user WS_USER
-    enable_submodules true
-  end
-
-  execute "verify-checkout-happened" do
-    command "test -e #{vim_dir}"
-  end
-
-  %w{vimrc gvimrc}.each do |vimrc|
-    link "#{WS_HOME}/.#{vimrc}" do
-      to "#{node["vim_home"]}/#{vimrc}"
-      owner WS_USER
-    end
-  end
-
-  execute "compile command-t" do
-    only_if "test -d #{vim_dir}/bundle/command-t/ruby/command-t"
-    cwd "#{node["vim_home"]}/bundle/command-t/ruby/command-t"
-    command "rvm use system; ruby extconf.rb && make clean && make"
-    user WS_USER
-  end
-
-  execute "verify-that-command-t-is-correctly-compiled-for-vim" do
-    command %{test "`otool -l #{node["vim_home"]}/bundle/command-t/ruby/command-t/ext.bundle | grep libruby`" = "`otool -l /usr/local/bin/vim | grep libruby`"}
-  end
-
-  execute "verify-that-command-t-is-correctly-compiled-for-mvim" do
-    command %{test "`otool -l #{node["vim_home"]}/bundle/command-t/ruby/command-t/ext.bundle | grep libruby`" = "`otool -l /Applications/MacVim.app/Contents/MacOS/Vim | grep libruby`"}
-  end
-
-  file "/Users/#{WS_USER}/.vimrc.local" do
-    action :touch
+%w{vimrc gvimrc}.each do |vimrc|
+  link "#{WS_HOME}/.#{vimrc}" do
+    to "#{node["vim_home"]}/#{vimrc}"
     owner WS_USER
+    not_if { File.symlink?("#{node["vim_home"]}/#{vimrc}") }
   end
+end
+
+execute "compile command-t" do
+  # This matches the ruby that homebrew currently uses to `brew install macvim`
+  # See --with-ruby-command in https://github.com/mxcl/homebrew/blob/master/Library/Formula/macvim.rb
+  command "/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby extconf.rb && make clean && make"
+  cwd "#{node["vim_home"]}/bundle/command-t/ruby/command-t"
+  user WS_USER
+  only_if "test -d #{node["vim_home"]}/bundle/command-t/ruby/command-t"
+end
+
+execute "verify that command-t is correctly compiled for macvim" do
+  command <<-SH
+    findlibruby () { otool -l $1 | grep libruby; }
+    CMDT_RUBY=`findlibruby #{node["vim_home"]}/bundle/command-t/ruby/command-t/ext.bundle`
+    MACVIM_RUBY=`findlibruby /Applications/MacVim.app/Contents/MacOS/Vim`
+    test -n "$MACVIM_RUBY" -a "$MACVIM_RUBY" = "$CMDT_RUBY"
+  SH
+end
+
+file "#{WS_HOME}/.vimrc.local" do
+  action :touch
+  owner WS_USER
+  not_if { File.exists?("#{WS_HOME}/.vimrc.local") }
 end
 
 pivotal_workstation_bash_it_custom_plugin "vim-alias_vi_to_minimal_vim.bash"
