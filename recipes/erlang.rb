@@ -1,1 +1,1 @@
-brew_install "erlang"
+brew "erlang"

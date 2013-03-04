@@ -1,7 +1,5 @@
-include_recipe "pivotal_workstation::homebrew"
-
 unless brew_installed? "memcached"
-  brew_install "memcached"
+  brew "memcached"
 
   directory "/Users/#{WS_USER}/Library/LaunchAgents" do
     owner WS_USER

@@ -1,1 +1,1 @@
-brew_install "svn"
+brew "svn"

@@ -1,1 +1,1 @@
-brew_install "node"
+brew "node"
