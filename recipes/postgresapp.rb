@@ -1,8 +1,6 @@
 # coding: UTF-8
 
-=begin
-Installs PostgreSQL on a Mac using http://postgresapp.com/
-=end
+#Installs PostgreSQL on a Mac using http://postgresapp.com/
 return unless node["platform"] == "mac_os_x"
 
 unless File.exists?("/Applications/Postgres.app")
@@ -12,20 +10,20 @@ unless File.exists?("/Applications/Postgres.app")
     checksum "933f05df440e1a66eb0d7f609197d0802c0bb28c9db10c8974b3b3b2f9a087be"
   end
 
-  execute "unzip PostgresApp" do
-    command "unzip #{Chef::Config[:file_cache_path]}/PostgresApp.zip -d #{Chef::Config[:file_cache_path]}/"
+  execute "unzip PostgresApp.zip" do
+    command "unzip #{Chef::Config[:file_cache_path]}/PostgresApp.zip -d #{Chef::Config[:file_cache_path]}/;rm -rf #{Chef::Config[:file_cache_path]}/__MACOSX"
     user WS_USER
   end
 
-  execute "copy PostgresApp to /Applications" do
+  execute "copy Postgres.app to /Applications" do
     command "mv #{Chef::Config[:file_cache_path]}/Postgres.app #{Regexp.escape("/Applications/Postgres.app")}"
     user WS_USER
     group "admin"
   end
 
-  ruby_block "test to see if PostgresApp.app was installed" do
+  ruby_block "test to see if Postgres.app was installed" do
     block do
-      raise "PostgresApp.app was not installed" unless File.exists?("/Applications/PostgresApp.app")
+      raise "Postgres.app was not installed" unless File.exists?("/Applications/Postgres.app")
     end
   end
 end
