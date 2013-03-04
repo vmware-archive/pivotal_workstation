@@ -1,4 +1,4 @@
-brew_install "hub"
+brew "hub"
 
 # homebrew recipe for hub automatically installs the following as well:
   # Bash completion has been installed to:

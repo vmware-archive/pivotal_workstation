@@ -1,1 +1,1 @@
-brew_install "solr"
+brew "solr"
