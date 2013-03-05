@@ -1,8 +1,4 @@
-# coding: UTF-8
-
 #Installs PostgreSQL on a Mac using http://postgresapp.com/
-return unless node["platform"] == "mac_os_x"
-
 unless File.exists?("/Applications/Postgres.app")
   remote_file "#{Chef::Config[:file_cache_path]}/PostgresApp.zip" do
     source "http://postgres-app.s3.amazonaws.com/PostgresApp-9-2-2-0.zip"
