@@ -7,7 +7,7 @@ end
 pivotal_workstation_defaults "set dock to autohide" do
   domain "com.apple.dock"
   key "autohide"
-  boolean node["dock_preferences"]["autohide"]
+  boolean node["dock_preferences"]["autohide"] && node["dock_preferences"]["autohide"] != 'false'
 end
 
 execute "relaunch dock" do
