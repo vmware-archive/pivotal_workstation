@@ -1,6 +1,6 @@
 dmg_package "RubyMine" do
-  source "http://download.jetbrains.com/ruby/RubyMine-5.0.1.dmg"
-  checksum "a10385a869d3b2bf99fbfa6f7b1206871e2a4a177aa6a4249fa8893cb523f0cb"
+  source "http://download.jetbrains.com/ruby/RubyMine-5.0.2.dmg"
+  checksum "4c186bbd54e976d2a83595bcc77a57304159ba7e40d6fe2e5690cb074b4c65ae"
   action :install
   owner WS_USER
 end
