@@ -14,7 +14,7 @@ execute "Delete #{plist_key} from #{plist_file}" do
 end
 
 execute "Add #{plist_key} to #{plist_file}" do
-  command "usr/libexec/PlistBuddy -c 'Add #{plist_key} bool #{start_after_restore}' #{plist_file}"
+  command "/usr/libexec/PlistBuddy -c 'Add #{plist_key} bool #{start_after_restore}' #{plist_file}"
 end
 
 execute "Restart powerd" do
