@@ -6,7 +6,7 @@ unless File.exists?("/Library/Fonts/SourceCodePro-Black.otf")
   end
 
   execute "unzip source code pro" do
-    command "unzip -f #{Chef::Config[:file_cache_path]}/source_code_pro.zip '*.otf' -d #{Chef::Config[:file_cache_path]}/"
+    command "unzip -o #{Chef::Config[:file_cache_path]}/source_code_pro.zip '*.otf' -d #{Chef::Config[:file_cache_path]}/"
     user WS_USER
   end
 
