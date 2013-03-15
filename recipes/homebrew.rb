@@ -32,6 +32,11 @@ execute "Copying homebrew's .git to /usr/local" do
   user WS_USER
 end
 
+execute "Run git clean in /usr/local to clear out cruft after rsync" do
+  command "cd /usr/local; git clean -fd"
+  user WS_USER
+end
+
 ruby_block "Check that homebrew is running & working" do
   block do
     `brew --version`
