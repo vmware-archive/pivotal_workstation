@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.6.0_37" class="java.beans.XMLDecoder">
+ <object class="com.xk72.charles.config.CharlesConfiguration">
+  <void property="registrationConfiguration">
+   <void property="key">
+    <string><%= node['charles_proxy']['license_key'] %></string>
+   </void>
+   <void property="name">
+    <string><%= node['charles_proxy']['license_name'] %></string>
+   </void>
+  </void>
+  <void property="startupConfiguration">
+   <void property="lastCheckUpdates">
+    <object class="java.util.Date">
+     <long>1359896490377</long>
+    </object>
+   </void>
+   <void property="mainWindow">
+    <object class="java.awt.Rectangle">
+     <int>499</int>
+     <int>98</int>
+     <int>600</int>
+     <int>440</int>
+    </object>
+   </void>
+  </void>
+  <void property="toolConfiguration">
+   <void property="configs">
+    <void method="put">
+     <string>Map Remote</string>
+     <object class="com.xk72.charles.tools.MapTool$MapConfiguration"/>
+    </void>
+    <void method="put">
+     <string>Auto Save</string>
+     <object class="com.xk72.charles.tools.AutoSaveTool$AutoSaveConfiguration"/>
+    </void>
+    <void method="put">
+     <string>Reverse Proxies</string>
+     <object class="com.xk72.charles.tools.ReverseProxiesTool$ReverseProxiesConfiguration"/>
+    </void>
+    <void method="put">
+     <string>Block Cookies</string>
+     <object class="com.xk72.charles.tools.lib.SelectedHostsToolConfiguration"/>
+    </void>
+    <void method="put">
+     <string>Mirror</string>
+     <object class="com.xk72.charles.tools.MirrorTool$MirrorConfiguration"/>
+    </void>
+    <void method="put">
+     <string>DNS Spoofing</string>
+     <object class="com.xk72.charles.tools.DNSSpoofingTool$DNSSpoofingConfiguration"/>
+    </void>
+    <void method="put">
+     <string>Port Forwarding</string>
+     <object class="com.xk72.charles.tools.PortForwardingTool$PortForwardingConfiguration"/>
+    </void>
+    <void method="put">
+     <string>Breakpoints</string>
+     <object class="com.xk72.charles.tools.breakpoints.BreakpointsTool$BreakpointsConfiguration"/>
+    </void>
+    <void method="put">
+     <string>Client Process</string>
+     <object class="com.xk72.charles.tools.lib.SelectedHostsToolConfiguration"/>
+    </void>
+    <void method="put">
+     <string>Rewrite</string>
+     <object class="com.xk72.charles.tools.rewrite.RewriteConfiguration"/>
+    </void>
+    <void method="put">
+     <string>Map Local</string>
+     <object class="com.xk72.charles.tools.MapLocalTool$MapLocalConfiguration"/>
+    </void>
+    <void method="put">
+     <string>Black List</string>
+     <object class="com.xk72.charles.tools.BlacklistTool$BlacklistConfiguration"/>
+    </void>
+    <void method="put">
+     <string>No Caching</string>
+     <object class="com.xk72.charles.tools.lib.SelectedHostsToolConfiguration"/>
+    </void>
+   </void>
+  </void>
+ </object>
+</java>
