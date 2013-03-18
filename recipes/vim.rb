@@ -25,6 +25,12 @@ execute "test to see if macvim link worked" do
   command "test -L /Applications/MacVim.app"
 end
 
+directory node["vim_home"] do
+  action :delete
+  recursive true
+  not_if "test -d #{node["vim_home"]}/.git"
+end
+
 git node["vim_home"] do
   repository node["vim_config_git"]
   branch "master"
