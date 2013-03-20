@@ -10,7 +10,7 @@ end
 execute "set global git ignore" do
   command "git config --global core.excludesfile #{WS_HOME}/.gitignore_global"
   user WS_USER
-  not_if "[ -z `git config --global core.excludesfile`]"
+  only_if "[ -z `git config --global core.excludesfile` ]"
 end
 
 execute "make the pager prettier" do
