@@ -6,11 +6,12 @@ include_recipe "pivotal_workstation::ack"
 include_recipe "pivotal_workstation::git"
 include_recipe "pivotal_workstation::tmux"
 
+vim_home_missing = "test ! -d #{node["vim_home"]}"
+vim_home_present = "cd #{node["vim_home"]}"
+vim_home_owned_by_pw = "test -d .git && (git remote -v show | grep -q #{node["vim_config_git"]})"
+
 ruby_block "ensure pivotal_workstation can manage #{node["vim_home"]}" do
-  missing = "test ! -d #{node["vim_home"]}"
-  present = "cd #{node["vim_home"]}"
-  owned_by_pw = "test -d .git && (git remote -v show | grep -q #{node["vim_config_git"]})"
-  not_if "#{missing} || (#{present} && #{owned_by_pw})"
+  not_if "#{vim_home_missing} || (#{vim_home_present} && #{vim_home_owned_by_pw})"
   block { raise "Rename or delete #{node["vim_home"]} if you want to use this recipe" }
 end
 
