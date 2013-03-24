@@ -10,15 +10,15 @@ execute "tap the dupes repo" do
     not_if { system("brew tap | grep 'dupes' > /dev/null 2>&1") }
 end
 
-brew_install "php54", {:brew_args => "--with-mysql --with-pgsql"}
+brew "php54", {:brew_args => "--with-mysql --with-pgsql"}
 
-brew_install "php54-apc"
-brew_install "php54-memcached"
-brew_install "php54-inclued"
-brew_install "php54-http"
-brew_install "php54-xdebug"
-brew_install "php54-intl"
-brew_install "php54-yaml"
-brew_install "php54-imagick"
-brew_install "php54-solr"
-brew_install "php54-twig"
+brew "php54-apc"
+brew "php54-memcached"
+brew "php54-inclued"
+brew "php54-http"
+brew "php54-xdebug"
+brew "php54-intl"
+brew "php54-yaml"
+brew "php54-imagick"
+brew "php54-solr"
+brew "php54-twig"

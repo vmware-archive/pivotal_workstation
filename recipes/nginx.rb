@@ -8,7 +8,7 @@ run_unless_marker_file_exists("nginx") do
     command "sudo brew remove nginx"
   end
 
-  brew_install "nginx"
+  brew "nginx"
 
   plist_path = File.expand_path('org.nginx.nginx.plist', File.join('~', 'Library', 'LaunchAgents'))
   if File.exists?(plist_path)

@@ -17,7 +17,7 @@ include_recipe "pivotal_workstation::homebrew"
   end
 end
 
-brew_install("mysql")
+brew "mysql"
 
 ruby_block "copy mysql plist to ~/Library/LaunchAgents" do
   block do
@@ -60,6 +60,6 @@ execute "set the root password to the default" do
 end
 
 execute "insert time zone info" do
-  command "mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -uroot -p#{PASSWORD} mysql"
+  command "mysql_tzinfo_to_sql /usr/share/zoneinfo | sed 's/Local time zone must be set--see zic manual page/XXT/' | mysql -uroot -p#{PASSWORD} mysql"
   not_if "mysql -uroot -p#{PASSWORD} mysql -e 'select * from time_zone_name' | grep -q UTC"
 end

@@ -39,7 +39,7 @@ define :brew, :action => :install do
     end
   when :upgrade
     execute "brew upgrade #{package}" do
-      only_if params[:only_if] || "brew list | grep #{package}"
+      only_if params[:only_if] || "brew outdated | grep #{package}"
       not_if params[:not_if] if params[:not_if]
       user params[:user] || WS_USER
       command "brew upgrade #{package}"

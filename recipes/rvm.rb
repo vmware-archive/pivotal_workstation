@@ -1,4 +1,3 @@
-include_recipe "pivotal_workstation::java"
 include_recipe "pivotal_workstation::git"
 include_recipe "pivotal_workstation::apple_gcc42"
 
