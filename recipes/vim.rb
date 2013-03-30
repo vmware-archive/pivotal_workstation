@@ -58,6 +58,7 @@ execute "verify that command-t is correctly compiled for macvim" do
     MACVIM_RUBY=`findlibruby /Applications/MacVim.app/Contents/MacOS/Vim`
     test -n "$MACVIM_RUBY" -a "$MACVIM_RUBY" = "$CMDT_RUBY"
   SH
+  only_if "test -d #{node["vim_home"]}/bundle/command-t/ruby/command-t"
 end
 
 file "#{WS_HOME}/.vimrc.local" do
