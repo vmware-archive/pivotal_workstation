@@ -1,5 +1,5 @@
 node.default["background_host"] = "http://cheffiles.pivotallabs.com"
-node.default["backgrounds"]["primary"] ||= %w{blue green orange violet}.map do |color| 
+node.default["backgrounds"]["primary"] = %w{blue green orange violet}.map do |color| 
   "pivID_#{color}-1004x400.png"
 end
 node.default["backgrounds"]["secondary"] = ["BackToTheEdward.png"]
