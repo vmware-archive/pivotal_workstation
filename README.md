@@ -31,12 +31,29 @@ soloist
 
 Configuration
 -------------
-You may want to change the default applications or preferences.  For example, you might want to install only Chrome and Sublime Text.  In that case, your `soloistrc` would look like this:
+You may want to change the default applications or preferences.  
+
+
+For instance, you might want to install only Chrome and Sublime Text. You can change the `recipes` portion of your `soloistrc` to look like this:
 
 ```yaml
 recipes:
 - pivotal_workstation::chrome
 - pivotal_workstation::sublime_text
+```
+
+Alternately, you might like to change the people and company associated with your `.pairs` file. To do this simply set the appropriate `node_attributes` in your `soloistrc`:
+
+```yaml
+node_attributes:
+  git_pairs_domain: pivotallabs.com
+  git_pairs_authors:
+    - initials: ah
+      name: Abhi Hiremagalur
+      shortname: abhi
+    - initials: bc
+      name: Brian Cunnie
+      shortname: cunnie
 ```
 
 
