@@ -14,6 +14,5 @@ end
 unless File.exists?(app_path)
   execute "Start CCMenu on login" do
     command "su #{WS_USER} -c \"addloginitem #{app_path}\""
-    not_if { File.exists?(app_path) }
   end
 end
