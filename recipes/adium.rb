@@ -1,7 +1,7 @@
 dmg_package "Adium" do
-  volumes_dir "Adium 1.5.4"
-  source "http://sourceforge.net/projects/adium/files/Adium_1.5.4.dmg/download"
-  checksum "c11302c03c90bffeafb25b36a0a77c97fc27f32f2c32845df2292416b46457aa"
+  volumes_dir "Adium 1.5.6"
+  source "http://sourceforge.net/projects/adium/files/Adium_1.5.6.dmg/download"
+  checksum "d5f580b7db57348c31f8e0f18691d7758a65ad61471bf984955360f91b21edb8"
   action :install
   owner WS_USER
 end
