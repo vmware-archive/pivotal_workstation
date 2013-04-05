@@ -77,6 +77,14 @@ Traditionally, Pivotal Labs relied on imaging workstations from a gold master im
 Many recipes require [homebrew](https://github.com/mxcl/homebrew).  Other recipes will overwrite your `.bash_profile`.  `chef-solo` runs as root and may make system-wide changes.
 
 
+Finding the checksum for a dmg_package
+-----------
+
+If the filename is `ccmenu-1.5-b.dmg`
+
+    shasum -a 256 ccmenu-1.5-b.dmg
+	=> "c11302c03c90bffeafb25b36a0a77c97fc27f32f2c32845df2292416b46457aa"
+
 Contributing
 ------------
 * Fork the project
