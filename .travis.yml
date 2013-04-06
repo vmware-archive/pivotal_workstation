@@ -1,7 +1,6 @@
+language: objective-c
 before_script:
   - source /Users/travis/.bash_profile
   - cd foodcritic
-  - pwd
-  - ruby -v
   - bundle install
 script: "bundle exec foodcritic -f any -f ~FC004 -f ~FC005 -f ~FC015 -f ~FC017 .."
