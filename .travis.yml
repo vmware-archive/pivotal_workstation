@@ -1,3 +1,5 @@
-script: "source /Users/travis/.bash_profile && gem install foodcritic -v 1.4.0 && foodcritic -f any -f ~FC004 -f ~FC005 -f ~FC015 -f ~FC017 ."
-rvm:
-  - 1.9.3
+before_script:
+  - source /Users/travis/.bash_profile
+  - cd foodcritic
+  - bundle install
+script: "bundle exec foodcritic -f any -f ~FC004 -f ~FC005 -f ~FC015 -f ~FC017 .."

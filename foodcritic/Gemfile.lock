@@ -1,0 +1,45 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    coderay (0.9.8)
+    foodcritic (1.4.0)
+      gherkin (~> 2.8.0)
+      gist (~> 2.0.4)
+      nokogiri (= 1.5.0)
+      pry (~> 0.9.7.4)
+      pry-doc (~> 0.3.0)
+      rak (~> 1.4)
+      treetop (~> 1.4.10)
+      yajl-ruby (~> 1.1.0)
+    gherkin (2.8.0)
+      json (>= 1.4.6)
+    gist (2.0.4)
+    json (1.7.7)
+    method_source (0.6.7)
+      ruby_parser (>= 2.3.1)
+    nokogiri (1.5.0)
+    polyglot (0.3.3)
+    pry (0.9.7.4)
+      coderay (~> 0.9.8)
+      method_source (~> 0.6.7)
+      ruby_parser (>= 2.3.1)
+      slop (~> 2.1.0)
+    pry-doc (0.3.0)
+      pry (>= 0.9.0)
+      yard (>= 0.6.4)
+    rak (1.4)
+    ruby_parser (3.1.2)
+      sexp_processor (~> 4.1)
+    sexp_processor (4.2.0)
+    slop (2.1.0)
+    treetop (1.4.12)
+      polyglot
+      polyglot (>= 0.3.1)
+    yajl-ruby (1.1.0)
+    yard (0.8.5.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  foodcritic (= 1.4.0)
