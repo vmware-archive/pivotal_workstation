@@ -10,9 +10,7 @@ dmg_package "CCMenu" do
   action :install
 end
 
-# TODO: default read com.apple.loginitems | grep ccmenu ""
-unless File.exists?(app_path)
-  execute "Start CCMenu on login" do
-    command "su #{WS_USER} -c \"addloginitem #{app_path}\""
-  end
+execute "Start CCMenu on login" do
+  command "su #{WS_USER} -c \"addloginitem #{app_path}\""
+  not_if { File.exists?(app_path) }
 end
