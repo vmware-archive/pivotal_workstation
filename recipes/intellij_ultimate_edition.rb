@@ -1,7 +1,7 @@
-intellij_version = "10.5.2"
-dmg_package "IntelliJ IDEA 10" do
+intellij_version = "12.1"
+dmg_package "IntelliJ IDEA 12" do
   source "http://download.jetbrains.com/idea/ideaIU-#{intellij_version}.dmg"
-  checksum "667c7227cccc011666492150320601fb7517ed9e9f3b935dcee1cc337bdadae9"
+  checksum "31c9e860d42854df22a520bfc9c1e18d54df80fd3817298428df8b9b4ccdefca"
   owner WS_USER
   action :install
 end
