@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 unless File.exists?(node['mouse_locator_dst'])
 
   remote_file "#{Chef::Config[:file_cache_path]}/mouse_locator.dmg" do

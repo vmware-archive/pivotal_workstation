@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 include_recipe "pivotal_workstation::user_owns_usr_local"
 
 dmg_package "Sublime Text 2" do

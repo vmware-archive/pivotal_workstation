@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 # Solo doesn't necessarily create the file_cache_path,
 # but we don't want to mess with it if it exists
 directory Chef::Config[:file_cache_path] do

@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 include_recipe "pivotal_workstation::bash_it"
 include_recipe "pivotal_workstation::create_var_chef_cache"
 include_recipe "pivotal_workstation::sshd_on"

@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 remote_file "#{Chef::Config[:file_cache_path]}/Flux.zip" do
   source node["flux_download_uri"]
   checksum node["flux_download_checksum"]

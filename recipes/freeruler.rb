@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 unless File.exists?(node["freeruler_app_path"])
 
   remote_file "#{Chef::Config[:file_cache_path]}/FreeRuler1.7b5.zip" do

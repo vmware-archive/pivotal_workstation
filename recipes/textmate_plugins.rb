@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 run_unless_marker_file_exists("textmate_plugins_0") do
   ["curl -o #{Chef::Config[:file_cache_path]}/projectplus.dmg http://ciaranwal.sh/projectplus-files/ProjectPlus-1.3.dmg",
    "hdiutil mount #{Chef::Config[:file_cache_path]}/projectplus.dmg",

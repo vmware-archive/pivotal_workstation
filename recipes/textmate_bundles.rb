@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 bundle_dir = "#{WS_HOME}/Library/Application Support/TextMate/Bundles"
 filename = "Pivotal.tmbundle"
 tarfile = "#{filename}.tar.gz"

@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 remote_file "#{Chef::Config[:file_cache_path]}/github_for_mac.zip" do
   source node["github_for_mac_download_uri"]
   owner WS_USER

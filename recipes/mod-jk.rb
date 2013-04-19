@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 
 unless File.exists?("/usr/libexec/apache2/mod_jk.so")
 

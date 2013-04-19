@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 ["/usr/lib/ssl", "/usr/lib/ssl/certs/"].each do |dir|
   directory dir do
     owner WS_USER

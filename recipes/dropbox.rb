@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 dmg_package "Dropbox" do
   volumes_dir "Dropbox Installer"
   source "https://www.dropbox.com/download?plat=mac"

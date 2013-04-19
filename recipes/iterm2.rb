@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 unless File.exists?(node["iterm2_app_path"])
 
   remote_file "#{Chef::Config[:file_cache_path]}/iTerm2.zip" do

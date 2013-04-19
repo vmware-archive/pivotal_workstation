@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 include_recipe "pivotal_workstation::rvm"
 include_recipe "pivotal_workstation::gem_setup"
 include_recipe "pivotal_workstation::mysql"

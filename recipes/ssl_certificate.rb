@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 cert_path = node["ssl_settings"]["cert_path"]
 ca_path = node["ssl_settings"]["ca_path"]
 

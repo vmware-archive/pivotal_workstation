@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 cookbook_file "/etc/snmp/snmpd.conf" do
   source "snmpd.conf"
   mode "0644"

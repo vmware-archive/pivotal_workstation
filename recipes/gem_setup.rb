@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 pivotal_workstation_bash_it_custom_plugin "gem_setup-warn_on_sudo.bash"
 
 file "/etc/gemrc" do

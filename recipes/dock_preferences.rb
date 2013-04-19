@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 pivotal_workstation_defaults "set dock to be on left" do
   domain "com.apple.dock"
   key "orientation"

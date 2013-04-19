@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 unless File.exists?("/Applications/nvalt.app")
   remote_file "#{Chef::Config[:file_cache_path]}/nvalt.zip" do
     source "http://abyss.designheresy.com/nvaltb/files/nvalt2.2b101.zip"

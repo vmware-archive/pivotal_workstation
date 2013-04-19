@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 # unattended install doesn't usually work; expects your account name in /tmp/samanage
 # http://support.samanage.com/entries/262691-deploy-on-mac-osx
 dmg_package "SAManage-MAC-Agent" do

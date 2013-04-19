@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 dmg_package "XQuartz" do
   source "http://xquartz.macosforge.org/downloads/SL/XQuartz-2.7.4.dmg"
   action :install

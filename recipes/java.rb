@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 return unless node["platform"] == "mac_os_x"
 
 dmg_package "JavaForOSX" do

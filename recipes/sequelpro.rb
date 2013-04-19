@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 dmg_package "Sequel Pro" do
   volumes_dir "Sequel Pro 1.0"
   owner WS_USER

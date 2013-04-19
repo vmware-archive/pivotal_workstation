@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 include_recipe "pivotal_workstation::bash_it"
 include_recipe "pivotal_workstation::ccmenu"
 include_recipe "pivotal_workstation::git_config_global_defaults"

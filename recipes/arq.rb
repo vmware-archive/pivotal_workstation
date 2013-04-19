@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 unless File.exists?("/Applications/Arq.app")
 
   remote_file "#{Chef::Config[:file_cache_path]}/arq.zip" do

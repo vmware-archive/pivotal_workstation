@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 # Recipe to install Charles Proxy
 # http://www.charlesproxy.com/
 #

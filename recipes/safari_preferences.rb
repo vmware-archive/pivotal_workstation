@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 pivotal_workstation_defaults "set safari to show status bar" do
   domain 'com.apple.safari'
   key 'ShowStatusBar'

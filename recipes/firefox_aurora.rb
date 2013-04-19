@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 #Installs Firefox Aurora (Pre Beta Build of Firefox)
 #http://www.mozilla.org/en-US/firefox/aurora/
 dmg_package "Firefox Aurora" do

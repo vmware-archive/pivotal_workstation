@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 dmg_package "Google Drive" do
   volumes_dir "Install Google Drive"
   source "http://dl.google.com/drive/installgoogledrive.dmg"

@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 execute "turn on ssh" do
   command "systemsetup -setremotelogin on"
 end

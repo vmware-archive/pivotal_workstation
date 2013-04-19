@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 pivotal_workstation_defaults "ask for password when screen is locked" do
   domain 'com.apple.screensaver'
   key 'askForPassword'

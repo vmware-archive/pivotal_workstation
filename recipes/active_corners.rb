@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 active_corner_value_to_int = {
   desktop:               4,
   dashboard:             7,

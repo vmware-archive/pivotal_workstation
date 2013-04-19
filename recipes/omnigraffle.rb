@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 dmg_package "OmniGraffle Professional 5" do
     volumes_dir "OmniGrafflePro"
     accept_eula true

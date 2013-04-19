@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 include_recipe "pivotal_workstation::homebrew"
 include_recipe "pivotal_workstation::increase_shared_memory"
 

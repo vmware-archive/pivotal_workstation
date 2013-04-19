@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 # Requires logout to take effect
 
 key_repeat_rate_lower_is_faster = 2

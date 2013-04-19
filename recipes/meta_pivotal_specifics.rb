@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 include_recipe "pivotal_workstation::default_editor"
 include_recipe "pivotal_workstation::flycut"
 include_recipe "pivotal_workstation::function_keys"

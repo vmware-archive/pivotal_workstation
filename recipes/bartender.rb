@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 unless File.exists?("/Applications/Bartender.app")
 
   remote_file "#{Chef::Config[:file_cache_path]}/Bartender.zip" do

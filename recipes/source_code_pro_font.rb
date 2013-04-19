@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 unless File.exists?("/Library/Fonts/SourceCodePro-Black.otf")
   remote_file "#{Chef::Config[:file_cache_path]}/source_code_pro.zip" do
     source "http://sourceforge.net/projects/sourcecodepro.adobe/files/SourceCodePro_FontsOnly-1.017.zip/download"

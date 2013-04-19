@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 # May not work if System Preferences is open while this is running
 file "/private/var/db/.AccessibilityAPIEnabled" do
   action :create_if_missing

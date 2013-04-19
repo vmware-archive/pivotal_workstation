@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 aqua_color_variant_blue = 1
 aqua_color_variant_graphite = 6
 

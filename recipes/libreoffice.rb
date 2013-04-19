@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 dmg_package "LibreOffice" do
   volumes_dir "LibreOffice"
   source "http://download.documentfoundation.org/libreoffice/stable/4.0.2/mac/x86/LibreOffice_4.0.2_MacOS_x86.dmg"

@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 pivotal_workstation_sysctl "send keepalive packets" do
   name "net.inet.tcp.always_keepalive"
   value "1"

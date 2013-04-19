@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 include_recipe "pivotal_workstation::git"
 pivotal_workstation_bash_it_custom_plugin "git-export_editor.bash"
 

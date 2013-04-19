@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 # This is obviously a destructive recipe.
 
 directory "/Library/Application\ Support/GarageBand" do

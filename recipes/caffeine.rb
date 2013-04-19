@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 remote_file "#{Chef::Config[:file_cache_path]}/caffeine.zip" do
   source node["caffeine_download_uri"]
   owner WS_USER

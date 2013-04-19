@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 unless File.exists?("/Applications/SizeUp.app")
   include_recipe "pivotal_workstation::enable_assistive_devices"
 

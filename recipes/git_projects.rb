@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 # Recipe to clone git repositories into the users workspace_directory
 #
 # Repositories should be defined as an array in the node_attributes section of

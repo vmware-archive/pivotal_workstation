@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 menu_meters_uri = "http://www.ragingmenace.com/software/download/MenuMeters.dmg"
 menu_meters_dmg = Chef::Config[:file_cache_path] + "/MenuMeters.dmg"
 menu_meters_mnt = "/Volumes/MenuMeters 1.6"

@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 pivotal_workstation_defaults "TimeMachine should NOT ask to use every new disk"   do
   domain 'com.apple.TimeMachine'
   key 'DoNotOfferNewDisksForBackup'

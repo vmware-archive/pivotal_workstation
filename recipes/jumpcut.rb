@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 ruby_block "Install Jumpcut" do
   block do
     system("cd #{Chef::Config[:file_cache_path]}/ && curl -L 'http://downloads.sourceforge.net/project/jumpcut/jumpcut/0.63/Jumpcut_0.63.tgz?r=http%3A%2F%2Fjumpcut.sourceforge.net%2F&ts=1319134739&use_mirror=iweb' | gunzip | tar xf -")

@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 # See http://willbryant.net/software/mac_os_x/postgres_initdb_fatal_shared_memory_error_on_leopard
 
 pivotal_workstation_sysctl "increase shared memory allocation size" do

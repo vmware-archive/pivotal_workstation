@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 return unless node["platform"] == "mac_os_x"
 
 include_recipe "pivotal_workstation::user_owns_usr_local"

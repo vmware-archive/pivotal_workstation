@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 ruby_block "Show User Home In Sidebar" do
   username = ENV['SUDO_USER']
   block do

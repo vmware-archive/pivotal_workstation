@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 start_after_restore="true"
 plist_key=":Custom\\ Profile:AC\\ Power:Automatic\\ Restart\\ On\\ Power\\ Loss"
 plist_file="/Library/Preferences/SystemConfiguration/com.apple.PowerManagement.plist"

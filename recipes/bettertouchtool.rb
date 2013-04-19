@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 remote_file "#{Chef::Config[:file_cache_path]}/BetterTouchTool.zip" do
   source node["bettertouchtool_download_uri"]
   owner WS_USER

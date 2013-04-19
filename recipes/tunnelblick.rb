@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 dmg_package "Tunnelblick" do
   dmg_name "Tunnelblick_3.2.8.dmg"
   source "http://tunnelblick.googlecode.com/files/Tunnelblick_3.2.8.dmg"

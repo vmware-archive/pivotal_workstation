@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 dmg_package "Adium" do
   volumes_dir "Adium 1.5.6"
   source "http://sourceforge.net/projects/adium/files/Adium_1.5.6.dmg/download"

@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 intellij_version = "10.5.2"
 dmg_package "IntelliJ IDEA 10 CE" do
   source "http://download.jetbrains.com/idea/ideaIC-#{intellij_version}.dmg"

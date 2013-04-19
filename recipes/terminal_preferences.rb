@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 pivotal_workstation_defaults "Set terminal color scheme to #{node['terminal']['color_scheme']}" do
   domain 'com.apple.Terminal'
   key '"Default Window Settings"'

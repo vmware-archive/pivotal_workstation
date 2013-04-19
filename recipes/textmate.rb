@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 include_recipe "pivotal_workstation::user_owns_usr_local"
 
 node.default["textmate"]["url"] = "http://download.macromates.com/TextMate_1.5.11_r1635.zip"

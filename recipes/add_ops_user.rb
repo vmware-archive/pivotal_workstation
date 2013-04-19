@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 #password_hash = node[:users][:operations][:password_hash] || "!NOLOGIN"
 #password_hash = "!NOLOGIN"
 require 'etc'

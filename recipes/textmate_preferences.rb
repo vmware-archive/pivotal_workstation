@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 include_recipe "pivotal_workstation::textmate"
 
 pivotal_workstation_defaults "set save on losing focus" do

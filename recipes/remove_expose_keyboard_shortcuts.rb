@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 include_recipe "pivotal_workstation::enable_assistive_devices"
 
 ruby_block "Remove Expose Keyboard Shortcuts" do

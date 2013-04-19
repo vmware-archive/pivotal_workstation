@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 directory "#{WS_HOME}/Library/Google" do
   owner WS_USER
   action :create

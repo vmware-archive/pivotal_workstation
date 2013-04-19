@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 unless File.exists?("/Applications/Screen Sharing.app")
 
   ruby_block "Copy Screen Sharing to /Applications" do

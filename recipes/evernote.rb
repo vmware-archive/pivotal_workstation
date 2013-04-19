@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 dmg_package "Evernote" do
   volumes_dir "Evernote"
   source "http://evernote.com/download/get.php?file=EvernoteMac"

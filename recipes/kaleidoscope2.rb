@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 unless File.exists?("/Applications/Kaleidoscope.app")
 
   remote_file "#{Chef::Config[:file_cache_path]}/kaleidoscope2.tar.gz" do

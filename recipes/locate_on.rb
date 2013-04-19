@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 execute "load locate daemon via launchctl"   do
   command "launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist"
   not_if "launchctl list | grep locate"

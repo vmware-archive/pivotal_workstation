@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 node.default["background_host"] = "http://cheffiles.pivotallabs.com"
 node.default["backgrounds"]["primary"] = %w{blue green orange violet}.map do |color| 
   "pivID_#{color}-1004x400.png"

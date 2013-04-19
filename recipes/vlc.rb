@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 vlc_version = node["vlc_version"]
 vlc_checksum = node["vlc_checksum"]
 

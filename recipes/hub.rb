@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 brew "hub"
 
 # homebrew recipe for hub automatically installs the following as well:

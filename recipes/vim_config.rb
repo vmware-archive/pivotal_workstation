@@ -1,3 +1,5 @@
+Chef::Log.warn 'Please use https://github.com/pivotal-sprout/sprout instead'
+
 # Acknowledgements: Some configuration source from
 # https://github.com/Casecommons/casecommons_workstation
 
