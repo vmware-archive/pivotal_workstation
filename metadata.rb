@@ -1,3 +1,4 @@
+name              "pivotal_workstation"
 maintainer        "Pivotal Labs"
 maintainer_email  "accounts@pivotallabs.com"
 license           "MIT"
