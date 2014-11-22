@@ -1,5 +1,0 @@
-language: objective-c
-before_script:
-  - cd foodcritic
-  - bundle install
-script: "bundle exec foodcritic -f any -f ~FC004 -f ~FC005 -f ~FC015 -f ~FC017 .."

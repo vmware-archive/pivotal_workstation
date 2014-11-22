@@ -1,1 +1,0 @@
-node.default["machine_domain"] = "pivotallabs.com"

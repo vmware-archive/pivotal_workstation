@@ -1,3 +1,0 @@
-source 'https://rubygems.org'
-
-gem 'foodcritic', '1.4.0'
